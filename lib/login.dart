@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:next_app/main.dart';
+import './home.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -22,40 +22,84 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  String username = '';
-  String password = '';
-  String otp = '';
+  var signInController = List.generate(2, (index) => TextEditingController());
 
   var otpController = List.generate(6, (index) => TextEditingController());
   var otpFocusNode = List.generate(6, (index) => FocusNode());
 
+  var buttonController = MaterialStatesController();
+
   bool _isObscure = true;
 
-  switchObscure({required isObscure}) {
+  switchObscure() {
     setState(() {
-      isObscure = !isObscure;
+      _isObscure = !_isObscure;
     });
   }
 
-  String updateOtp() {
-    return otp = otpController[0].text +
+  String getUsername() {
+    return signInController[0].text;
+  }
+
+  String getPassword() {
+    return signInController[1].text;
+  }
+
+  String getOTP() {
+    String otp = otpController[0].text +
         otpController[1].text +
         otpController[2].text +
         otpController[3].text +
         otpController[4].text +
         otpController[5].text;
+
+    if (otp.contains(' ')) {
+      return '';
+    }
+    return otp;
+  }
+
+  bool isSignInEnabled() {
+    return signInController[0].text.isNotEmpty &&
+        signInController[1].text.isNotEmpty &&
+        getOTP().length == 6;
   }
 
   void _completeLogin() {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const HomeScreen()),
+      MaterialPageRoute(builder: (context) => HomeScreen()),
+    );
+  }
+
+  Future<dynamic> _failLogin() {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        title: const Text('Thông báo', style: TextStyle(fontSize: 18)),
+        titlePadding: const EdgeInsets.only(top: 21, left: 25),
+        content: const Text('Đăng nhập thất bại'),
+        contentPadding: const EdgeInsets.only(top: 17, left: 27),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(
+              'OK',
+              style: TextStyle(fontSize: 15, color: Colors.purple[300]),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   @override
   void dispose() {
     for (var i = 0; i < 6; i++) {
+      if (i < 2) signInController[i].dispose();
       otpController[i].dispose();
       otpFocusNode[i].dispose();
     }
@@ -71,7 +115,7 @@ class _LoginState extends State<Login> {
         children: <Widget>[
           welcomeUserSignIn(),
           signInField(),
-          signInField(label: 'Password'),
+          signInField(_isObscure),
           twoStepAuthentication(),
           otpFields(context),
           signInButton(),
@@ -95,19 +139,41 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Container signInField({label = 'Username'}) {
+  /// params: isObscure: true if password field
+  Container signInField([bool? isObscure]) {
+    bool isPasswordFields;
+    bool izObscure;
+    int index;
+
+    isObscure == null
+        ? {isPasswordFields = false, izObscure = false, index = 0}
+        : {isPasswordFields = true, izObscure = isObscure, index = 1};
+
+    List<String> labels = [
+      'Username',
+      'Password',
+    ];
+    var label = labels[index];
+
+    List<IconData> prefixIcons = [
+      Icons.person_outline_rounded,
+      Icons.lock_outline_rounded,
+    ];
+
+    List<IconData> visibility = [
+      Icons.visibility_off,
+      Icons.visibility,
+    ];
+
     return Container(
-      constraints: const BoxConstraints(
-        maxWidth: 360,
-      ),
+      constraints: const BoxConstraints(maxWidth: 360),
       padding: const EdgeInsets.all(8),
       child: TextField(
-        obscureText: label == 'Password' ? _isObscure : false,
-        onChanged: (value) =>
-            label != 'Password' ? username = value : password = value,
+        controller: signInController[index],
+        obscureText: izObscure,
         onTapOutside: (event) => FocusScope.of(context).unfocus(),
         cursorColor: Colors.orange,
-        textInputAction: label != 'Password' ? TextInputAction.next : null,
+        textInputAction: !isPasswordFields ? TextInputAction.next : null,
         style: const TextStyle(
           color: Colors.white,
           fontSize: 14,
@@ -136,21 +202,14 @@ class _LoginState extends State<Login> {
             ),
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
-          prefixIcon: Icon(
-            label == 'Username'
-                ? Icons.person_outline_rounded
-                : Icons.lock_outline_rounded,
-            color: Colors.white,
-          ),
-          suffixIcon: label == 'Password'
+          prefixIcon: Icon(prefixIcons[index], color: Colors.white),
+          suffixIcon: isPasswordFields
               ? IconButton(
                   icon: Icon(
-                    !_isObscure ? Icons.visibility_off : Icons.visibility,
+                    !_isObscure ? visibility[0] : visibility[1],
                     color: Colors.orange,
                   ),
-                  onPressed: () {
-                    setState(() => _isObscure = !_isObscure);
-                  },
+                  onPressed: () => switchObscure(),
                 )
               : null,
         ),
@@ -206,7 +265,6 @@ class _LoginState extends State<Login> {
                 if (otpController[index].text == hiddenChar) {
                   otpController[index].clear();
                 }
-                updateOtp();
               },
               onChanged: (value) {
                 if (value.length == 6) {
@@ -244,7 +302,6 @@ class _LoginState extends State<Login> {
                     }
                   }
                 }
-                updateOtp();
               },
               style: const TextStyle(
                 color: Colors.white,
@@ -289,37 +346,32 @@ class _LoginState extends State<Login> {
       ),
       margin: const EdgeInsets.only(top: 50, bottom: 80),
       child: ElevatedButton(
-        onPressed: () {
-          if (username != 'admin' || password != 'admin' || otp != '123456') {
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                title: const Text(
-                  'Thông báo',
-                  // style: TextStyle(fontSize: 18, color: Colors.purple),
-                ),
-                content: const Text('Đăng nhập thất bại'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: Text(
-                      'OK',
-                      style: TextStyle(fontSize: 15, color: Colors.purple[300]),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          } else {
-            _completeLogin();
-          }
-        },
+        onPressed: isSignInEnabled()
+            ? () {
+                if (getUsername() == 'admin' &&
+                    getPassword() == 'admin' &&
+                    getOTP() == '123456') {
+                  _completeLogin();
+                } else {
+                  _failLogin();
+                }
+              }
+            : null,
         style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Colors.purple[700]),
-          foregroundColor: MaterialStatePropertyAll(Colors.orange[400]),
+          backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return Colors.deepPurple;
+            }
+            return Colors.purple[700];
+          }),
+          foregroundColor: MaterialStateProperty.resolveWith<Color?>(
+              (Set<MaterialState> states) {
+            if (states.contains(MaterialState.disabled)) {
+              return Colors.black26;
+            }
+            return Colors.orange[400];
+          }),
           shape: MaterialStatePropertyAll(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(50),
