@@ -46,23 +46,19 @@ class _LoginState extends State<Login> {
   }
 
   String getOTP() {
-    String otp = otpController[0].text +
+    return otpController[0].text +
         otpController[1].text +
         otpController[2].text +
         otpController[3].text +
         otpController[4].text +
         otpController[5].text;
-
-    if (otp.contains(' ')) {
-      return '';
-    }
-    return otp;
   }
 
   bool isSignInEnabled() {
     return signInController[0].text.isNotEmpty &&
         signInController[1].text.isNotEmpty &&
-        getOTP().length == 6;
+        getOTP().length == 6 &&
+        !getOTP().contains(' ');
   }
 
   void _completeLogin() {
@@ -80,9 +76,10 @@ class _LoginState extends State<Login> {
           borderRadius: BorderRadius.circular(8),
         ),
         title: const Text('Thông báo', style: TextStyle(fontSize: 18)),
-        titlePadding: const EdgeInsets.only(top: 21, left: 25),
+        titlePadding: const EdgeInsets.only(top: 22, left: 22),
         content: const Text('Đăng nhập thất bại'),
-        contentPadding: const EdgeInsets.only(top: 17, left: 27),
+        contentPadding: const EdgeInsets.only(top: 16, left: 24.3),
+        actionsPadding: const EdgeInsets.only(top: 10, right: 7, bottom: 5),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -272,7 +269,7 @@ class _LoginState extends State<Login> {
                     otpController[i].text = value[i];
                   }
                   FocusScope.of(context).unfocus();
-                } // when pasting OTP when and only when the OTP is 6 digits
+                } // pasting OTP when and only when the OTP is 6 digits
                 else {
                   if (value.isEmpty) {
                     if (index > 0) {
@@ -359,16 +356,17 @@ class _LoginState extends State<Login> {
             : null,
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith<Color?>(
-              (Set<MaterialState> states) {
-            if (states.contains(MaterialState.disabled)) {
-              return Colors.deepPurple;
-            }
-            return Colors.purple[700];
-          }),
+            (Set<MaterialState> states) {
+              if (states.contains(MaterialState.disabled)) {
+                return Colors.deepPurple[600];
+              }
+              return Colors.purple[700];
+            },
+          ),
           foregroundColor: MaterialStateProperty.resolveWith<Color?>(
               (Set<MaterialState> states) {
             if (states.contains(MaterialState.disabled)) {
-              return Colors.black26;
+              return Colors.purple[900];
             }
             return Colors.orange[400];
           }),

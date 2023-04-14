@@ -1,5 +1,40 @@
 import 'package:flutter/material.dart';
 import './login.dart';
+import './features/cam.dart';
+import './features/maps.dart';
+import './features/lists.dart';
+import './features/notif.dart';
+
+Route toFeature(String featureName) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) {
+      switch (featureName) {
+        case 'Truy vết TSĐB':
+          return CamScreen();
+        case 'Bản đồ':
+          return MapScreen();
+        case 'Danh sách\nPTVT cần xử lý':
+          return ListScreen();
+        case 'Thông báo':
+          return NotifScreen();
+        default:
+          return LoginScreen();
+      }
+    },
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      var begin = const Offset(1.0, 0.0);
+      var end = Offset.zero;
+      var curve = Curves.ease;
+
+      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+      return SlideTransition(
+        position: animation.drive(tween),
+        child: child,
+      );
+    },
+  );
+}
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -25,48 +60,7 @@ class HomeScreen extends StatelessWidget {
           onPressed: () {},
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.logout_rounded),
-            tooltip: 'Đăng xuất',
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  title:
-                      const Text('Đăng xuất', style: TextStyle(fontSize: 18)),
-                  titlePadding: const EdgeInsets.only(top: 23, left: 24),
-                  content: const Text('Bạn có muốn đăng xuất ?'),
-                  contentPadding:
-                      const EdgeInsets.only(top: 20, left: 24, bottom: 12),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: Text('Không',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.purple[300],
-                          )),
-                    ),
-                    ElevatedButton(
-                      onPressed: () => Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LoginScreen(),
-                          )),
-                      child: const Text('Đồng ý',
-                          style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                          )),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+          signOutButton(context),
         ],
       ),
       body: Center(
@@ -79,7 +73,9 @@ class HomeScreen extends StatelessWidget {
           children: [
             for (final feature in features.entries)
               InkWell(
-                onTap: () {},
+                onTap: () => Navigator.of(context).push(
+                  toFeature(feature.value),
+                ),
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
                 splashColor: Colors.black12,
                 highlightColor: Colors.black12,
@@ -108,6 +104,68 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  IconButton signOutButton(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.logout_rounded),
+      tooltip: 'Đăng xuất',
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            title: const Text('Đăng xuất', style: TextStyle(fontSize: 18)),
+            titlePadding: const EdgeInsets.only(top: 23, left: 24),
+            content: const Text('Bạn có muốn đăng xuất ?'),
+            contentPadding:
+                const EdgeInsets.only(top: 20, left: 24, bottom: 17),
+            actionsPadding:
+                const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+            actions: [
+              TextButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(7),
+                  )),
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  ),
+                ),
+                onPressed: () => Navigator.pop(context),
+                child: Text('Không',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.purple[300],
+                    )),
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(7),
+                  )),
+                  padding: MaterialStateProperty.all(
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                  ),
+                ),
+                onPressed: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    )),
+                child: const Text('Đồng ý',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                    )),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
