@@ -10,15 +10,15 @@ Route toFeature(String featureName) {
     pageBuilder: (context, animation, secondaryAnimation) {
       switch (featureName) {
         case 'Truy vết TSĐB':
-          return CamScreen();
+          return const CamScreen();
         case 'Bản đồ':
-          return MapScreen();
+          return const MapScreen();
         case 'Danh sách\nPTVT cần xử lý':
-          return ListScreen();
+          return const ListScreen();
         case 'Thông báo':
-          return NotifScreen();
+          return const NotifScreen();
         default:
-          return LoginScreen();
+          return const LoginScreen();
       }
     },
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -64,44 +64,51 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: GridView.count(
-          crossAxisCount: isPortrait ? 2 : 4,
-          crossAxisSpacing: 30,
-          mainAxisSpacing: 25,
-          padding: const EdgeInsets.only(left: 50, right: 50, bottom: 90),
-          shrinkWrap: true,
-          children: [
-            for (final feature in features.entries)
-              InkWell(
-                onTap: () => Navigator.of(context).push(
-                  toFeature(feature.value),
-                ),
-                borderRadius: const BorderRadius.all(Radius.circular(15)),
-                splashColor: Colors.black12,
-                highlightColor: Colors.black12,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(height: isPortrait ? 32 : 40),
-                    Icon(
-                      feature.key,
-                      size: 40,
-                      color: Colors.deepOrange[300],
+        child: Container(
+          padding: const EdgeInsets.only(bottom: 70),
+          height: 400,
+          width: isPortrait ? 400 : 800,
+          child: Center(
+            child: GridView.count(
+              crossAxisCount: isPortrait ? 2 : 4,
+              crossAxisSpacing: 30,
+              mainAxisSpacing: 25,
+              padding: const EdgeInsets.symmetric(horizontal: 50),
+              shrinkWrap: true,
+              children: [
+                for (final feature in features.entries)
+                  InkWell(
+                    onTap: () => Navigator.of(context).push(
+                      toFeature(feature.value),
                     ),
-                    const SizedBox(height: 10),
-                    Text(
-                      feature.value,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.94),
-                        height: 1.25,
-                        fontSize: 15,
-                      ),
+                    borderRadius: const BorderRadius.all(Radius.circular(15)),
+                    splashColor: Colors.black12,
+                    highlightColor: Colors.black12,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(height: isPortrait ? 32 : 40),
+                        Icon(
+                          feature.key,
+                          size: 40,
+                          color: Colors.deepOrange[300],
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          feature.value,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.94),
+                            height: 1.25,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-          ],
+                  ),
+              ],
+            ),
+          ),
         ),
       ),
     );
