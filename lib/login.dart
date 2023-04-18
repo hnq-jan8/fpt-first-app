@@ -78,8 +78,9 @@ class _LoginState extends State<Login> {
         title: const Text('Thông báo', style: TextStyle(fontSize: 18)),
         titlePadding: const EdgeInsets.only(top: 22, left: 22),
         content: const Text('Đăng nhập thất bại'),
-        contentPadding: const EdgeInsets.only(top: 16, left: 24.3),
-        actionsPadding: const EdgeInsets.only(top: 10, right: 7, bottom: 5),
+        contentPadding:
+            const EdgeInsets.only(top: 16, left: 24.3, right: 40, bottom: 5),
+        actionsPadding: const EdgeInsets.only(top: 10, right: 10, bottom: 7),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -106,26 +107,28 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          welcomeUserSignIn(),
-          signInField(),
-          signInField(_isObscure),
-          twoStepAuthentication(),
-          otpFields(context),
-          signInButton(),
-        ],
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 360),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            welcomeUserSignIn(),
+            signInField(),
+            signInField(_isObscure),
+            twoStepAuthentication(),
+            otpFields(context),
+            signInButton(),
+          ],
+        ),
       ),
     );
   }
 
   Container welcomeUserSignIn() {
     return Container(
-      constraints: const BoxConstraints(maxWidth: 360),
       alignment: Alignment.centerLeft,
-      margin: const EdgeInsets.only(top: 150, bottom: 20, left: 25),
+      margin: const EdgeInsets.only(top: 150, bottom: 20, left: 12),
       child: const Text(
         'Chào mừng !',
         style: TextStyle(
@@ -136,7 +139,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  /// params: isObscure: true if password field
+  /// params: assign 'isObscure' for password field
   Container signInField([bool? isObscure]) {
     bool isPasswordFields;
     bool izObscure;
@@ -163,7 +166,6 @@ class _LoginState extends State<Login> {
     ];
 
     return Container(
-      constraints: const BoxConstraints(maxWidth: 360),
       padding: const EdgeInsets.all(8),
       child: TextField(
         controller: signInController[index],
@@ -238,10 +240,8 @@ class _LoginState extends State<Login> {
         children: List.generate(
           6,
           (index) => Container(
-            constraints: const BoxConstraints(
-              maxWidth: 59,
-              maxHeight: 75,
-            ),
+            width: 59,
+            height: 75,
             padding: const EdgeInsets.symmetric(
               horizontal: 5,
               vertical: 8,

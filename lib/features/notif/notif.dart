@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/notif_manager.dart';
+import '../../data/notif_manager.dart';
 
 class NotifScreen extends StatefulWidget {
   const NotifScreen({super.key});
@@ -36,9 +36,11 @@ class _NotifScreenState extends State<NotifScreen>
         ),
         bottom: TabBar(
           controller: _tabController,
+          splashBorderRadius: BorderRadius.circular(20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           unselectedLabelColor: Colors.white54,
           indicatorColor: Colors.white,
-          indicatorPadding: const EdgeInsets.symmetric(horizontal: 32),
+          indicatorSize: TabBarIndicatorSize.label,
           tabs: const [
             Tab(text: 'Loại 1'),
             Tab(text: 'Loại 2'),

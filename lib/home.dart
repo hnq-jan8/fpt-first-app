@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import './login.dart';
-import './features/cam.dart';
-import './features/maps.dart';
-import './features/lists.dart';
-import './features/notif.dart';
+import 'features/cam/cam.dart';
+import 'features/maps/maps.dart';
+import 'features/list/list.dart';
+import 'features/notif/notif.dart';
 
 Route toFeature(String featureName) {
   return PageRouteBuilder(
