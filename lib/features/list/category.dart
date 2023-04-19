@@ -5,7 +5,16 @@ import '../../data/collateral_manager.dart';
 List<Widget> categories(int index, {bool isDetailed = false}) {
   String localLabel = '';
   String data = '';
-  String warningLevel = CollateralManager().getData()[index].warningLevel;
+  int warningLevel = CollateralManager().getData()[index].warningLevel;
+
+  List warningColors = [
+    Colors.white.withOpacity(0.8),
+    Colors.green,
+    Colors.yellow,
+    Colors.orange[600],
+    Colors.red,
+  ];
+
   var textDataColor = Colors.white.withOpacity(0.8);
   // isDetailed ? Colors.white.withOpacity(0.8) : Colors.orange[300];
 
@@ -44,7 +53,7 @@ List<Widget> categories(int index, {bool isDetailed = false}) {
           ],
         );
       }(index, i),
-    if (isDetailed)
+    if (isDetailed) ...[
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -54,19 +63,33 @@ List<Widget> categories(int index, {bool isDetailed = false}) {
             height: 20,
             width: 64,
             decoration: BoxDecoration(
-              color: warningLevel == '4'
-                  ? Colors.red[400]
-                  : warningLevel == '3'
-                      ? Colors.orange[400]
-                      : warningLevel == '2'
-                          ? Colors.yellow[400]
-                          : warningLevel == '1'
-                              ? Colors.green[400]
-                              : Colors.grey[400],
+              color: warningColors[warningLevel],
               borderRadius: BorderRadius.circular(5),
             ),
           )
         ],
-      )
+      ),
+      Container(
+        margin: const EdgeInsets.only(top: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text('Cập nhật CV: '),
+            DropdownButton<String>(
+              items: ['Chưa xử lý', 'Đã xử lý']
+                  .map((String value) => DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      ))
+                  .toList(),
+              onChanged: (Object? value) {},
+              icon: const Icon(Icons.arrow_drop_down_rounded, size: 45),
+              underline: Container(),
+            )
+          ],
+        ),
+      ),
+    ]
   ];
 }

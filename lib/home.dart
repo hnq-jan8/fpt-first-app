@@ -82,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                       toFeature(feature.value),
                     ),
                     borderRadius: const BorderRadius.all(Radius.circular(15)),
-                    splashColor: Colors.black12,
+                    splashColor: Colors.transparent,
                     highlightColor: Colors.black12,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,

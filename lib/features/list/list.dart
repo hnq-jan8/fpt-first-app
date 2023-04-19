@@ -40,8 +40,11 @@ class ListScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(context, toMaps()),
-        backgroundColor: Colors.orange[600],
-        child: const Icon(Icons.map),
+        backgroundColor: Colors.orange,
+        child: const Icon(
+          Icons.map,
+          color: Colors.black87,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: CollateralManager().getDataLength() == 0
@@ -70,29 +73,33 @@ class ListScreen extends StatelessWidget {
     );
   }
 
-  InkWell listElement(BuildContext context, int index) {
-    return InkWell(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => DetailedView(index),
-        ),
+  Container listElement(BuildContext context, int index) {
+    return Container(
+      margin: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        color: Colors.black38,
+        borderRadius: BorderRadius.circular(15),
       ),
-      borderRadius: BorderRadius.circular(18),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.black38,
-          borderRadius: BorderRadius.circular(15),
+      child: InkWell(
+        highlightColor: Colors.white12,
+        splashColor: Colors.transparent,
+        borderRadius: BorderRadius.circular(15),
+        onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailedView(index),
+          ),
         ),
-        margin: const EdgeInsets.all(5),
-        padding: const EdgeInsets.only(
-          top: 12,
-          bottom: 15,
-          left: 20,
-          right: 20,
-        ),
-        child: Column(
-          children: categories(index),
+        child: Container(
+          padding: const EdgeInsets.only(
+            top: 12,
+            bottom: 15,
+            left: 20,
+            right: 20,
+          ),
+          child: Column(
+            children: categories(index),
+          ),
         ),
       ),
     );

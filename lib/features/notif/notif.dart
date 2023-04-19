@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './notif_block.dart';
 import '../../data/notif_manager.dart';
 
 class NotifScreen extends StatefulWidget {
@@ -67,67 +68,13 @@ class _NotifScreenState extends State<NotifScreen>
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       itemCount: NotifManager().getDataLength(notifType),
       itemBuilder: (BuildContext context, int index) {
-        return InkWell(
-          onTap: () => debugPrint('Choose $notifType.${index + 1}'),
-          borderRadius: BorderRadius.circular(18),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.black38,
-              borderRadius: BorderRadius.circular(15),
-            ),
-            margin: const EdgeInsets.all(5),
-            padding: const EdgeInsets.only(
-              top: 17,
-              bottom: 10,
-              left: 20,
-              right: 20,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  NotifManager().getData(notifType)[index].title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 15, left: 1),
-                  child: Text(
-                    NotifManager().getData(notifType)[index].content,
-                    // maxLines: 2,
-                    // overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      height: 1.5,
-                      color: Colors.white.withOpacity(0.9),
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      NotifManager().getData(notifType)[index].date,
-                      style: TextStyle(
-                        color: Colors.orange[300],
-                        fontSize: 12,
-                      ),
-                    ),
-                    Text(
-                      NotifManager().getData(notifType)[index].time,
-                      style: TextStyle(
-                        color: Colors.orange[400],
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
+        return AnimatedSize(
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.fastOutSlowIn,
+          child: NotifBlock(notifType, index),
         );
       },
     );
   }
 }
+
