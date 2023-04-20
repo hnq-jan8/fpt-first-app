@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import './category.dart';
-import './list.dart';
 
 class DetailedView extends StatelessWidget {
   final int index;

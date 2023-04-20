@@ -23,6 +23,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   var signInController = List.generate(2, (index) => TextEditingController());
+  var signInFocusNode = List.generate(2, (index) => FocusNode());
 
   var otpController = List.generate(6, (index) => TextEditingController());
   var otpFocusNode = List.generate(6, (index) => FocusNode());
@@ -97,7 +98,10 @@ class _LoginState extends State<Login> {
   @override
   void dispose() {
     for (var i = 0; i < 6; i++) {
-      if (i < 2) signInController[i].dispose();
+      if (i < 2) {
+        signInController[i].dispose();
+        signInFocusNode[i].dispose();
+      }
       otpController[i].dispose();
       otpFocusNode[i].dispose();
     }
@@ -106,29 +110,83 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    bool isPortrait =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+    int screenWidth = MediaQuery.of(context).size.width.toInt();
     return SingleChildScrollView(
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: 360),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
+      child:
+          isPortrait || screenWidth < 800 ? buildPortrait() : buildLandscape(),
+    );
+  }
+
+  Widget buildPortrait() {
+    return Container(
+      constraints: const BoxConstraints(maxWidth: 360),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const SizedBox(height: 100),
+          welcomeUserSignIn(),
+          signInField(),
+          signInField(_isObscure),
+          const SizedBox(height: 20),
+          askForOtp(),
+          otpFields(context),
+          signInButton(),
+          const SizedBox(height: 15),
+        ],
+      ),
+    );
+  }
+
+  Widget buildLandscape() {
+    return Column(
+      children: [
+        const SizedBox(height: 30),
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            welcomeUserSignIn(),
-            signInField(),
-            signInField(_isObscure),
-            twoStepAuthentication(),
-            otpFields(context),
-            signInButton(),
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Container(
+              // color: Colors.black12,
+              margin: const EdgeInsets.only(right: 30),
+              constraints: const BoxConstraints(maxWidth: 360),
+              child: Column(
+                children: <Widget>[
+                  welcomeUserSignIn(),
+                  signInField(),
+                  signInField(_isObscure),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black12,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: <Widget>[
+                  askForOtp(),
+                  otpFields(context),
+                ],
+              ),
+            ),
           ],
         ),
-      ),
+        signInButton(),
+      ],
     );
   }
 
   Container welcomeUserSignIn() {
     return Container(
       alignment: Alignment.centerLeft,
-      margin: const EdgeInsets.only(top: 150, bottom: 20, left: 12),
+      margin: const EdgeInsets.only(left: 12, bottom: 20),
       child: const Text(
         'Chào mừng !',
         style: TextStyle(
@@ -169,9 +227,13 @@ class _LoginState extends State<Login> {
       padding: const EdgeInsets.all(8),
       child: TextField(
         controller: signInController[index],
+        focusNode: signInFocusNode[index],
         obscureText: izObscure,
-        onTapOutside: (event) => FocusScope.of(context).unfocus(),
         cursorColor: Colors.orange,
+        onEditingComplete: () => isPasswordFields
+            ? FocusScope.of(context).unfocus()
+            : FocusScope.of(context).requestFocus(signInFocusNode[1]),
+        onTapOutside: (event) => FocusScope.of(context).unfocus(),
         textInputAction: !isPasswordFields ? TextInputAction.next : null,
         style: const TextStyle(
           color: Colors.white,
@@ -216,13 +278,13 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Container twoStepAuthentication({label = 'OTP'}) {
+  Container askForOtp({Color? color}) {
     return Container(
       constraints: const BoxConstraints(maxWidth: 360),
       alignment: Alignment.center,
-      margin: const EdgeInsets.only(top: 50, bottom: 15),
+      margin: const EdgeInsets.only(top: 20, bottom: 15),
       child: Text(
-        label == 'OTP' ? 'Nhập mã OTP cơ bản' : label,
+        'Nhập mã OTP cơ bản',
         style: TextStyle(
           color: Colors.white.withOpacity(0.9),
           fontSize: 16,
@@ -341,7 +403,7 @@ class _LoginState extends State<Login> {
         maxWidth: 337,
         maxHeight: 54,
       ),
-      margin: const EdgeInsets.only(top: 50, bottom: 80),
+      margin: const EdgeInsets.only(top: 50),
       child: ElevatedButton(
         onPressed: isSignInEnabled()
             ? () {

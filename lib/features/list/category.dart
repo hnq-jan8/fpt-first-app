@@ -76,16 +76,21 @@ List<Widget> categories(int index, {bool isDetailed = false}) {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text('Cập nhật CV: '),
-            DropdownButton<String>(
-              items: ['Chưa xử lý', 'Đã xử lý']
-                  .map((String value) => DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      ))
-                  .toList(),
-              onChanged: (Object? value) {},
-              icon: const Icon(Icons.arrow_drop_down_rounded, size: 45),
-              underline: Container(),
+            Theme(
+              data: ThemeData(
+                canvasColor: Colors.white,
+              ),
+              child: DropdownButton<String>(
+                items: ['Chưa xử lý', 'Đã xử lý']
+                    .map((String value) => DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        ))
+                    .toList(),
+                onChanged: (Object? value) {},
+                icon: const Icon(Icons.arrow_drop_down_rounded, size: 45),
+                underline: Container(),
+              ),
             )
           ],
         ),
