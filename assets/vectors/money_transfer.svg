@@ -1,0 +1,17 @@
+<svg width="35" height="24" viewBox="0 0 35 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Ti&#225;&#187;&#129;n icon">
+<path id="Rectangle 1" d="M0 4C0 2.11438 0 1.17157 0.585786 0.585786C1.17157 0 2.11438 0 4 0H31C32.8856 0 33.8284 0 34.4142 0.585786C35 1.17157 35 2.11438 35 4V19.3333C35 21.219 35 22.1618 34.4142 22.7475C33.8284 23.3333 32.8856 23.3333 31 23.3333H4C2.11438 23.3333 1.17157 23.3333 0.585786 22.7475C0 22.1618 0 21.219 0 19.3333V4Z" fill="url(#paint0_linear_440_11883)"/>
+<ellipse id="Ellipse 118" cx="17.5" cy="11.6667" rx="3.88889" ry="3.88889" fill="#D9D9D9"/>
+<rect id="Rectangle 4135" x="3.88889" y="3.88889" width="5.83333" height="1.94444" rx="0.972222" fill="#D9D9D9"/>
+<rect id="Rectangle 4136" x="25.2778" y="17.5" width="5.83333" height="1.94444" rx="0.972222" fill="#D9D9D9"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_440_11883" x1="42.5" y1="12" x2="-3.5" y2="27.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#BC3026"/>
+<stop offset="0.261761" stop-color="#AB0059"/>
+<stop offset="0.518552" stop-color="#741082"/>
+<stop offset="0.778556" stop-color="#58208C"/>
+<stop offset="1" stop-color="#072D94"/>
+</linearGradient>
+</defs>
+</svg>

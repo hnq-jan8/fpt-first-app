@@ -1,0 +1,63 @@
+<svg width="32" height="36" viewBox="0 0 32 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Mua SIM icon">
+<g id="&#231;&#148;&#187;&#230;&#157;&#191;">
+<path id="&#232;&#183;&#175;&#229;&#190;&#132;" fill-rule="evenodd" clip-rule="evenodd" d="M5.76824 11.6368L2 13.7188V28.1538H22.1044V2H5.76824V11.6368Z" fill="#D9D9D9" stroke="#D9D9D9" stroke-width="4" stroke-linejoin="round"/>
+<path id="&#232;&#183;&#175;&#229;&#190;&#132; 2&#229;&#164;&#135;&#228;&#187;&#189;" d="M10.1674 7.23077V11.1538" stroke="url(#paint0_linear_444_12004)" stroke-width="2" stroke-linecap="round"/>
+<path id="&#232;&#183;&#175;&#229;&#190;&#132; 2&#229;&#164;&#135;&#228;&#187;&#189; 4" d="M17.7065 7.23077V11.1538" stroke="url(#paint1_linear_444_12004)" stroke-width="2" stroke-linecap="round"/>
+<path id="&#232;&#183;&#175;&#229;&#190;&#132; 2&#229;&#164;&#135;&#228;&#187;&#189; 5" d="M13.9369 7.23077V11.1538" stroke="url(#paint2_linear_444_12004)" stroke-width="2" stroke-linecap="round"/>
+</g>
+<g id="shopping cart">
+<ellipse id="Ellipse 279" cx="19.9215" cy="34.2983" rx="1.63509" ry="1.70168" fill="url(#paint3_linear_444_12004)"/>
+<ellipse id="Ellipse 280" cx="27.8634" cy="34.2983" rx="1.63509" ry="1.70168" fill="url(#paint4_linear_444_12004)"/>
+<path id="Vector 909" d="M13.9369 19L16.8849 19.9556L19.2207 30.6519H28.5641L30.9 22.3866H22.0237" stroke="url(#paint5_linear_444_12004)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector 566" d="M22.0237 26.7623L25.4213 26.7623L29.4984 26.7623" stroke="url(#paint6_linear_444_12004)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_444_12004" x1="10.6674" y1="7.23077" x2="10.6674" y2="11.1538" gradientUnits="userSpaceOnUse">
+<stop stop-color="#BC3026"/>
+<stop offset="0.234375" stop-color="#AB0059"/>
+<stop offset="0.53125" stop-color="#741082"/>
+<stop offset="0.791667" stop-color="#58208C"/>
+<stop offset="1" stop-color="#072D94"/>
+</linearGradient>
+<linearGradient id="paint1_linear_444_12004" x1="18.2065" y1="7.23077" x2="18.2065" y2="11.1538" gradientUnits="userSpaceOnUse">
+<stop stop-color="#BC3026"/>
+<stop offset="0.234375" stop-color="#AB0059"/>
+<stop offset="0.53125" stop-color="#741082"/>
+<stop offset="0.791667" stop-color="#58208C"/>
+<stop offset="1" stop-color="#072D94"/>
+</linearGradient>
+<linearGradient id="paint2_linear_444_12004" x1="14.4369" y1="7.23077" x2="14.4369" y2="11.1538" gradientUnits="userSpaceOnUse">
+<stop stop-color="#BC3026"/>
+<stop offset="0.234375" stop-color="#AB0059"/>
+<stop offset="0.53125" stop-color="#741082"/>
+<stop offset="0.791667" stop-color="#58208C"/>
+<stop offset="1" stop-color="#072D94"/>
+</linearGradient>
+<linearGradient id="paint3_linear_444_12004" x1="21.7901" y1="33.0577" x2="17.9135" y2="35.8514" gradientUnits="userSpaceOnUse">
+<stop stop-color="#BC3026"/>
+<stop offset="0.305001" stop-color="#AB0059"/>
+<stop offset="0.696116" stop-color="#741082"/>
+<stop offset="1" stop-color="#072D94"/>
+</linearGradient>
+<linearGradient id="paint4_linear_444_12004" x1="29.9576" y1="33.3846" x2="26.3779" y2="36.5116" gradientUnits="userSpaceOnUse">
+<stop stop-color="#BC3026"/>
+<stop offset="0.341048" stop-color="#AB0059"/>
+<stop offset="0.706746" stop-color="#741082"/>
+<stop offset="1" stop-color="#072D94"/>
+</linearGradient>
+<linearGradient id="paint5_linear_444_12004" x1="32.7847" y1="25.8654" x2="17.2777" y2="30.7308" gradientUnits="userSpaceOnUse">
+<stop stop-color="#BC3026"/>
+<stop offset="0.482344" stop-color="#AB0059"/>
+<stop offset="0.787001" stop-color="#741082"/>
+<stop offset="1" stop-color="#072D94"/>
+</linearGradient>
+<linearGradient id="paint6_linear_444_12004" x1="29.3293" y1="26.3905" x2="20.2935" y2="27.607" gradientUnits="userSpaceOnUse">
+<stop stop-color="#BC3026"/>
+<stop offset="0.296215" stop-color="#AB0059"/>
+<stop offset="0.745456" stop-color="#741082"/>
+<stop offset="1" stop-color="#072D94"/>
+</linearGradient>
+</defs>
+</svg>
