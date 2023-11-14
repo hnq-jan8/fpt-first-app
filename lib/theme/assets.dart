@@ -26,4 +26,5 @@ class Assets {
   static const String image_intro = '${_IMAGES_PATH}intro.png';
   static const String image_logo = '${_IMAGES_PATH}logo.png';
   static const String image_home_bg = '${_IMAGES_PATH}home_background.png';
+  static const String image_avatar_default = '${_IMAGES_PATH}avatar_default.png';
 }

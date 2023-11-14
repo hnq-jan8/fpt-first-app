@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/routes/home/widgets/home_app_bar.dart';
 import 'package:next_app/routes/home/widgets/home_background.dart';
+import 'package:next_app/routes/home/widgets/menu_item.dart';
 import 'package:next_app/routes/home/widgets/row_content_button.dart';
 import 'package:next_app/routes/home/widgets/text_column.dart';
 import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
+import 'package:next_app/widgets/indicators/indicator_scroll.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,52 +31,98 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     Assets.icon_vas_service: StringConst.dichVuVas,
   };
 
+  late AnimationController _colorController;
+  late AnimationController _backDropController;
+  late Animation _colorTween;
+  late Animation _colorTweenText;
+  late Animation _colorTweenBorder;
+  late Animation _backDropFilter;
+
+  Brightness _iconBrightness = Brightness.light;
+
+  double position = 0;
+
+  final ScrollController _menuScrollController = ScrollController();
+
   bool _scrollListener(ScrollNotification info) {
     if (info.metrics.axis == Axis.vertical) {
-      _colorController.animateTo(info.metrics.pixels * 2 / 100);
+      _colorController.animateTo(info.metrics.pixels.abs() * 2 / 100);
+      _backDropController.animateTo(info.metrics.pixels * 2 / 100);
+      _iconBrightness = info.metrics.pixels < 30 && info.metrics.pixels > -20
+          ? Brightness.light
+          : Brightness.dark;
     }
     return true;
   }
 
-  late AnimationController _colorController;
-  late Animation _colorTween;
-  late Animation _colorTweenText;
-  late Animation _colorTweenBorder;
-
   @override
   void initState() {
+    _menuScrollController.addListener(() {
+      setState(() {});
+    });
+
+    // update scroll position for showing scroll indicator
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _menuScrollController.jumpTo(1);
+      _menuScrollController.jumpTo(0);
+    });
+
     _colorController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 0),
     );
+
+    _backDropController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 0),
+    );
+
     _colorTween = ColorTween(
       begin: Colors.transparent,
-      end: ThemeColors.background.withOpacity(1),
-    ).animate(_colorController);
+      end: ThemeColors.background.withOpacity(0.6),
+    ).animate(_backDropController);
+
     _colorTweenText = ColorTween(
       begin: ThemeColors.onPrimary,
       end: ThemeColors.onBackground,
     ).animate(_colorController);
+
     _colorTweenBorder = ColorTween(
       begin: ThemeColors.onPrimary,
       end: ThemeColors.fieldBorderDark,
     ).animate(_colorController);
+
+    _backDropFilter = Tween<double>(
+      begin: 0,
+      end: 27,
+    ).animate(_backDropController);
+
     super.initState();
   }
 
   @override
+  void dispose() {
+    _colorController.dispose();
+    _backDropController.dispose();
+    _menuScrollController.dispose();
+    super.dispose();
+  }
+
+  bool buildCalledYet = false;
+
+  @override
   Widget build(BuildContext context) {
-    var topPadding = MediaQuery.of(context).padding.top + 56;
+    var topPadding = MediaQuery.of(context).padding.top + 60;
     return Material(
-      child: NotificationListener<ScrollNotification>(
-        onNotification: _scrollListener,
-        child: Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            Container(
-              color: ThemeColors.background,
-            ),
-            SingleChildScrollView(
+      child: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          Container(
+            color: ThemeColors.background,
+          ),
+          NotificationListener<ScrollNotification>(
+            onNotification: _scrollListener,
+            child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
               child: Stack(
                 alignment: Alignment.topCenter,
@@ -83,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   const HomeBackground(),
                   Column(
                     children: [
-                      SizedBox(height: topPadding + 12),
+                      SizedBox(height: topPadding + 15),
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 20),
                         padding: const EdgeInsets.symmetric(vertical: 20),
@@ -183,64 +230,37 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 190,
-                              child: GridView.count(
-                                scrollDirection: Axis.horizontal,
-                                physics: const BouncingScrollPhysics(),
-                                crossAxisCount: 2,
-                                childAspectRatio: 1.2,
-                                shrinkWrap: true,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
-                                children: [
-                                  for (final feature in mainFeatures.entries)
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        debugPrint(feature.key);
-                                      },
-                                      style: ButtonStyle(
-                                        elevation: MaterialStateProperty.all(0),
-                                        splashFactory: NoSplash.splashFactory,
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                          Colors.transparent,
-                                        ),
-                                        overlayColor: MaterialStateProperty.all(
-                                          ThemeColors.primaryBlue
-                                              .withOpacity(0.1),
-                                        ),
-                                        shape:
-                                            MaterialStateProperty.resolveWith(
-                                          (states) =>
-                                              const RoundedRectangleBorder(),
-                                        ),
-                                        padding: MaterialStateProperty.all(
-                                          const EdgeInsets.all(0),
-                                        ),
+                            Center(
+                              child: SizedBox(
+                                height: 190,
+                                child: GridView.count(
+                                  scrollDirection: Axis.horizontal,
+                                  controller: _menuScrollController,
+                                  physics: const BouncingScrollPhysics(),
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 1.2,
+                                  shrinkWrap: true,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  children: [
+                                    for (final feature in mainFeatures.entries)
+                                      MenuItem(
+                                        svgIcon: feature.key,
+                                        title: feature.value,
                                       ),
-                                      child: Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 50,
-                                            child: SvgPicture.asset(
-                                              feature.key,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 5),
-                                          Text(
-                                            feature.value,
-                                            textAlign: TextAlign.center,
-                                            style: const TextStyle(
-                                              color: ThemeColors.onBackground,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                ],
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Visibility(
+                              visible: _menuScrollController.hasClients &&
+                                  _menuScrollController
+                                          .position.maxScrollExtent >
+                                      0,
+                              child: Center(
+                                child: ScrollIndicator(
+                                  scrollController: _menuScrollController,
+                                ),
                               ),
                             ),
                           ],
@@ -252,18 +272,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ],
               ),
             ),
-            AnimatedBuilder(
-              animation: _colorController,
-              builder: (context, child) {
-                return HomeAppBar(
-                  searchTextColor: _colorTweenText.value,
-                  backgroundColor: _colorTween.value,
-                  searchBorderColor: _colorTweenBorder.value,
-                );
-              },
-            ),
-          ],
-        ),
+          ),
+          AnimatedBuilder(
+            animation: _colorController,
+            builder: (context, child) {
+              return HomeAppBar(
+                searchTextColor: _colorTweenText.value,
+                backgroundColor: _colorTween.value,
+                searchBorderColor: _colorTweenBorder.value,
+                sigmaValue: _backDropFilter.value,
+                statusBarIconBrightness: _iconBrightness,
+              );
+            },
+          ),
+        ],
       ),
     );
   }

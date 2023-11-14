@@ -33,11 +33,11 @@ class ThemeColors {
   static const Color indicatorGradient1 = Color(0xFF49238E);
   static const Color indicatorGradient2 = Color(0xFFBC3027);
   static const Color indicatorDim = Color(0xFFC7C7C7);
-
-  static const Color inputBackground = Color(0xFFFFFFFF);
+  static const Color scrollIndicator = Color(0xFFE6E6E6);
 
   // text field
   // - text
+  static const Color inputBackground = Color(0xFFFFFFFF);
   static const Color dimText = Color(0xFFA5A5A5);
   static const Color hintText = Color(0xFFC7C7C7);
   // - border

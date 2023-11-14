@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:next_app/theme/assets.dart';
 
 import 'package:next_app/theme/theme_colors.dart';
 
@@ -28,7 +29,11 @@ class GradientCircleAvatar extends StatelessWidget {
       child: CircleAvatar(
         radius: radius,
         backgroundColor: ThemeColors.background,
-        // backgroundImage: AssetImage(Assets.image_logo),
+        backgroundImage: Image.asset(
+          Assets.image_avatar_default,
+          cacheHeight: 147,
+          cacheWidth: 147,
+        ).image,
       ),
     );
   }

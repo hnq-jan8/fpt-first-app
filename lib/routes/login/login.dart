@@ -40,6 +40,20 @@ class _LoginScreenState extends State<LoginScreen> {
   var fieldController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    fieldController.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    fieldController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     bool isKeyboardUp = MediaQuery.of(context).viewInsets.bottom != 0;
     return WillPopScope(

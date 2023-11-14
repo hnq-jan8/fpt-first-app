@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:next_app/constants/string_const.dart';
@@ -11,11 +14,17 @@ class HomeAppBar extends StatefulWidget {
   final Color searchTextColor;
   final Color searchBorderColor;
 
+  final double sigmaValue;
+
+  final Brightness statusBarIconBrightness;
+
   const HomeAppBar({
     super.key,
     this.backgroundColor = Colors.transparent,
     this.searchTextColor = ThemeColors.onPrimary,
     this.searchBorderColor = ThemeColors.onPrimary,
+    this.sigmaValue = 0,
+    this.statusBarIconBrightness = Brightness.dark,
   });
 
   @override
@@ -24,6 +33,7 @@ class HomeAppBar extends StatefulWidget {
 
 class _HomeAppBarState extends State<HomeAppBar> {
   final FocusNode _searchFocusNode = FocusNode();
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -34,14 +44,36 @@ class _HomeAppBarState extends State<HomeAppBar> {
   }
 
   @override
+  void dispose() {
+    _searchFocusNode.dispose();
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var topPadding = MediaQuery.of(context).padding.top;
 
     return SizedBox(
-      height: 56 + topPadding,
+      height: 60 + topPadding,
       child: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: widget.backgroundColor,
+        backgroundColor: Colors.transparent,
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarIconBrightness: widget.statusBarIconBrightness,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
+        flexibleSpace: ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: widget.sigmaValue,
+              sigmaY: widget.sigmaValue,
+            ), //
+            child: Container(
+              color: widget.backgroundColor,
+            ),
+          ),
+        ),
         elevation: 0,
         title: Row(
           children: [
@@ -52,10 +84,17 @@ class _HomeAppBarState extends State<HomeAppBar> {
                 height: 36,
                 child: TextField(
                   focusNode: _searchFocusNode,
+                  controller: _searchController,
+                  onTap: () => _searchController.selection = TextSelection(
+                    baseOffset: 0,
+                    extentOffset: _searchController.text.length,
+                  ),
                   onTapOutside: (event) => FocusScope.of(context).unfocus(),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 13.6,
-                    color: ThemeColors.onBackground,
+                    color: _searchFocusNode.hasFocus
+                        ? ThemeColors.onBackground
+                        : widget.searchTextColor,
                   ),
                   decoration: InputDecoration(
                     filled: true,
@@ -68,7 +107,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                       fontSize: 13.6,
                       color: _searchFocusNode.hasFocus
                           ? ThemeColors.onBackground.withOpacity(0.5)
-                          : widget.searchTextColor,
+                          : widget.searchTextColor.withOpacity(0.7),
                     ),
                     prefixIcon: Icon(
                       Icons.search,
@@ -86,9 +125,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),
-                      borderSide: BorderSide(
-                        width: 2,
-                        color: widget.searchBorderColor,
+                      borderSide: const BorderSide(
+                        width: 1,
+                        color: ThemeColors.background,
                       ),
                     ),
                   ),

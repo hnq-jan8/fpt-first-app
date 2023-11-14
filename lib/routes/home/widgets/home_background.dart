@@ -13,7 +13,11 @@ class HomeBackground extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
-      child: Image.asset(Assets.image_home_bg),
+      child: Image.asset(
+        Assets.image_home_bg,
+        cacheHeight: 961,
+        cacheWidth: 1440,
+      ),
     );
   }
 }
