@@ -5,7 +5,7 @@ import 'package:next_app/theme/theme_colors.dart';
 // ignore_for_file: constant_identifier_names
 const double DEFAULT_BAR_HEIGHT = 60;
 
-const double DEFAULT_INDICATOR_HEIGHT = 4;
+const double DEFAULT_INDICATOR_HEIGHT = 2.5;
 
 // ignore: must_be_immutable
 class CustomBottomNavigationBar extends StatefulWidget {
@@ -97,7 +97,8 @@ class _BottomNavigationAppState extends State<CustomBottomNavigationBar> {
                     color: index == widget.currentIndex
                         ? widget.indicatorColor ?? widget.activeColor
                         : Colors.transparent,
-                    margin: const EdgeInsets.only(left: 10, right: 10),
+                    margin:
+                        const EdgeInsets.only(top: 0.5, left: 10, right: 10),
                     height: widget.indicatorHeight,
                   ),
                 ],
