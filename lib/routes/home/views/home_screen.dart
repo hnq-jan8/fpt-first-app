@@ -50,6 +50,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   late AnimationController _colorController;
   late AnimationController _backDropController;
+
   late Animation _colorTween;
   late Animation _colorTweenText;
   late Animation _colorTweenBorder;
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   Brightness _iconBrightness = Brightness.light;
 
-  double position = 0;
+  double avatarRadius = 25;
 
   final ScrollController _menuScrollController = ScrollController();
   final ScrollController _adsScrollController = ScrollController();
@@ -66,9 +67,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     if (info.metrics.axis == Axis.vertical) {
       _colorController.animateTo(info.metrics.pixels.abs() * 2 / 100);
       _backDropController.animateTo(info.metrics.pixels * 2 / 100);
+
       _iconBrightness = info.metrics.pixels < 30 && info.metrics.pixels > -20
           ? Brightness.light
           : Brightness.dark;
+
+      avatarRadius = info.metrics.pixels > 10 ? 17 : 25;
     }
     return true;
   }
@@ -127,8 +131,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void dispose() {
     _colorController.dispose();
     _backDropController.dispose();
+
     _menuScrollController.dispose();
     _adsScrollController.dispose();
+
     super.dispose();
   }
 
@@ -379,6 +385,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 searchBorderColor: _colorTweenBorder.value,
                 sigmaValue: _backDropFilter.value,
                 statusBarIconBrightness: _iconBrightness,
+                avatarRadius: avatarRadius,
+                notifUnreadCount: 7,
               );
             },
           ),

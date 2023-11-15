@@ -18,6 +18,10 @@ class HomeAppBar extends StatefulWidget {
 
   final Brightness statusBarIconBrightness;
 
+  final int notifUnreadCount;
+
+  final double? avatarRadius;
+
   const HomeAppBar({
     super.key,
     this.backgroundColor = Colors.transparent,
@@ -25,6 +29,8 @@ class HomeAppBar extends StatefulWidget {
     this.searchBorderColor = ThemeColors.onPrimary,
     this.sigmaValue = 0,
     this.statusBarIconBrightness = Brightness.dark,
+    this.notifUnreadCount = 0,
+    this.avatarRadius,
   });
 
   @override
@@ -78,7 +84,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
         elevation: 0,
         title: Row(
           children: [
-            const GradientCircleAvatar(),
+            GradientCircleAvatar(radius: widget.avatarRadius),
             const SizedBox(width: 15),
             Expanded(
               child: SizedBox(
@@ -120,8 +126,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),
                       borderSide: BorderSide(
-                        width: 2,
-                        color: widget.searchBorderColor.withOpacity(0.5),
+                        width: 1.5,
+                        color: widget.searchBorderColor.withOpacity(0.7),
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
@@ -138,16 +144,58 @@ class _HomeAppBarState extends State<HomeAppBar> {
             const SizedBox(width: 5),
             IconButton(
               onPressed: () {},
-              alignment: Alignment.centerRight,
+              padding: EdgeInsets.zero,
               splashColor: Colors.transparent,
               splashRadius: 0.1,
-              icon: SvgPicture.asset(
-                Assets.icon_notification,
-                height: 25,
-                colorFilter: const ColorFilter.mode(
-                  ThemeColors.primaryBlue,
-                  BlendMode.srcIn,
-                ),
+              icon: Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: SvgPicture.asset(
+                        Assets.icon_notification,
+                        height: 25,
+                        colorFilter: const ColorFilter.mode(
+                          ThemeColors.primaryBlue,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: widget.notifUnreadCount != 0
+                        ? Container(
+                            constraints: const BoxConstraints(minWidth: 20),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: ThemeColors.primary,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: const EdgeInsets.only(
+                                top: 2,
+                                bottom: 1,
+                                left: 3,
+                                right: 4,
+                              ),
+                              margin: const EdgeInsets.only(
+                                top: 7,
+                                right: 4,
+                              ),
+                              child: Text(
+                                widget.notifUnreadCount.toString(),
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: Color(0xFFFFFFFF),
+                                  fontSize: 12.5,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container(),
+                  )
+                ],
               ),
             ),
           ],

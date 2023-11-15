@@ -43,5 +43,5 @@ class ThemeColors {
   // - border
   static const Color fieldBorder = Color(0xFFC7C7C7);
   static const Color fieldBorderLight = Color(0xFFFFFFFF);
-  static const Color fieldBorderDark = Color(0xFF616161);
+  static const Color fieldBorderDark = Color(0xFF888888);
 }

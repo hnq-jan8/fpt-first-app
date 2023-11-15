@@ -124,9 +124,6 @@ class _BottomNavigationAppState extends State<CustomBottomNavigationBar> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const SizedBox(
-            height: 5,
-          ),
           Stack(
             children: [
               Center(
@@ -140,8 +137,8 @@ class _BottomNavigationAppState extends State<CustomBottomNavigationBar> {
               ),
               Align(
                 alignment: Alignment.center,
-                child: (item.notifCountUnread != null &&
-                        item.notifCountUnread != 0)
+                child: (item.notifUnreadCount != null &&
+                        item.notifUnreadCount != 0)
                     ? Container(
                         decoration: BoxDecoration(
                           color: const Color(0xFFF44336),
@@ -155,16 +152,18 @@ class _BottomNavigationAppState extends State<CustomBottomNavigationBar> {
                         ),
                         margin: const EdgeInsets.only(left: 25),
                         child: Text(
-                          '${item.notifCountUnread ?? 0}',
+                          '${item.notifUnreadCount ?? 0}',
                           style: const TextStyle(
-                              color: Color(0xFFFFFFFF), fontSize: 12),
+                            color: Color(0xFFFFFFFF),
+                            fontSize: 12,
+                          ),
                         ),
                       )
                     : Container(),
               )
             ],
           ),
-          const SizedBox(height: 4.5),
+          const SizedBox(height: 2),
           DefaultTextStyle.merge(
             child: Text(item.title),
             style: TextStyle(

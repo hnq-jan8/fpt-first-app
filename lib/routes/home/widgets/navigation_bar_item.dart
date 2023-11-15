@@ -17,13 +17,13 @@ class NavigationBarItem {
   final Color backgroundColor;
 
   ///Number unread notification.
-  final int? notifCountUnread;
+  final int? notifUnreadCount;
 
   NavigationBarItem({
     required this.inactiveIcon,
     required this.activeIcon,
     required this.title,
     this.backgroundColor = Colors.white,
-    this.notifCountUnread
+    this.notifUnreadCount
   });
 }

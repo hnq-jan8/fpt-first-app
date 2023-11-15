@@ -6,10 +6,10 @@ import 'package:next_app/theme/theme_colors.dart';
 class GradientCircleAvatar extends StatelessWidget {
   const GradientCircleAvatar({
     super.key,
-    this.radius = 21,
+    this.radius,
   });
 
-  final double radius;
+  final double? radius;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class GradientCircleAvatar extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
       ),
       child: CircleAvatar(
-        radius: radius,
+        radius: radius ?? 21,
         backgroundColor: ThemeColors.background,
         backgroundImage: Image.asset(
           Assets.image_avatar_default,
