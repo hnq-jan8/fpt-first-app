@@ -73,20 +73,22 @@ class DataPackageCell extends StatelessWidget {
                       Text(
                         "Gói Data ${dataPackage.title}",
                         style: const TextStyle(
-                          fontSize: 16,
+                          fontSize: 15,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       Text(
                         dataPackage.description,
                         style: const TextStyle(
-                          height: 1.37,
+                          fontSize: 14,
+                          height: 1.4,
                         ),
                       ),
                       Text(
                         dataPackage.highlight,
                         style: const TextStyle(
-                          height: 1.37,
+                          fontSize: 13.6,
+                          height: 1.5,
                           color: ThemeColors.primary,
                         ),
                       ),

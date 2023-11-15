@@ -353,8 +353,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.only(
-                            top: 25,
-                            bottom: 75,
+                            top: 45,
+                            bottom: 95,
                           ),
                           child: GradientButton(
                             onPressed: () {},

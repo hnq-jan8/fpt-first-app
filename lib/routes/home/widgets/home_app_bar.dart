@@ -62,6 +62,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarIconBrightness: widget.statusBarIconBrightness,
           systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarColor: const Color(0xFFFFFFFF),
         ),
         flexibleSpace: ClipRRect(
           child: BackdropFilter(
