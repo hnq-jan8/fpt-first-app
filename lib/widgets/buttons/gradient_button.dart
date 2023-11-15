@@ -17,6 +17,9 @@ class GradientButton extends StatefulWidget {
 
   final double borderRadius;
 
+  /// Reverse the way this button updates its color
+  final bool reversedBehavior;
+
   const GradientButton({
     Key? key,
     this.gradientColor1 = ThemeColors.buttonGradient1,
@@ -27,6 +30,7 @@ class GradientButton extends StatefulWidget {
     this.borderRadius = 14,
     required this.child,
     required this.onPressed,
+    this.reversedBehavior = false,
   }) : super(key: key);
 
   @override
@@ -66,13 +70,14 @@ class _GradientButtonState extends State<GradientButton> {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(widget.borderRadius),
-              color:
-                  isButtonPressed ? Colors.transparent : widget.backgroundColor,
+              color: isButtonPressed != widget.reversedBehavior
+                  ? Colors.transparent
+                  : widget.backgroundColor,
             ),
             child: ShaderMask(
               shaderCallback: (Rect bounds) {
                 return LinearGradient(
-                  colors: isButtonPressed
+                  colors: isButtonPressed != widget.reversedBehavior
                       ? <Color>[
                           const Color(0xFFFFFFFF),
                           const Color(0xFFFFFFFF),

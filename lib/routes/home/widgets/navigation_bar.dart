@@ -94,11 +94,14 @@ class _BottomNavigationAppState extends State<CustomBottomNavigationBar> {
                     index == widget.currentIndex,
                   ),
                   Container(
-                    color: index == widget.currentIndex
-                        ? widget.indicatorColor ?? widget.activeColor
-                        : Colors.transparent,
                     margin:
                         const EdgeInsets.only(top: 0.5, left: 10, right: 10),
+                    decoration: BoxDecoration(
+                      color: index == widget.currentIndex
+                          ? widget.indicatorColor ?? widget.activeColor
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     height: widget.indicatorHeight,
                   ),
                 ],
