@@ -61,7 +61,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
     var topPadding = MediaQuery.of(context).padding.top;
 
     return SizedBox(
-      height: 60 + topPadding,
+      height: 56 + topPadding,
       child: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
