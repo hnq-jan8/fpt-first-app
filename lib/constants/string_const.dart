@@ -48,4 +48,14 @@ class StringConst {
   static const String muaSim = 'Mua SIM';
   static const String chuyenTien = 'Chuyển tiền';
   static const String dichVuVas = 'Dịch vụ\nVAS';
+
+  static const String cacGoiCuocUuDai = 'Các gói cước ưu đãi';
+
+  static const String dieuChinhManHinhChinh = 'Điều chỉnh màn hình chính';
+
+  static const String trangChu = 'Trang chủ';
+  static const String troGiup = 'Trợ giúp';
+  static const String tienIch = 'Tiện ích';
+  static const String caiDat = 'Cài đặt';
+  static const String taiKhoan = 'Tài khoản';
 }

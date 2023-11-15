@@ -8,17 +8,18 @@ class MenuItem extends StatelessWidget {
     super.key,
     required this.svgIcon,
     required this.title,
+    required this.onPressed,
   });
 
   final String svgIcon;
   final String title;
 
+  final VoidCallback? onPressed;
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        debugPrint(svgIcon);
-      },
+      onPressed: onPressed,
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(0),
         splashFactory: NoSplash.splashFactory,

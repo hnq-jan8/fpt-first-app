@@ -87,7 +87,7 @@ class AppRouter {
       case Routes.home:
         return CupertinoPageRoute(
           settings: settings,
-          builder: (context) => const HomeScreen(),
+          builder: (context) => const HomePage(),
         );
     }
     return null;

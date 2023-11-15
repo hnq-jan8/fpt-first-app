@@ -8,6 +8,7 @@ class Cell extends StatelessWidget {
     this.borderRadius = 10,
     this.fillColor = const Color(0xFFFFFFFF),
     required this.child,
+    this.borderColor,
   });
 
   final double borderRadius;
@@ -15,6 +16,8 @@ class Cell extends StatelessWidget {
   final double height;
 
   final Color fillColor;
+  final Color? borderColor;
+
   final Widget? child;
 
   @override
@@ -25,6 +28,12 @@ class Cell extends StatelessWidget {
       decoration: BoxDecoration(
         color: fillColor,
         borderRadius: BorderRadius.circular(borderRadius),
+        border: borderColor != null
+            ? Border.all(
+                color: borderColor!,
+                width: 1,
+              )
+            : null,
       ),
       child: child,
     );
