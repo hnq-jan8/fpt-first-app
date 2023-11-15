@@ -9,6 +9,9 @@ class HomeBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int cacheHeight = MediaQuery.of(context).size.height.toInt();
+    int cacheWidth = MediaQuery.of(context).size.width.toInt();
+
     return Container(
       clipBehavior: Clip.hardEdge,
       decoration: const BoxDecoration(
@@ -16,8 +19,8 @@ class HomeBackground extends StatelessWidget {
       ),
       child: Image.asset(
         Assets.image_home_bg,
-        cacheHeight: 961,
-        cacheWidth: 1440,
+        cacheHeight: cacheWidth,
+        cacheWidth: cacheHeight,
       ),
     );
   }

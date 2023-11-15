@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:next_app/theme/assets.dart';
 
+import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
 
 class GradientCircleAvatar extends StatelessWidget {
