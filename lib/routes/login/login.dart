@@ -182,11 +182,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         duration: const Duration(milliseconds: 100),
                         curve: Curves.easeOut,
                         child: Visibility(
-                          replacement: Container(
-                            width: 23,
-                            height: 1,
-                            color: Colors.black.withOpacity(0.5),
-                          ),
                           visible: !buttonSignInVisibility,
                           maintainAnimation: true,
                           maintainState: true,
@@ -255,16 +250,8 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Visibility(
                 visible: !buttonSignInVisibility && !isKeyboardUp,
                 child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        ThemeColors.background,
-                        ThemeColors.background.withOpacity(0.9),
-                      ],
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                    ),
-                  ),
+                  decoration:
+                      const BoxDecoration(color: ThemeColors.background),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

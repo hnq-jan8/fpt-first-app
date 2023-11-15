@@ -22,7 +22,7 @@ class ThemeColors {
   // - header
   static const Color headerGradient1 = Color(0xFF302690);
   static const Color headerGradient2 = Color(0xFFB9272F);
-  static const Color homeHeader = Color(0xFFC08BCA);
+  static const Color homeHeader = Color(0x90F5F5F5);
   // - button
   static const Color buttonGradient1 = Color(0xFF162B93);
   static const Color buttonGradient2 = Color(0xFFB82531);
@@ -42,6 +42,9 @@ class ThemeColors {
   static const Color hintText = Color(0xFFC7C7C7);
   // - border
   static const Color fieldBorder = Color(0xFFC7C7C7);
-  static const Color fieldBorderLight = Color(0xFFFFFFFF);
-  static const Color fieldBorderDark = Color(0xFF888888);
+  static const Color fieldBorderLight = Color(0x93FFFFFF);
+  static const Color fieldBorderDark = Color(0x90888888);
+
+  // others
+  static const Color bottomContainer = Color(0xFFF5F5F5);
 }

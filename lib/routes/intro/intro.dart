@@ -191,18 +191,9 @@ class _IntroScreenState extends State<IntroScreen>
                   onPressed: currentPage == 0
                       ? () => changePage(toPage: 1)
                       : () => AppRouter.instance.navigateTo(Routes.login),
-                  child: AnimatedSwitcher(
-                    duration: textDuration,
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) =>
-                            FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    ),
-                    child: GradientButtonTitle(
-                      buttonTitle: buttonTitle[currentPage],
-                      key: ValueKey<String>(buttonTitle[currentPage]),
-                    ),
+                  child: GradientButtonTitle(
+                    buttonTitle: buttonTitle[currentPage],
+                    key: ValueKey<String>(buttonTitle[currentPage]),
                   ),
                 ),
               ),

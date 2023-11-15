@@ -27,7 +27,7 @@ class MenuItem extends StatelessWidget {
           Colors.transparent,
         ),
         overlayColor: MaterialStateProperty.all(
-          ThemeColors.primaryBlue.withOpacity(0.1),
+          Colors.black12,
         ),
         shape: MaterialStateProperty.resolveWith(
           (states) => const RoundedRectangleBorder(),

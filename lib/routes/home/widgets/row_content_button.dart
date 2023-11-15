@@ -46,7 +46,7 @@ class RowContentButton extends StatelessWidget {
               ),
               splashFactory: NoSplash.splashFactory,
               overlayColor:
-                  MaterialStateProperty.all(Colors.white.withOpacity(0.2)),
+                  MaterialStateProperty.all(Colors.white24),
             ),
             child: Text(
               buttonTitle,

@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
     _colorTween = ColorTween(
       begin: Colors.transparent,
-      end: ThemeColors.background.withOpacity(0.64),
+      end: ThemeColors.homeHeader,
     ).animate(_backDropController);
 
     _colorTweenText = ColorTween(
@@ -115,13 +115,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     ).animate(_colorController);
 
     _colorTweenBorder = ColorTween(
-      begin: ThemeColors.onPrimary,
+      begin: ThemeColors.fieldBorderLight,
       end: ThemeColors.fieldBorderDark,
     ).animate(_colorController);
 
     _backDropFilter = Tween<double>(
       begin: 0,
-      end: 32,
+      end: 36,
     ).animate(_backDropController);
 
     super.initState();
@@ -164,11 +164,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         decoration: BoxDecoration(
                           color: const Color(0xFFFFFFFF),
                           borderRadius: BorderRadius.circular(24),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
+                              color: Colors.black26,
                               blurRadius: 10,
-                              offset: const Offset(0, 5),
+                              offset: Offset(0, 5),
                             )
                           ],
                         ),
@@ -360,7 +360,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         child: Padding(
                           padding: const EdgeInsets.only(
                             top: 45,
-                            bottom: 95,
+                            bottom: 60,
                           ),
                           child: GradientButton(
                             onPressed: () {},

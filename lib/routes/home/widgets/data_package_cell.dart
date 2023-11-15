@@ -21,9 +21,8 @@ class DataPackageCell extends StatelessWidget {
     return Ink(
       decoration: BoxDecoration(
         color: const Color(0xFFFFFFFF),
-        // color: ThemeColors.background,
         border: Border.all(
-          color: ThemeColors.fieldBorderDark.withOpacity(0.4),
+          color: ThemeColors.fieldBorderDark,
           width: 1,
         ),
         borderRadius: BorderRadius.circular(15),

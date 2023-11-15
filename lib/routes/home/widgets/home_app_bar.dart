@@ -113,7 +113,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     hintStyle: TextStyle(
                       fontSize: 13.6,
                       color: _searchFocusNode.hasFocus
-                          ? ThemeColors.onBackground.withOpacity(0.5)
+                          ? Colors.black45
                           : widget.searchTextColor.withOpacity(0.7),
                     ),
                     prefixIcon: Icon(
@@ -127,7 +127,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                       borderRadius: BorderRadius.circular(100),
                       borderSide: BorderSide(
                         width: 1.5,
-                        color: widget.searchBorderColor.withOpacity(0.7),
+                        color: widget.searchBorderColor,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
