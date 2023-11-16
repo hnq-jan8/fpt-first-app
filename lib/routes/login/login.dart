@@ -70,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
         backgroundColor: ThemeColors.background,
         appBar: Header(
           onBack: onBackCustom,
+          showBack: buttonSignInVisibility,
         ),
         body: Stack(
           alignment: Alignment.bottomCenter,

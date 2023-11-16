@@ -7,7 +7,7 @@ class TextColumn extends StatelessWidget {
     super.key,
     required this.title,
     required this.content,
-    this.fontSize = 13.2,
+    this.fontSize = 12.9,
   });
 
   final String title;
@@ -31,7 +31,7 @@ class TextColumn extends StatelessWidget {
         Text(
           content,
           style: TextStyle(
-            fontSize: fontSize,
+            fontSize: fontSize - 0.7,
             color: ThemeColors.onPrimary,
             fontWeight: FontWeight.w300,
           ),

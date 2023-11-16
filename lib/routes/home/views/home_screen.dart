@@ -6,8 +6,8 @@ import 'package:next_app/routes/home/widgets/ad_image.dart';
 import 'package:next_app/routes/home/widgets/data_package_cell.dart';
 import 'package:next_app/routes/home/widgets/home_app_bar.dart';
 import 'package:next_app/routes/home/widgets/home_background.dart';
+import 'package:next_app/routes/home/widgets/home_gradient_content.dart';
 import 'package:next_app/routes/home/widgets/menu_item.dart';
-import 'package:next_app/routes/home/widgets/row_content_button.dart';
 import 'package:next_app/routes/home/widgets/text_column.dart';
 import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
@@ -175,46 +175,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                              padding: const EdgeInsets.only(
-                                top: 20,
-                                bottom: 15,
-                                left: 20,
-                                right: 20,
-                              ),
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(15)),
-                                gradient: LinearGradient(
-                                  colors: [
-                                    ThemeColors.headerGradient1,
-                                    ThemeColors.headerGradient2,
-                                  ],
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  RowContentButton(
-                                    title: StringConst.taiKhoanGoc,
-                                    content: '90.000 VNĐ',
-                                    buttonTitle: StringConst.napTien,
-                                    onPressed: () {},
-                                  ),
-                                  const SizedBox(height: 20),
-                                  RowContentButton(
-                                    title: StringConst.taiKhoanKhuyenMai,
-                                    content: '0 VNĐ',
-                                    buttonTitle: StringConst.traCuoc,
-                                    onPressed: () {},
-                                  ),
-                                ],
-                              ),
+                            HomeGradientContentBox(
+                              title1: StringConst.taiKhoanGoc,
+                              content1: '90.000 VNĐ',
+                              buttonTitle1: StringConst.napTien,
+                              onPressed1: () {},
+                              title2: StringConst.taiKhoanKhuyenMai,
+                              content2: '0 VNĐ',
+                              buttonTitle2: StringConst.traCuoc,
+                              onPressed2: () {},
                             ),
                             Container(
-                              margin:
-                                  const EdgeInsets.symmetric(horizontal: 20),
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                              ),
                               padding: const EdgeInsets.symmetric(
                                 vertical: 17,
                                 horizontal: 20,
@@ -359,8 +333,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       Center(
                         child: Padding(
                           padding: const EdgeInsets.only(
-                            top: 45,
-                            bottom: 60,
+                            top: 40,
+                            bottom: 64,
                           ),
                           child: GradientButton(
                             onPressed: () {},

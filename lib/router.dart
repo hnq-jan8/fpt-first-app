@@ -27,17 +27,25 @@ class AppRouter {
 
   static AppRouter get instance => _instance;
 
+  ///
+  /// Push a new route onto the navigation stack.
   Future<dynamic> navigateTo(String routeName, {dynamic arguments}) async {
     return navigatorKey.currentState
         ?.pushNamed(routeName, arguments: arguments);
   }
 
+  ///
+  /// Pop the current route off the navigation stack and
+  /// then push a new route
   Future<dynamic> popAndNavigateTo(
       {dynamic result, required String routeName, dynamic arguments}) {
     return navigatorKey.currentState!
         .popAndPushNamed(routeName, arguments: arguments);
   }
 
+  ///
+  /// Push a new route onto the navigation stack and remove all
+  /// the previous routes
   Future<dynamic> navigateAndRemove(String routeName,
       {dynamic arguments}) async {
     return navigatorKey.currentState!.pushNamedAndRemoveUntil(
@@ -47,25 +55,39 @@ class AppRouter {
     );
   }
 
+  ///
+  /// Pop off routes from the navigation stack
+  /// until the first route is reached.
   dynamic popUntil() {
     return navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
+  ///
+  /// Pop off routes from the navigation stack
+  /// until the route with the given name is reached.
   dynamic popUntilWithName(String routeName) {
     return navigatorKey.currentState!.popUntil(ModalRoute.withName(routeName));
   }
 
+  ///
+  /// Push a new route onto the navigation stack and
+  /// keep popping routes until the route with the given name is reached.
   dynamic pushNamedAndRemoveUntil(String pushName, String removeUntilName) {
     return navigatorKey.currentState!.pushNamedAndRemoveUntil(
         pushName, ModalRoute.withName(removeUntilName));
   }
 
+  ///
+  /// Replace the current route of the navigation stack
+  /// with a new route.
   Future<dynamic> navigateAndReplace(String routeName,
       {dynamic arguments}) async {
     return navigatorKey.currentState!
         .pushReplacementNamed(routeName, arguments: arguments);
   }
 
+  ///
+  /// Pop the current route off the navigation stack.
   dynamic pop({dynamic result}) {
     return navigatorKey.currentState!.pop(result);
   }

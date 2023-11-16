@@ -190,7 +190,8 @@ class _IntroScreenState extends State<IntroScreen>
                 child: GradientButton(
                   onPressed: currentPage == 0
                       ? () => changePage(toPage: 1)
-                      : () => AppRouter.instance.navigateTo(Routes.login),
+                      : () =>
+                          AppRouter.instance.navigateAndRemove(Routes.login),
                   child: GradientButtonTitle(
                     buttonTitle: buttonTitle[currentPage],
                     key: ValueKey<String>(buttonTitle[currentPage]),
