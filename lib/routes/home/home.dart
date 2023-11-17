@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/routes/home/views/home_screen.dart';
+import 'package:next_app/routes/settings/setting_screen.dart';
 import 'package:next_app/routes/home/widgets/navigation_bar.dart';
 import 'package:next_app/routes/home/widgets/navigation_bar_item.dart';
 import 'package:next_app/theme/assets.dart';
@@ -55,46 +57,54 @@ class _HomePageState extends State<HomePage> {
       )
     ];
 
-    return Material(
-      color: ThemeColors.background,
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          Column(
-            children: [
-              Expanded(
-                child: IndexedStack(
-                  index: _currentIndex,
-                  children: [
-                    const HomeScreen(),
-                    Container(
-                      color: Colors.red,
-                    ),
-                    Container(
-                      color: Colors.green,
-                    ),
-                    Container(
-                      color: Colors.blue,
-                    ),
-                    Container(
-                      color: Colors.yellow,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 40),
-            ],
-          ),
-          CustomBottomNavigationBar(
-            onPressed: (index) {
+    return WillPopScope(
+      onWillPop: _currentIndex != 0
+          ? () {
               setState(() {
-                _currentIndex = index;
+                _currentIndex = 0;
               });
-            },
-            items: navigationItems,
-            currentIndex: _currentIndex!,
-          ),
-        ],
+              return Future.value(false);
+            }
+          : null,
+      child: Material(
+        color: ThemeColors.background,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Column(
+              children: [
+                Expanded(
+                  child: IndexedStack(
+                    index: _currentIndex,
+                    children: [
+                      const HomeScreen(),
+                      Container(
+                        color: Colors.red,
+                      ),
+                      Container(
+                        color: Colors.green,
+                      ),
+                      const SettingScreen(),
+                      Container(
+                        color: Colors.yellow,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 40),
+              ],
+            ),
+            CustomBottomNavigationBar(
+              onPressed: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+              items: navigationItems,
+              currentIndex: _currentIndex!,
+            ),
+          ],
+        ),
       ),
     );
   }

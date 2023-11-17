@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:next_app/routes/home/widgets/navigation_bar_item.dart';
 import 'package:next_app/theme/theme_colors.dart';
 
@@ -34,6 +35,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
   /// Change the navigation bar's size.
   ///
   /// Defaults to [DEFAULT_BAR_HEIGHT].
+  final double barHeight;
 
   CustomBottomNavigationBar({
     Key? key,
@@ -46,6 +48,7 @@ class CustomBottomNavigationBar extends StatefulWidget {
     this.enableShadow = true,
     this.currentIndex = 0,
     this.indicatorHeight = DEFAULT_INDICATOR_HEIGHT,
+    this.barHeight = DEFAULT_BAR_HEIGHT,
   })  : assert(items.length >= 2 && items.length <= 5),
         super(key: key);
 
@@ -54,16 +57,19 @@ class CustomBottomNavigationBar extends StatefulWidget {
 }
 
 class _BottomNavigationAppState extends State<CustomBottomNavigationBar> {
-  Duration duration = const Duration(milliseconds: 270);
+  Duration duration = const Duration(milliseconds: 150);
+  Curve curve = Curves.easeOut;
 
   @override
   Widget build(BuildContext context) {
+    var itemWidth =
+        (MediaQuery.of(context).size.width - 10) / widget.items.length;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       clipBehavior: Clip.hardEdge,
       constraints: BoxConstraints(
-        minHeight: widget.indicatorHeight + DEFAULT_BAR_HEIGHT,
-        maxHeight: widget.indicatorHeight + DEFAULT_BAR_HEIGHT,
+        minHeight: widget.indicatorHeight + widget.barHeight,
+        maxHeight: widget.indicatorHeight + widget.barHeight,
       ),
       decoration: BoxDecoration(
         color: const Color(0xFFFFFFFF),
@@ -80,35 +86,58 @@ class _BottomNavigationAppState extends State<CustomBottomNavigationBar> {
               ]
             : null,
       ),
-      child: Row(
-        children: widget.items.map((item) {
-          var index = widget.items.indexOf(item);
-          return Expanded(
-            child: GestureDetector(
-              onTap: () => _select(index),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  _buildItemWidget(
-                    item,
-                    index == widget.currentIndex,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Row(
+            children: widget.items.map((item) {
+              var index = widget.items.indexOf(item);
+              return Expanded(
+                child: GestureDetector(
+                  onTap: () => _select(index),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      _buildItemWidget(
+                        item,
+                        index == widget.currentIndex,
+                      ),
+                    ],
                   ),
-                  Container(
-                    margin:
-                        const EdgeInsets.only(top: 0.5, left: 10, right: 10),
-                    decoration: BoxDecoration(
-                      color: index == widget.currentIndex
-                          ? widget.indicatorColor ?? widget.activeColor
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    height: widget.indicatorHeight,
-                  ),
-                ],
+                ),
+              );
+            }).toList(),
+          ),
+          Row(
+            children: [
+              AnimatedSize(
+                duration: duration,
+                curve: curve,
+                child: SizedBox(
+                  width: itemWidth * widget.currentIndex,
+                ),
               ),
-            ),
-          );
-        }).toList(),
+              Expanded(
+                child: Container(
+                  height: widget.indicatorHeight,
+                  margin: const EdgeInsets.only(top: 1, left: 10, right: 10),
+                  decoration: BoxDecoration(
+                    color: widget.activeColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
+              AnimatedSize(
+                duration: duration,
+                curve: curve,
+                child: SizedBox(
+                  width: itemWidth * (widget.items.length - 1) -
+                      itemWidth * widget.currentIndex,
+                ),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
@@ -170,9 +199,11 @@ class _BottomNavigationAppState extends State<CustomBottomNavigationBar> {
           DefaultTextStyle.merge(
             child: Text(item.title),
             style: TextStyle(
-              color: isSelected ? ThemeColors.primary : ThemeColors.dimText,
+              color: isSelected
+                  ? ThemeColors.primary
+                  : ThemeColors.navigationBarDimText,
               fontSize: 11.5,
-              fontWeight: FontWeight.w400,
+              fontWeight: isSelected ? FontWeight.w400 : FontWeight.w300,
             ),
           )
         ],

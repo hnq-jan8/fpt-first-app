@@ -34,16 +34,27 @@ class Assets {
 
   static const String icon_home_active = '${_ICONS_PATH}home.svg';
   static const String icon_home_inactive = '${_ICONS_PATH}home_inactive.svg';
+
   static const String icon_help_active = '${_ICONS_PATH}help.svg';
   static const String icon_help_inactive = '${_ICONS_PATH}help_inactive.svg';
+
   static const String icon_apps_active = '${_ICONS_PATH}apps.svg';
   static const String icon_apps_inactive = '${_ICONS_PATH}apps_inactive.svg';
+
   static const String icon_settings_active = '${_ICONS_PATH}settings.svg';
   static const String icon_settings_inactive =
       '${_ICONS_PATH}settings_inactive.svg';
+
   static const String icon_account_active = '${_ICONS_PATH}account.svg';
   static const String icon_account_inactive =
       '${_ICONS_PATH}account_inactive.svg';
+
+  static const String icon_globe = '${_ICONS_PATH}globe.svg';
+  static const String icon_notification_outlined =
+      '${_ICONS_PATH}notif_outlined.svg';
+  static const String icon_face_id = '${_ICONS_PATH}faceId.svg';
+  static const String icon_otp = '${_ICONS_PATH}otp.svg';
+  static const String icon_info = '${_ICONS_PATH}info.svg';
 
   // images
   static const String image_intro = '${_IMAGES_PATH}intro.png';

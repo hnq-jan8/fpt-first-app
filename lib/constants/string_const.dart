@@ -58,4 +58,12 @@ class StringConst {
   static const String tienIch = 'Tiện ích';
   static const String caiDat = 'Cài đặt';
   static const String taiKhoan = 'Tài khoản';
+
+  static const String khac = 'Khác';
+
+  static const String thongTinUngDung = 'Thông tin ứng dụng';
+  static const String chinhSachQuyenRiengTu = 'Chính sách quyền riêng tư';
+  static const String dieuKhoanSuDung = 'Điều khoản sử dụng';
+
+  static const String thoatTaiKhoan = 'Thoát tài khoản';
 }

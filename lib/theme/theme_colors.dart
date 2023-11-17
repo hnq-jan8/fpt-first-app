@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ThemeColors {
@@ -47,4 +46,5 @@ class ThemeColors {
 
   // others
   static const Color bottomContainer = Color(0xFFF5F5F5);
+  static const Color navigationBarDimText = Color(0xFF858585);
 }

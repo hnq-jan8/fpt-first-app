@@ -1,0 +1,27 @@
+import 'package:flutter/material.dart';
+
+import 'package:next_app/theme/theme_colors.dart';
+
+class NoAppBar extends StatelessWidget implements PreferredSizeWidget {
+  ///
+  /// Correct system_status_bar_icon color
+  const NoAppBar({
+    super.key,
+    this.elevation = 0,
+  });
+
+  final double elevation;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      elevation: elevation,
+      toolbarHeight: 0,
+      automaticallyImplyLeading: false,
+      backgroundColor: ThemeColors.background,
+    );
+  }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(0);
+}
