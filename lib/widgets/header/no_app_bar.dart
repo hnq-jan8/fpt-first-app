@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:next_app/theme/theme_colors.dart';
 
@@ -19,6 +20,10 @@ class NoAppBar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: 0,
       automaticallyImplyLeading: false,
       backgroundColor: ThemeColors.background,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
     );
   }
 

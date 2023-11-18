@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/routes/home/views/home_screen.dart';
 import 'package:next_app/routes/settings/setting_screen.dart';
-import 'package:next_app/routes/home/widgets/navigation_bar.dart';
-import 'package:next_app/routes/home/widgets/navigation_bar_item.dart';
+import 'package:next_app/widgets/navigation_bar/navigation_bar.dart';
+import 'package:next_app/widgets/navigation_bar/navigation_bar_item.dart';
 import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
 
@@ -19,13 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int? _currentIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    _currentIndex = 0;
-  }
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -78,16 +72,10 @@ class _HomePageState extends State<HomePage> {
                     index: _currentIndex,
                     children: [
                       const HomeScreen(),
-                      Container(
-                        color: Colors.red,
-                      ),
-                      Container(
-                        color: Colors.green,
-                      ),
+                      Container(color: Colors.red),
+                      Container(color: Colors.green),
                       const SettingScreen(),
-                      Container(
-                        color: Colors.yellow,
-                      ),
+                      Container(color: Colors.yellow),
                     ],
                   ),
                 ),
@@ -101,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                 });
               },
               items: navigationItems,
-              currentIndex: _currentIndex!,
+              currentIndex: _currentIndex,
             ),
           ],
         ),

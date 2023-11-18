@@ -21,6 +21,8 @@ class TextColumn extends StatelessWidget {
       children: [
         Text(
           title,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
           style: TextStyle(
             fontSize: fontSize,
             color: ThemeColors.onPrimary,

@@ -23,13 +23,15 @@ class RowContentButton extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        TextColumn(
-          title: title,
-          content: content,
-          fontSize: 15.7,
+        Expanded(
+          child: TextColumn(
+            title: title,
+            content: content,
+            fontSize: 15.7,
+          ),
         ),
         SizedBox(
-          width: 96,
+          width: 94,
           child: OutlinedButton(
             onPressed: onPressed,
             style: ButtonStyle(
@@ -45,8 +47,7 @@ class RowContentButton extends StatelessWidget {
                 ),
               ),
               splashFactory: NoSplash.splashFactory,
-              overlayColor:
-                  MaterialStateProperty.all(Colors.white24),
+              overlayColor: MaterialStateProperty.all(Colors.white24),
             ),
             child: Text(
               buttonTitle,

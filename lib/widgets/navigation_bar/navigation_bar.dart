@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:next_app/routes/home/widgets/navigation_bar_item.dart';
 import 'package:next_app/theme/theme_colors.dart';
+import 'package:next_app/widgets/navigation_bar/navigation_bar_item.dart';
 
 // ignore_for_file: constant_identifier_names
 const double DEFAULT_BAR_HEIGHT = 60;
 
 const double DEFAULT_INDICATOR_HEIGHT = 2.5;
+
+const double DEFAULT_INDICATOR_PADDING = 10;
 
 // ignore: must_be_immutable
 class CustomBottomNavigationBar extends StatefulWidget {
@@ -18,24 +20,28 @@ class CustomBottomNavigationBar extends StatefulWidget {
   int currentIndex;
 
   /// Called when a item is tapped.
-  ///
   /// This provide the selected item's index.
   final ValueChanged<int> onPressed;
 
   /// The items of this navigation bar.
-  ///
   /// This should contain at least two items and five at most.
   final List<NavigationBarItem> items;
 
   /// The selected item is indicator height.
-  ///
   /// Defaults to [DEFAULT_INDICATOR_HEIGHT].
   final double indicatorHeight;
 
   /// Change the navigation bar's size.
-  ///
+  /// Defaults to [DEFAULT_INDICATOR_PADDING].
+  final double indicatorPadding;
+
+  /// Change the navigation bar's size.
   /// Defaults to [DEFAULT_BAR_HEIGHT].
   final double barHeight;
+
+  /// The animation curve of this navigation bar.
+  /// Defaults to [Curves.easeOut].
+  final Curve animationCurve;
 
   CustomBottomNavigationBar({
     Key? key,
@@ -48,7 +54,9 @@ class CustomBottomNavigationBar extends StatefulWidget {
     this.enableShadow = true,
     this.currentIndex = 0,
     this.indicatorHeight = DEFAULT_INDICATOR_HEIGHT,
+    this.indicatorPadding = DEFAULT_INDICATOR_PADDING,
     this.barHeight = DEFAULT_BAR_HEIGHT,
+    this.animationCurve = Curves.easeOut,
   })  : assert(items.length >= 2 && items.length <= 5),
         super(key: key);
 
@@ -58,11 +66,10 @@ class CustomBottomNavigationBar extends StatefulWidget {
 
 class _BottomNavigationAppState extends State<CustomBottomNavigationBar> {
   Duration duration = const Duration(milliseconds: 150);
-  Curve curve = Curves.easeOut;
 
   @override
   Widget build(BuildContext context) {
-    var itemWidth =
+    double itemWidth =
         (MediaQuery.of(context).size.width - 10) / widget.items.length;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -112,27 +119,23 @@ class _BottomNavigationAppState extends State<CustomBottomNavigationBar> {
             children: [
               AnimatedSize(
                 duration: duration,
-                curve: curve,
+                curve: widget.curve,
                 child: SizedBox(
                   width: itemWidth * widget.currentIndex,
                 ),
               ),
-              Expanded(
+              SizedBox(
+                width: itemWidth,
                 child: Container(
                   height: widget.indicatorHeight,
-                  margin: const EdgeInsets.only(top: 1, left: 10, right: 10),
+                  margin: EdgeInsets.only(
+                      top: 1.5,
+                      left: widget.indicatorPadding,
+                      right: widget.indicatorPadding),
                   decoration: BoxDecoration(
                     color: widget.activeColor,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                ),
-              ),
-              AnimatedSize(
-                duration: duration,
-                curve: curve,
-                child: SizedBox(
-                  width: itemWidth * (widget.items.length - 1) -
-                      itemWidth * widget.currentIndex,
                 ),
               ),
             ],
