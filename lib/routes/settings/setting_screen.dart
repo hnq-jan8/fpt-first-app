@@ -23,6 +23,19 @@ class _SettingScreenState extends State<SettingScreen> {
 
   bool switchTest = false;
 
+  ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    scrollController.addListener(() {
+      scrollController.offset > topPadding + 15
+          ? setState(() => elevation = 0.5)
+          : setState(() => elevation = 0);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +45,7 @@ class _SettingScreenState extends State<SettingScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
+          controller: scrollController,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

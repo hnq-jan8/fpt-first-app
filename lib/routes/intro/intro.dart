@@ -107,11 +107,14 @@ class _IntroScreenState extends State<IntroScreen>
                   child: Row(
                     children: [
                       const SizedBox(width: 100),
-                      Image.asset(
-                        Assets.image_intro,
-                        fit: BoxFit.cover,
-                        filterQuality: FilterQuality.high,
-                        alignment: Alignment.bottomLeft,
+                      SizedBox(
+                        height: double.maxFinite,
+                        child: Image.asset(
+                          Assets.image_intro,
+                          filterQuality: FilterQuality.high,
+                          fit: BoxFit.fitHeight,
+                          alignment: Alignment.bottomLeft,
+                        ),
                       ),
                     ],
                   ),

@@ -58,8 +58,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
 
   @override
   Widget build(BuildContext context) {
-    var topPadding = MediaQuery.of(context).padding.top;
-
+    double topPadding = MediaQuery.of(context).padding.top;
     return SizedBox(
       height: 56 + topPadding,
       child: AppBar(

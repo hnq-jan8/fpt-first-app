@@ -55,10 +55,11 @@ flutter_native_splash:
   # windowDrawsSystemBarBackgrounds: true
 
   android_12:
-    image: assets/images/android_12_splash.png
-    image_dark: assets/images/android_12_splash_dark.png
     color: "#F5F5F5"
-    color_dark: "#000000"
+    image: assets/images/android_12_splash.png
+
+    # color_dark: "#000000"
+    # image_dark: assets/images/android_12_splash_dark.png
 
   android: true
   ios: true
