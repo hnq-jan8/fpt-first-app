@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:next_app/theme/theme_colors.dart';
 
 class AppButtonText extends StatelessWidget {
   const AppButtonText({
@@ -13,6 +14,7 @@ class AppButtonText extends StatelessWidget {
     return Text(
       title,
       style: const TextStyle(
+        color: ThemeColors.onPrimary,
         fontSize: 13.5,
       ),
     );

@@ -65,6 +65,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: widget.statusBarIconBrightness == Brightness.dark
+              ? Brightness.light
+              : Brightness.dark,
           statusBarIconBrightness: widget.statusBarIconBrightness,
           systemNavigationBarIconBrightness: Brightness.dark,
           systemNavigationBarColor: const Color(0xFFFFFFFF),

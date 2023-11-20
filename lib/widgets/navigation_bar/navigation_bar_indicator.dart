@@ -1,0 +1,54 @@
+import 'package:flutter/material.dart';
+
+import 'package:next_app/theme/theme_colors.dart';
+
+class NavigationBarIndicator extends StatelessWidget {
+  const NavigationBarIndicator({
+    super.key,
+    required this.duration,
+    required this.itemWidth,
+    required this.currentIndex,
+    required this.indicatorHeight,
+    this.curve = Curves.easeOut,
+    this.activeColor = ThemeColors.primary,
+    this.indicatorPadding = 10,
+  });
+
+  final Duration duration;
+
+  final double itemWidth;
+  final double indicatorHeight;
+  final double indicatorPadding;
+
+  final int currentIndex;
+
+  final Curve curve;
+
+  final Color activeColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        AnimatedSize(
+          duration: duration,
+          curve: curve,
+          child: SizedBox(
+            width: itemWidth * currentIndex,
+          ),
+        ),
+        SizedBox(
+          width: itemWidth,
+          child: Container(
+            height: indicatorHeight,
+            margin: EdgeInsets.symmetric(horizontal: indicatorPadding),
+            decoration: BoxDecoration(
+              color: activeColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

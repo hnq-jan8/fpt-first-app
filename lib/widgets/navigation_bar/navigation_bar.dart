@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:next_app/theme/theme_colors.dart';
+import 'package:next_app/widgets/navigation_bar/navigation_bar_indicator.dart';
 import 'package:next_app/widgets/navigation_bar/navigation_bar_item.dart';
 
 // ignore_for_file: constant_identifier_names
@@ -87,7 +88,7 @@ class _BottomNavigationAppState extends State<CustomBottomNavigationBar> {
             ? [
                 const BoxShadow(
                   color: Colors.black12,
-                  blurRadius: 10,
+                  blurRadius: 5,
                   offset: Offset(0, -5),
                 ),
               ]
@@ -115,31 +116,16 @@ class _BottomNavigationAppState extends State<CustomBottomNavigationBar> {
               );
             }).toList(),
           ),
-          Row(
-            children: [
-              AnimatedSize(
-                duration: duration,
-                curve: widget.curve,
-                child: SizedBox(
-                  width: itemWidth * widget.currentIndex,
-                ),
-              ),
-              SizedBox(
-                width: itemWidth,
-                child: Container(
-                  height: widget.indicatorHeight,
-                  margin: EdgeInsets.only(
-                      top: 1.5,
-                      left: widget.indicatorPadding,
-                      right: widget.indicatorPadding),
-                  decoration: BoxDecoration(
-                    color: widget.activeColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
-            ],
-          )
+          const SizedBox(height: 1.5),
+          NavigationBarIndicator(
+            duration: duration,
+            itemWidth: itemWidth,
+            indicatorHeight: widget.indicatorHeight,
+            indicatorPadding: widget.indicatorPadding,
+            currentIndex: widget.currentIndex,
+            curve: widget.animationCurve,
+            activeColor: widget.indicatorColor ?? widget.activeColor,
+          ),
         ],
       ),
     );

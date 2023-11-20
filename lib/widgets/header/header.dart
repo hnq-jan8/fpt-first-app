@@ -50,6 +50,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
       elevation: elevation,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
+        statusBarBrightness: !useGradient ? Brightness.light : Brightness.dark,
         statusBarIconBrightness:
             useGradient ? Brightness.light : Brightness.dark,
         systemNavigationBarColor: ThemeColors.background,

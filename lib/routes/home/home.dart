@@ -51,6 +51,8 @@ class _HomePageState extends State<HomePage> {
       )
     ];
 
+    double bottomPadding = MediaQuery.of(context).padding.bottom;
+
     return WillPopScope(
       onWillPop: _currentIndex != 0
           ? () {
@@ -79,17 +81,23 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 40),
+                Container(
+                  color: const Color(0xFFFFFFFF),
+                  height: 45 + bottomPadding,
+                ),
               ],
             ),
-            CustomBottomNavigationBar(
-              onPressed: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-              items: navigationItems,
-              currentIndex: _currentIndex,
+            SafeArea(
+              minimum: const EdgeInsets.only(bottom: 5),
+              child: CustomBottomNavigationBar(
+                onPressed: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+                items: navigationItems,
+                currentIndex: _currentIndex,
+              ),
             ),
           ],
         ),

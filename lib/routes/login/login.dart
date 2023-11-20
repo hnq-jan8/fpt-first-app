@@ -250,31 +250,33 @@ class _LoginScreenState extends State<LoginScreen> {
               curve: Curves.easeInOut,
               child: Visibility(
                 visible: !buttonSignInVisibility && !isKeyboardUp,
-                child: Container(
-                  decoration:
-                      const BoxDecoration(color: ThemeColors.background),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        StringConst.banCoSimFTelMoi,
-                        style: TextStyle(fontSize: 13.2),
-                      ),
-                      TextButton(
-                        style: const ButtonStyle(
-                          splashFactory: NoSplash.splashFactory,
+                child: SafeArea(
+                  child: Container(
+                    decoration:
+                        const BoxDecoration(color: ThemeColors.background),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          StringConst.banCoSimFTelMoi,
+                          style: TextStyle(fontSize: 13.2),
                         ),
-                        onPressed: () {},
-                        child: const Text(
-                          StringConst.kichHoatSimTaiDay,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 13.2,
-                            decoration: TextDecoration.underline,
+                        TextButton(
+                          style: const ButtonStyle(
+                            splashFactory: NoSplash.splashFactory,
                           ),
-                        ),
-                      )
-                    ],
+                          onPressed: () {},
+                          child: const Text(
+                            StringConst.kichHoatSimTaiDay,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 13.2,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
