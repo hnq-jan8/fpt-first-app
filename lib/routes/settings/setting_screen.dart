@@ -57,6 +57,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 title: StringConst.ngonNguLanguage,
                 switchText: StringConst.vi,
                 switchTextOff: StringConst.en,
+                isColorUpdate: false,
                 value: isUsingVi,
                 onChanged: (value) {
                   setState(() => isUsingVi = value);
