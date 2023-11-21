@@ -21,7 +21,7 @@ class ThemeColors {
   // - header
   static const Color headerGradient1 = Color(0xFF302690);
   static const Color headerGradient2 = Color(0xFFB9272F);
-  static const Color homeHeader = Color(0x90F5F5F5);
+  static const Color homeHeader = Color(0x92F5F5F5);
   // - button
   static const Color buttonGradient1 = Color(0xFF162B93);
   static const Color buttonGradient2 = Color(0xFFB82531);
@@ -47,4 +47,5 @@ class ThemeColors {
   // others
   static const Color bottomContainer = Color(0xFFF5F5F5);
   static const Color navigationBarDimText = Color(0xFF858585);
+  static const Color homeSearchDark = Color(0x98000000);
 }

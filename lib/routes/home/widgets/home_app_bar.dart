@@ -114,6 +114,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     hintText: StringConst.timKiem,
                     hintStyle: TextStyle(
                       fontSize: 13.6,
+                      fontWeight: FontWeight.w500,
                       color: _searchFocusNode.hasFocus
                           ? Colors.black45
                           : widget.searchTextColor.withOpacity(0.7),

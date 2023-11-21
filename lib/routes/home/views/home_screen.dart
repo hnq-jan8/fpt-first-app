@@ -65,8 +65,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   bool _scrollListener(ScrollNotification info) {
     if (info.metrics.axis == Axis.vertical) {
-      _colorController.animateTo(info.metrics.pixels.abs() * 2 / 100);
-      _backDropController.animateTo(info.metrics.pixels * 2 / 100);
+      _colorController.animateTo(info.metrics.pixels.abs() * 2.2 / 100);
+      _backDropController.animateTo(info.metrics.pixels * 2.5 / 100);
 
       _iconBrightness = info.metrics.pixels < 30 && info.metrics.pixels > -20
           ? Brightness.light

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:next_app/constants/string_const.dart';
+import 'package:next_app/routes/settings/widgets/setting_cell_switch.dart';
 import 'package:next_app/routes/settings/widgets/setting_cell_other.dart';
 import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
 import 'package:next_app/widgets/buttons/app_button.dart';
 import 'package:next_app/widgets/buttons/app_button_text.dart';
-import 'package:next_app/widgets/cell/outlined_cell.dart';
 import 'package:next_app/widgets/header/no_app_bar.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -21,7 +20,10 @@ class _SettingScreenState extends State<SettingScreen> {
   double topPadding = 15;
   double elevation = 0;
 
-  bool switchTest = false;
+  bool isUsingVi = true;
+  bool isUsingNotification = true;
+  bool isUsingFaceId = true;
+  bool isUsingOtp = false;
 
   ScrollController scrollController = ScrollController();
 
@@ -31,7 +33,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
     scrollController.addListener(() {
       scrollController.offset > topPadding + 15
-          ? setState(() => elevation = 0.5)
+          ? setState(() => elevation = 1)
           : setState(() => elevation = 0);
     });
   }
@@ -50,57 +52,39 @@ class _SettingScreenState extends State<SettingScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: topPadding),
-              Container(
-                height: 55,
-                margin: const EdgeInsets.only(top: 15),
-                child: OutlinedCell(
-                  horizontalPadding: 20,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(Assets.icon_globe, width: 20),
-                          const SizedBox(width: 20),
-                          const Text('Ngôn ngữ/Language'),
-                        ],
-                      ),
-                      Switch(
-                        value: switchTest,
-                        onChanged: (value) {
-                          setState(() => switchTest = value);
-                        },
-                      ), // TODO: Custom Switch
-                      Container(
-                        height: 19,
-                        width: 48,
-                        decoration: BoxDecoration(
-                          color: ThemeColors.scrollIndicator,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Row(
-                          children: [
-                            const SizedBox(
-                              width: 0,
-                              // width: 48 - 23,
-                            ),
-                            Container(
-                              width: 23,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                gradient: const LinearGradient(colors: [
-                                  ThemeColors.indicatorGradient1,
-                                  ThemeColors.indicatorGradient2,
-                                ]),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+              SettingCellSwitch(
+                svgAsset: Assets.icon_globe,
+                title: StringConst.ngonNguLanguage,
+                switchText: StringConst.vi,
+                switchTextOff: StringConst.en,
+                value: isUsingVi,
+                onChanged: (value) {
+                  setState(() => isUsingVi = value);
+                },
+              ),
+              SettingCellSwitch(
+                svgAsset: Assets.icon_notification_outlined,
+                title: StringConst.thongBao,
+                value: isUsingNotification,
+                onChanged: (value) {
+                  setState(() => isUsingNotification = value);
+                },
+              ),
+              SettingCellSwitch(
+                svgAsset: Assets.icon_face_id,
+                title: StringConst.dangNhapXacThucBangKhuonMat,
+                value: isUsingFaceId,
+                onChanged: (value) {
+                  setState(() => isUsingFaceId = value);
+                },
+              ),
+              SettingCellSwitch(
+                svgAsset: Assets.icon_otp,
+                title: StringConst.smartOtp,
+                value: isUsingOtp,
+                onChanged: (value) {
+                  setState(() => isUsingOtp = value);
+                },
               ),
               Container(
                 margin: const EdgeInsets.only(
@@ -145,7 +129,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 500),
+              const SizedBox(height: 125),
             ],
           ),
         ),

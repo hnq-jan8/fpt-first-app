@@ -59,6 +59,14 @@ class StringConst {
   static const String caiDat = 'Cài đặt';
   static const String taiKhoan = 'Tài khoản';
 
+  static const String ngonNguLanguage = 'Ngôn ngữ/Language';
+  static const String vi = "VI";
+  static const String en = "EN";
+
+  static const String thongBao = 'Thông báo';
+  static const String dangNhapXacThucBangKhuonMat = 'Đăng nhập/Xác thực bằng khuôn mặt';
+  static const String smartOtp = 'Smart OTP';
+
   static const String khac = 'Khác';
 
   static const String thongTinUngDung = 'Thông tin ứng dụng';
@@ -66,4 +74,5 @@ class StringConst {
   static const String dieuKhoanSuDung = 'Điều khoản sử dụng';
 
   static const String thoatTaiKhoan = 'Thoát tài khoản';
+
 }
