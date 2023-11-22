@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:next_app/theme/theme_colors.dart';
 
 // ignore: constant_identifier_names
-const double DEFAULT_WIDTH_TOTAL = 46;
+const double DEFAULT_WIDTH_TOTAL = 44;
 
 // ignore: constant_identifier_names
 const double DEFAULT_WIDTH_BUTTON = 19;
@@ -88,12 +88,14 @@ class _AppSwitchState extends State<AppSwitch> {
   }
 
   LinearGradient? _colorUpdate() {
-    return widget.value || !widget.isColorUpdate
-        ? const LinearGradient(colors: [
-            ThemeColors.indicatorGradient1,
-            ThemeColors.indicatorGradient2,
-          ])
-        : null;
+    return LinearGradient(colors: [
+      ThemeColors.indicatorGradient1.withOpacity(1 -
+          (((dragPosition - switchPadding) / dragUpperLimit) * 1.5)
+              .clamp(0, 1)),
+      ThemeColors.indicatorGradient2.withOpacity(1 -
+          (((dragPosition - switchPadding) / dragUpperLimit) * 1.5)
+              .clamp(0, 1)),
+    ]);
   }
 
   void _dragUpdate(DragUpdateDetails details) {
@@ -153,24 +155,28 @@ class _AppSwitchState extends State<AppSwitch> {
           Container(
             height: switchHeight + switchPadding * 2,
             width: switchWidth + switchPadding * 1,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: ThemeColors.switchBackground,
+            ),
+          ),
+          Container(
+            height: switchHeight + switchPadding * 2,
+            width: switchWidth + switchPadding * 1,
             margin: const EdgeInsets.symmetric(vertical: 10),
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
-              color: ThemeColors.switchBackground,
-              border: !widget.value && widget.isColorUpdate
-                  ? Border.all(
-                      color: ThemeColors.switchBorder,
-                      width: 1.5,
-                    )
-                  : null,
               borderRadius: BorderRadius.circular(20),
-              gradient: _colorUpdate(),
+              gradient: widget.isColorUpdate
+                  ? _colorUpdate()
+                  : const LinearGradient(colors: [
+                      ThemeColors.indicatorGradient1,
+                      ThemeColors.indicatorGradient2,
+                    ]),
             ),
             child: widget.text != null
                 ? Row(
-                    mainAxisAlignment: isOnToggle
-                        ? MainAxisAlignment.spaceAround
-                        : MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         widget.textOff != null
@@ -178,17 +184,22 @@ class _AppSwitchState extends State<AppSwitch> {
                             : widget.text.toString(),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
                         style: TextStyle(
                           color: textColor,
                           fontSize: 10.7,
+                        ),
+                      ),
+                      AnimatedSize(
+                        duration: switchDuration,
+                        curve: switchCurve,
+                        child: SizedBox(
+                          width: isOnToggle ? 12.9 : 9,
                         ),
                       ),
                       Text(
                         widget.text.toString(),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.right,
                         style: TextStyle(
                           color: textColor,
                           fontSize: 10.7,
@@ -210,10 +221,7 @@ class _AppSwitchState extends State<AppSwitch> {
               height: switchHeight,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: widget.value || !widget.isColorUpdate
-                    ? ThemeColors.onPrimary
-                    : ThemeColors.dimText,
-                // gradient: _colorUpdate(),
+                color: ThemeColors.onPrimary,
               ),
             ),
           ),
