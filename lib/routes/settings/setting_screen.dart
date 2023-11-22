@@ -54,7 +54,8 @@ class _SettingScreenState extends State<SettingScreen> {
               SizedBox(height: topPadding),
               SettingCellSwitch(
                 svgAsset: Assets.icon_globe,
-                title: StringConst.ngonNguLanguage,
+                // title: StringConst.ngonNguLanguage,
+                title: StringConst2.ngonNguLanguage[Language.vi].toString(),
                 switchText: StringConst.vi,
                 switchTextOff: StringConst.en,
                 isColorUpdate: false,

@@ -9,9 +9,15 @@ import 'package:next_app/widgets/buttons/gradient_button_title.dart';
 import 'package:next_app/widgets/indicators/indicator_dot.dart';
 
 class IntroScreen extends StatefulWidget {
-  const IntroScreen({super.key, this.initialPage = 0});
+  const IntroScreen({
+    super.key,
+    this.initialPage = 0,
+    this.currentLanguage = Language.vi,
+  });
 
   final int initialPage;
+
+  final Language currentLanguage;
 
   @override
   State<IntroScreen> createState() => _IntroScreenState();
@@ -29,9 +35,14 @@ class _IntroScreenState extends State<IntroScreen>
 
   late ScrollController _scrollController;
 
+  late Language currentLanguage;
+
   @override
   void initState() {
     super.initState();
+
+    currentLanguage = widget.currentLanguage;
+
     _scrollController = ScrollController();
     _scrollController.addListener(() {
       if (_scrollController.offset >=
@@ -76,6 +87,13 @@ class _IntroScreenState extends State<IntroScreen>
 
   @override
   Widget build(BuildContext context) {
+    final List<String> introTitles2 = [
+      StringConst2.tienLoi[widget.currentLanguage].toString(),
+      StringConst2.deDangSuDung[widget.currentLanguage].toString(),
+    ];
+
+    double bottomPadding = MediaQuery.of(context).padding.bottom;
+
     return WillPopScope(
       onWillPop: currentPage == 1
           ? () {
@@ -135,8 +153,10 @@ class _IntroScreenState extends State<IntroScreen>
                     child: child,
                   ),
                   child: Text(
-                    introTitles[currentPage],
-                    key: ValueKey<String>(introTitles[currentPage]),
+                    // introTitles[currentPage],
+                    introTitles2[currentPage],
+                    // key: ValueKey<String>(introTitles[currentPage]),
+                    key: ValueKey<String>(introTitles2[currentPage]),
                     style: const TextStyle(
                       color: Color(0xFFAB0059),
                       fontSize: 18,
@@ -202,7 +222,7 @@ class _IntroScreenState extends State<IntroScreen>
                 ),
               ),
             ),
-            const SizedBox(height: 30)
+            SizedBox(height: 30 + bottomPadding),
           ],
         ),
       ),

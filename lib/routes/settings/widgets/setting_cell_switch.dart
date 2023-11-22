@@ -23,7 +23,6 @@ class SettingCellSwitch extends StatelessWidget {
   final String? switchTextOff;
 
   final bool value;
-
   final bool isColorUpdate;
 
   final void Function(bool) onChanged;

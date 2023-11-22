@@ -92,9 +92,12 @@ class AppRouter {
     return navigatorKey.currentState!.pop(result);
   }
 
-  static Route<dynamic>? generateRoute(RouteSettings settings) {
-    currentPath = settings.name ?? '';
+  static Route<dynamic>? generateRoute(RouteSettings settings, {dynamic arguments}) {
     debugPrint('Route: ${settings.name}');
+
+    currentPath = settings.name ?? '';
+    arguments = settings.arguments;
+
     switch (settings.name) {
       case Routes.intro:
         return CupertinoPageRoute(

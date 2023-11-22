@@ -6,13 +6,13 @@ import 'package:next_app/theme/theme_colors.dart';
 const double DEFAULT_WIDTH_TOTAL = 46;
 
 // ignore: constant_identifier_names
-const double DEFAULT_WIDTH_BUTTON = 23;
+const double DEFAULT_WIDTH_BUTTON = 19;
 
 // ignore: constant_identifier_names
 const double DEFAULT_HEIGHT = 19;
 
 // ignore: constant_identifier_names
-const double DEFAULT_PADDING = 1;
+const double DEFAULT_PADDING = 3;
 
 class AppSwitch extends StatefulWidget {
   const AppSwitch({
@@ -65,10 +65,6 @@ class _AppSwitchState extends State<AppSwitch> {
 
   late double dragPosition;
   late double dragUpperLimit;
-
-  String? get text => dragPosition > (dragUpperLimit - 5) * 0.5
-      ? widget.textOff ?? widget.text
-      : widget.text;
 
   Color get textColor => dragPosition > (dragUpperLimit - 5) * 0.5
       ? widget.textOffColor
@@ -160,9 +156,47 @@ class _AppSwitchState extends State<AppSwitch> {
             margin: const EdgeInsets.symmetric(vertical: 10),
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
-              color: ThemeColors.scrollIndicator,
-              borderRadius: BorderRadius.circular(10),
+              color: ThemeColors.switchBackground,
+              border: !widget.value && widget.isColorUpdate
+                  ? Border.all(
+                      color: ThemeColors.switchBorder,
+                      width: 1.5,
+                    )
+                  : null,
+              borderRadius: BorderRadius.circular(20),
+              gradient: _colorUpdate(),
             ),
+            child: widget.text != null
+                ? Row(
+                    mainAxisAlignment: isOnToggle
+                        ? MainAxisAlignment.spaceAround
+                        : MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        widget.textOff != null
+                            ? widget.textOff.toString()
+                            : widget.text.toString(),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: 10.7,
+                        ),
+                      ),
+                      Text(
+                        widget.text.toString(),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: 10.7,
+                        ),
+                      ),
+                    ],
+                  )
+                : null,
           ),
           AnimatedPositioned(
             duration:
@@ -175,25 +209,12 @@ class _AppSwitchState extends State<AppSwitch> {
             child: Container(
               height: switchHeight,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: ThemeColors.dimText,
-                gradient: _colorUpdate(),
+                borderRadius: BorderRadius.circular(20),
+                color: widget.value || !widget.isColorUpdate
+                    ? ThemeColors.onPrimary
+                    : ThemeColors.dimText,
+                // gradient: _colorUpdate(),
               ),
-              child: text != null
-                  ? Center(
-                      child: Text(
-                        text.toString(),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: textColor,
-                          fontSize: 10.3,
-                          height: 1.1,
-                        ),
-                      ),
-                    )
-                  : null,
             ),
           ),
         ],

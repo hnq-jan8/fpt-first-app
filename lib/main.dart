@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/router.dart';
 import 'package:next_app/theme/theme_colors.dart';
 
@@ -26,8 +29,28 @@ void main() {
   });
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Language currentLanguage = Language.vi;
+
+  @override
+  void initState() {
+    _loadLanguage();
+    super.initState();
+  }
+
+  Future<void> _loadLanguage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      currentLanguage = Language.values[prefs.getInt('language') ?? 0];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
