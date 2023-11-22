@@ -11,6 +11,9 @@ const double DEFAULT_WIDTH_BUTTON = 23;
 // ignore: constant_identifier_names
 const double DEFAULT_HEIGHT = 19;
 
+// ignore: constant_identifier_names
+const double DEFAULT_PADDING = 1;
+
 class AppSwitch extends StatefulWidget {
   const AppSwitch({
     super.key,
@@ -48,21 +51,26 @@ class AppSwitch extends StatefulWidget {
 class _AppSwitchState extends State<AppSwitch> {
   final double switchWidth = DEFAULT_WIDTH_TOTAL;
   final double switchButtonWidth = DEFAULT_WIDTH_BUTTON;
+
   final double switchHeight = DEFAULT_HEIGHT;
+
+  final double switchPadding = DEFAULT_PADDING;
 
   final Curve switchCurve = Curves.easeInOut;
 
-  final Duration switchDuration = const Duration(milliseconds: 200);
+  final Duration switchDuration = const Duration(milliseconds: 150);
 
   bool isDragging = false;
+  bool isOnToggle = false;
 
   late double dragPosition;
+  late double dragUpperLimit;
 
-  String? get text => dragPosition > (switchWidth - switchButtonWidth) * 0.5
+  String? get text => dragPosition > (dragUpperLimit - 5) * 0.5
       ? widget.textOff ?? widget.text
       : widget.text;
 
-  Color get textColor => dragPosition > (switchWidth - switchButtonWidth) * 0.5
+  Color get textColor => dragPosition > (dragUpperLimit - 5) * 0.5
       ? widget.textOffColor
       : widget.textColor;
 
@@ -70,7 +78,8 @@ class _AppSwitchState extends State<AppSwitch> {
   void initState() {
     super.initState();
 
-    dragPosition = widget.value ? 0 : switchWidth - switchButtonWidth;
+    dragUpperLimit = switchWidth - switchButtonWidth;
+    dragPosition = widget.value ? switchPadding : dragUpperLimit;
   }
 
   @override
@@ -82,7 +91,7 @@ class _AppSwitchState extends State<AppSwitch> {
     }
   }
 
-  LinearGradient? _defaultColorUpdate() {
+  LinearGradient? _colorUpdate() {
     return widget.value || !widget.isColorUpdate
         ? const LinearGradient(colors: [
             ThemeColors.indicatorGradient1,
@@ -94,16 +103,16 @@ class _AppSwitchState extends State<AppSwitch> {
   void _dragUpdate(DragUpdateDetails details) {
     setState(() {
       dragPosition = (dragPosition + details.delta.dx)
-          .clamp(0, switchWidth - switchButtonWidth);
+          .clamp(switchPadding, dragUpperLimit - 5);
     });
   }
 
   void _dragTo(bool value) {
-    dragPosition = value ? 0 : switchWidth - switchButtonWidth;
+    dragPosition = value ? switchPadding : dragUpperLimit;
   }
 
   bool _setValueWithDragPosition() {
-    if (dragPosition > (switchWidth - switchButtonWidth) * 0.4) {
+    if (dragPosition > (dragUpperLimit - 5) * 0.5) {
       _dragTo(false);
       return false;
     }
@@ -114,71 +123,80 @@ class _AppSwitchState extends State<AppSwitch> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapUp: (details) {
-        widget.onChanged?.call(!widget.value);
-        _dragTo(!widget.value);
-      },
+      behavior: HitTestBehavior.opaque,
+      onTap: () => widget.onChanged?.call(!widget.value),
       onHorizontalDragDown: (details) {
         setState(() {
-          isDragging = true;
+          isOnToggle = true;
         });
       },
       onHorizontalDragUpdate: (details) {
+        setState(() {
+          isDragging = true;
+        });
         _dragUpdate(details);
       },
       onHorizontalDragCancel: () {
         setState(() {
+          isOnToggle = false;
           isDragging = false;
         });
+        _dragTo(widget.value);
       },
       onHorizontalDragEnd: (details) {
         setState(() {
+          isOnToggle = false;
           isDragging = false;
         });
-
         widget.onChanged?.call(_setValueWithDragPosition());
       },
-      child: Container(
-        height: switchHeight,
-        width: switchWidth,
-        decoration: BoxDecoration(
-          color: ThemeColors.scrollIndicator,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Row(
-          children: [
-            AnimatedSize(
-              duration:
-                  isDragging ? const Duration(milliseconds: 1) : switchDuration,
-              curve: switchCurve,
-              child: SizedBox(
-                width: dragPosition,
-              ),
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.center,
+        children: [
+          Container(
+            height: switchHeight + switchPadding * 2,
+            width: switchWidth + switchPadding * 1,
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(
+              color: ThemeColors.scrollIndicator,
+              borderRadius: BorderRadius.circular(10),
             ),
-            Container(
-              width: switchButtonWidth,
+          ),
+          AnimatedPositioned(
+            duration:
+                isDragging ? const Duration(milliseconds: 1) : switchDuration,
+            curve: switchCurve,
+            left: isOnToggle && dragPosition == dragUpperLimit
+                ? dragPosition - 5
+                : dragPosition,
+            width: isOnToggle ? switchButtonWidth + 5 : switchButtonWidth,
+            child: Container(
+              height: switchHeight,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10),
                 color: ThemeColors.dimText,
-                gradient: _defaultColorUpdate(),
+                gradient: _colorUpdate(),
               ),
               child: text != null
                   ? Center(
                       child: Text(
                         text.toString(),
                         maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          overflow: TextOverflow.ellipsis,
                           color: textColor,
-                          fontSize: 10.5,
-                          height: 1.2,
+                          fontSize: 10.3,
+                          height: 1.1,
                         ),
                       ),
                     )
                   : null,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

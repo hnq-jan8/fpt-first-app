@@ -34,7 +34,6 @@ class OutlinedCell extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: horizontalPadding,
-            vertical: 10,
           ),
           child: child,
         ),
