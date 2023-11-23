@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:next_app/routes/home/home.dart';
 import 'package:next_app/routes/intro/intro.dart';
 import 'package:next_app/routes/login/login.dart';
+import 'package:next_app/routes/settings/views/policy_screen.dart';
 
 class Routes {
   static const String splash = '/';
@@ -12,6 +13,7 @@ class Routes {
   static const String login = '/login';
   static const String login_otp = '/login-otp';
   static const String home = '/home';
+  static const String policy = '/policy';
 }
 
 class AppRouter {
@@ -105,15 +107,23 @@ class AppRouter {
           settings: settings,
           builder: (context) => const IntroScreen(),
         );
+
       case Routes.login:
         return CupertinoPageRoute(
           settings: settings,
           builder: (context) => const LoginScreen(),
         );
+
       case Routes.home:
         return CupertinoPageRoute(
           settings: settings,
           builder: (context) => const HomePage(),
+        );
+
+      case Routes.policy:
+        return CupertinoPageRoute(
+          settings: settings,
+          builder: (context) => const PolicyScreen(),
         );
     }
     return null;

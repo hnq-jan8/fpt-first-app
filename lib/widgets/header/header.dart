@@ -33,7 +33,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
     this.showBack = true,
     this.height,
     this.elevation = 0,
-    this.useGradient = false,
+    this.useGradient = true,
     this.centerTitle = false,
   }) : super(key: key);
 

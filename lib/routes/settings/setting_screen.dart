@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/main.dart';
+import 'package:next_app/router.dart';
 import 'package:next_app/routes/settings/widgets/setting_cell_switch.dart';
 import 'package:next_app/routes/settings/widgets/setting_cell_other.dart';
 import 'package:next_app/theme/assets.dart';
@@ -116,7 +116,9 @@ class _SettingScreenState extends State<SettingScreen> {
               SettingCellOther(
                 svgIconPath: Assets.icon_info,
                 title: StringConst.get(context)!.chinhSachQuyenRiengTu,
-                onPressed: () {},
+                onPressed: () {
+                  AppRouter.instance.navigateTo(Routes.policy);
+                },
               ),
               SettingCellOther(
                 svgIconPath: Assets.icon_info,

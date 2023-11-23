@@ -23,6 +23,7 @@ class NoAppBar extends StatelessWidget implements PreferredSizeWidget {
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: Color(0xFFFFFFFF),
         systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );

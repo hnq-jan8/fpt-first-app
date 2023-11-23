@@ -70,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
         appBar: Header(
           onBack: onBackCustom,
           showBack: buttonSignInVisibility,
+          useGradient: false,
         ),
         body: Stack(
           alignment: Alignment.bottomCenter,
