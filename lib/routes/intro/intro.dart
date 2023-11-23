@@ -12,12 +12,9 @@ class IntroScreen extends StatefulWidget {
   const IntroScreen({
     super.key,
     this.initialPage = 0,
-    this.currentLanguage = Language.vi,
   });
 
   final int initialPage;
-
-  final Language currentLanguage;
 
   @override
   State<IntroScreen> createState() => _IntroScreenState();
@@ -35,13 +32,9 @@ class _IntroScreenState extends State<IntroScreen>
 
   late ScrollController _scrollController;
 
-  late Language currentLanguage;
-
   @override
   void initState() {
     super.initState();
-
-    currentLanguage = widget.currentLanguage;
 
     _scrollController = ScrollController();
     _scrollController.addListener(() {
@@ -61,21 +54,6 @@ class _IntroScreenState extends State<IntroScreen>
     super.dispose();
   }
 
-  final List<String> introTitles = [
-    StringConst.tienLoi,
-    StringConst.deDangSuDung,
-  ];
-
-  final List<String> introContent = [
-    StringConst.tichHopNhungDichVu_,
-    StringConst.thongTinHienThiRo_,
-  ];
-
-  final List<String> buttonTitle = [
-    '${StringConst.tiepTuc} ',
-    StringConst.batDau,
-  ];
-
   void changePage({required int toPage}) {
     _scrollController.animateTo(
       toPage == 0 ? 0 : _scrollController.position.maxScrollExtent,
@@ -87,11 +65,20 @@ class _IntroScreenState extends State<IntroScreen>
 
   @override
   Widget build(BuildContext context) {
-    final List<String> introTitles2 = [
-      StringConst2.tienLoi[widget.currentLanguage].toString(),
-      StringConst2.deDangSuDung[widget.currentLanguage].toString(),
+    final List<String> introTitles = [
+      StringConst.get(context)!.tienLoi,
+      StringConst.get(context)!.deDangSuDung,
     ];
 
+    final List<String> introContent = [
+      StringConst.get(context)!.tichHopNhungDichVu_,
+      StringConst.get(context)!.thongTinHienThiRo_,
+    ];
+
+    final List<String> buttonTitle = [
+      '${StringConst.get(context)!.tiepTuc} ',
+      StringConst.get(context)!.batDau,
+    ];
     double bottomPadding = MediaQuery.of(context).padding.bottom;
 
     return WillPopScope(
@@ -153,10 +140,8 @@ class _IntroScreenState extends State<IntroScreen>
                     child: child,
                   ),
                   child: Text(
-                    // introTitles[currentPage],
-                    introTitles2[currentPage],
-                    // key: ValueKey<String>(introTitles[currentPage]),
-                    key: ValueKey<String>(introTitles2[currentPage]),
+                    introTitles[currentPage],
+                    key: ValueKey<String>(introTitles[currentPage]),
                     style: const TextStyle(
                       color: Color(0xFFAB0059),
                       fontSize: 18,

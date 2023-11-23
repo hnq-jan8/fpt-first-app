@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:next_app/constants/string_const.dart';
+import 'package:next_app/main.dart';
 import 'package:next_app/routes/settings/widgets/setting_cell_switch.dart';
 import 'package:next_app/routes/settings/widgets/setting_cell_other.dart';
 import 'package:next_app/theme/assets.dart';
@@ -40,6 +42,8 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    isUsingVi = StringConst.get(context)!.localeName == 'vi';
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: NoAppBar(elevation: elevation),
@@ -54,19 +58,22 @@ class _SettingScreenState extends State<SettingScreen> {
               SizedBox(height: topPadding),
               SettingCellSwitch(
                 svgAsset: Assets.icon_globe,
-                // title: StringConst.ngonNguLanguage,
-                title: StringConst2.ngonNguLanguage[Language.vi].toString(),
-                switchText: StringConst.vi,
-                switchTextOff: StringConst.en,
+                title: StringConst.get(context)!.ngonNguLanguage,
+                switchText: StringConst.get(context)!.vi,
+                switchTextOff: StringConst.get(context)!.en,
                 isColorUpdate: false,
                 value: isUsingVi,
                 onChanged: (value) {
+                  MyApp.setLocale(
+                    context,
+                    value ? const Locale('vi') : const Locale('en'),
+                  );
                   setState(() => isUsingVi = value);
                 },
               ),
               SettingCellSwitch(
                 svgAsset: Assets.icon_notification_outlined,
-                title: StringConst.thongBao,
+                title: StringConst.get(context)!.thongBao,
                 value: isUsingNotification,
                 onChanged: (value) {
                   setState(() => isUsingNotification = value);
@@ -74,7 +81,7 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               SettingCellSwitch(
                 svgAsset: Assets.icon_face_id,
-                title: StringConst.dangNhapXacThucBangKhuonMat,
+                title: StringConst.get(context)!.dangNhapXacThucBangKhuonMat,
                 value: isUsingFaceId,
                 onChanged: (value) {
                   setState(() => isUsingFaceId = value);
@@ -82,7 +89,7 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               SettingCellSwitch(
                 svgAsset: Assets.icon_otp,
-                title: StringConst.smartOtp,
+                title: StringConst.get(context)!.smartOtp,
                 value: isUsingOtp,
                 onChanged: (value) {
                   setState(() => isUsingOtp = value);
@@ -93,9 +100,9 @@ class _SettingScreenState extends State<SettingScreen> {
                   left: 1,
                   top: 30,
                 ),
-                child: const Text(
-                  StringConst.khac,
-                  style: TextStyle(
+                child: Text(
+                  StringConst.get(context)!.khac,
+                  style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
                   ),
@@ -103,29 +110,32 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
               SettingCellOther(
                 svgIconPath: Assets.icon_info,
-                title: StringConst.thongTinUngDung,
+                title: StringConst.get(context)!.thongTinUngDung,
                 onPressed: () {},
               ),
               SettingCellOther(
                 svgIconPath: Assets.icon_info,
-                title: StringConst.chinhSachQuyenRiengTu,
+                title: StringConst.get(context)!.chinhSachQuyenRiengTu,
                 onPressed: () {},
               ),
               SettingCellOther(
                 svgIconPath: Assets.icon_info,
-                title: StringConst.dieuKhoanSuDung,
+                title: StringConst.get(context)!.dieuKhoanSuDung,
                 onPressed: () {},
               ),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 32),
-                  child: AppButton(
-                    onPressed: () {},
-                    color: ThemeColors.primaryBlue,
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5),
-                      child: AppButtonText(
-                        title: StringConst.thoatTaiKhoan,
+                  child: Container(
+                    constraints: const BoxConstraints(minWidth: 160),
+                    child: AppButton(
+                      onPressed: () {},
+                      color: ThemeColors.primaryBlue,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        child: AppButtonText(
+                          title: StringConst.get(context)!.thoatTaiKhoan,
+                        ),
                       ),
                     ),
                   ),

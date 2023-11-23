@@ -92,7 +92,8 @@ class AppRouter {
     return navigatorKey.currentState!.pop(result);
   }
 
-  static Route<dynamic>? generateRoute(RouteSettings settings, {dynamic arguments}) {
+  static Route<dynamic>? generateRoute(RouteSettings settings,
+      {dynamic arguments}) {
     debugPrint('Route: ${settings.name}');
 
     currentPath = settings.name ?? '';

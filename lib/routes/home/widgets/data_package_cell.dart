@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:next_app/constants/string_const.dart';
 
 import 'package:next_app/data/ads/ad_entity.dart';
 import 'package:next_app/theme/assets.dart';
@@ -57,7 +58,8 @@ class DataPackageCell extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Gói Data ${dataPackage.title}",
+                      // "Gói Data ${dataPackage.title}",
+                      StringConst.get(context)!.goiData_name(dataPackage.title),
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,

@@ -27,27 +27,27 @@ class _HomePageState extends State<HomePage> {
       NavigationBarItem(
         activeIcon: SvgPicture.asset(Assets.icon_home_active),
         inactiveIcon: SvgPicture.asset(Assets.icon_home_inactive),
-        title: StringConst.trangChu,
+        title: StringConst.get(context)!.trangChu,
       ),
       NavigationBarItem(
         activeIcon: SvgPicture.asset(Assets.icon_help_active),
         inactiveIcon: SvgPicture.asset(Assets.icon_help_inactive),
-        title: StringConst.troGiup,
+        title: StringConst.get(context)!.troGiup,
       ),
       NavigationBarItem(
         activeIcon: SvgPicture.asset(Assets.icon_apps_active),
         inactiveIcon: SvgPicture.asset(Assets.icon_apps_inactive),
-        title: StringConst.tienIch,
+        title: StringConst.get(context)!.tienIch,
       ),
       NavigationBarItem(
         activeIcon: SvgPicture.asset(Assets.icon_settings_active),
         inactiveIcon: SvgPicture.asset(Assets.icon_settings_inactive),
-        title: StringConst.caiDat,
+        title: StringConst.get(context)!.caiDat,
       ),
       NavigationBarItem(
         activeIcon: SvgPicture.asset(Assets.icon_account_active),
         inactiveIcon: SvgPicture.asset(Assets.icon_account_inactive),
-        title: StringConst.taiKhoan,
+        title: StringConst.get(context)!.taiKhoan,
       )
     ];
 

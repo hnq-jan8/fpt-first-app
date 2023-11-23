@@ -111,7 +111,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                         ? ThemeColors.background
                         : Colors.transparent,
                     contentPadding: EdgeInsets.zero,
-                    hintText: StringConst.timKiem,
+                    hintText: StringConst.get(context)!.timKiem,
                     hintStyle: TextStyle(
                       fontSize: 13.6,
                       fontWeight: FontWeight.w500,

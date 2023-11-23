@@ -22,21 +22,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool buttonSignInVisibility = false;
 
-  final List _hintText = [
-    StringConst.nhapSdt,
-    StringConst.nhapOtp,
-  ];
-
-  final List _iconField = [
-    Assets.icon_phone,
-    Assets.icon_keyboard,
-  ];
-
-  final List _otpButtonTitle = [
-    StringConst.guiOtp,
-    StringConst.guiLaiOtp,
-  ];
-
   var fieldController = TextEditingController();
 
   @override
@@ -55,6 +40,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final List hintText = [
+      StringConst.get(context)!.nhapSdt,
+      StringConst.get(context)!.nhapOtp,
+    ];
+
+    final List iconField = [
+      Assets.icon_phone,
+      Assets.icon_keyboard,
+    ];
+
+    final List otpButtonTitle = [
+      StringConst.get(context)!.guiOtp,
+      StringConst.get(context)!.guiLaiOtp,
+    ];
     bool isKeyboardUp = MediaQuery.of(context).viewInsets.bottom != 0;
     return WillPopScope(
       onWillPop: buttonSignInVisibility
@@ -108,10 +107,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               right: 18,
                             ),
                             child: SvgPicture.asset(
-                              _iconField[!buttonSignInVisibility ? 0 : 1],
+                              iconField[!buttonSignInVisibility ? 0 : 1],
                             ),
                           ),
-                          hintText: _hintText[!buttonSignInVisibility ? 0 : 1],
+                          hintText: hintText[!buttonSignInVisibility ? 0 : 1],
                           hintStyle: const TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -142,8 +141,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             children: [
                               GradientButton(
                                 onPressed: onTapSignIn,
-                                child: const GradientButtonTitle(
-                                  buttonTitle: StringConst.dangNhap,
+                                child: GradientButtonTitle(
+                                  buttonTitle:
+                                      StringConst.get(context)!.dangNhap,
                                 ),
                               ),
                               const SizedBox(height: 15),
@@ -174,8 +174,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: child,
                           ),
                           child: GradientButtonTitle(
-                            buttonTitle: _otpButtonTitle[
-                                !buttonSignInVisibility ? 0 : 1],
+                            buttonTitle:
+                                otpButtonTitle[!buttonSignInVisibility ? 0 : 1],
                           ),
                         ),
                       ),
@@ -193,8 +193,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 width: double.infinity,
                                 child: AppButton(
                                   onPressed: () {},
-                                  child: const AppButtonText(
-                                      title: StringConst.dangNhapFaceId),
+                                  child: AppButtonText(
+                                      title: StringConst.get(context)!
+                                          .dangNhapFaceId),
                                 ),
                               ),
                               const SizedBox(height: 10),
@@ -203,14 +204,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: AppButton(
                                   onPressed: () {},
                                   color: ThemeColors.primaryBlue,
-                                  child: const AppButtonText(
-                                      title: StringConst.dangNhapMatKhau),
+                                  child: AppButtonText(
+                                      title: StringConst.get(context)!
+                                          .dangNhapMatKhau),
                                 ),
                               ),
                               const SizedBox(height: 25),
-                              const Text(
-                                StringConst.hoacDangNhapVs,
-                                style: TextStyle(color: ThemeColors.dimText),
+                              Text(
+                                StringConst.get(context)!.hoacDangNhapVs,
+                                style:
+                                    const TextStyle(color: ThemeColors.dimText),
                               ),
                               Padding(
                                 padding: const EdgeInsets.symmetric(
@@ -257,18 +260,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text(
-                          StringConst.banCoSimFTelMoi,
-                          style: TextStyle(fontSize: 13.2),
+                        Text(
+                          StringConst.get(context)!.banCoSimFTelMoi,
+                          style: const TextStyle(fontSize: 13.2),
                         ),
                         TextButton(
                           style: const ButtonStyle(
                             splashFactory: NoSplash.splashFactory,
                           ),
                           onPressed: () {},
-                          child: const Text(
-                            StringConst.kichHoatSimTaiDay,
-                            style: TextStyle(
+                          child: Text(
+                            StringConst.get(context)!.kichHoatSimTaiDay,
+                            style: const TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 13.2,
                               decoration: TextDecoration.underline,

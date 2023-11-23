@@ -8,6 +8,8 @@ class OutlinedCell extends StatelessWidget {
     this.child,
     this.onPressed,
     this.horizontalPadding = 15,
+    this.onTapDown,
+    this.onTapUp,
   });
 
   final double horizontalPadding;
@@ -15,6 +17,9 @@ class OutlinedCell extends StatelessWidget {
   final Widget? child;
 
   final VoidCallback? onPressed;
+
+  final Function(TapDownDetails)? onTapDown;
+  final Function(TapUpDetails)? onTapUp;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +35,8 @@ class OutlinedCell extends StatelessWidget {
       child: InkWell(
         splashFactory: NoSplash.splashFactory,
         onTap: onPressed,
+        onTapDown: onTapDown,
+        onTapUp: onTapUp,
         borderRadius: BorderRadius.circular(14),
         child: Padding(
           padding: EdgeInsets.symmetric(

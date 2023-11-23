@@ -23,19 +23,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  Map<String, String> mainFeatures = {
-    Assets.icon_call_history: StringConst.lichSuCuocGoi,
-    Assets.icon_unlock: StringConst.moKhoaThueBao,
-    Assets.icon_purchase_bills: StringConst.thanhToanHoaDon,
-    Assets.icon_activate_sim: StringConst.kichHoatSim,
-    Assets.icon_membership: StringConst.hoiVien,
-    Assets.icon_purchase_sim: StringConst.muaSim,
-    Assets.icon_personalize: StringConst.goiCuocCaNhanHoa,
-    Assets.icon_transfer: StringConst.chuyenTien,
-    Assets.icon_look_up: StringConst.traCuuThongTin,
-    Assets.icon_vas_service: StringConst.dichVuVas,
-  };
-
   List<String> ads = [
     Assets.image_ad_demo_2,
     Assets.image_ad_demo_1,
@@ -140,6 +127,19 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, String> mainFeatures = {
+      Assets.icon_call_history: StringConst.get(context)!.lichSuCuocGoi,
+      Assets.icon_unlock: StringConst.get(context)!.moKhoaThueBao,
+      Assets.icon_purchase_bills: StringConst.get(context)!.thanhToanHoaDon,
+      Assets.icon_activate_sim: StringConst.get(context)!.kichHoatSim,
+      Assets.icon_membership: StringConst.get(context)!.hoiVien,
+      Assets.icon_purchase_sim: StringConst.get(context)!.muaSim,
+      Assets.icon_personalize: StringConst.get(context)!.goiCuocCaNhanHoa,
+      Assets.icon_transfer: StringConst.get(context)!.chuyenTien,
+      Assets.icon_look_up: StringConst.get(context)!.traCuuThongTin,
+      Assets.icon_vas_service: StringConst.get(context)!.dichVuVas,
+    };
+
     var topPadding = MediaQuery.of(context).padding.top + 60;
     return Material(
       color: ThemeColors.background,
@@ -176,13 +176,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             HomeGradientContentBox(
-                              title1: StringConst.taiKhoanGoc,
+                              title1: StringConst.get(context)!.taiKhoanGoc,
                               content1: '90.000 VNĐ',
-                              buttonTitle1: StringConst.napTien,
+                              buttonTitle1: StringConst.get(context)!.napTien,
                               onPressed1: () {},
-                              title2: StringConst.taiKhoanKhuyenMai,
+                              title2:
+                                  StringConst.get(context)!.taiKhoanKhuyenMai,
                               content2: '0 VNĐ',
-                              buttonTitle2: StringConst.traCuoc,
+                              buttonTitle2: StringConst.get(context)!.traCuoc,
                               onPressed2: () {},
                             ),
                             Container(
@@ -201,17 +202,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: const [
+                                children: [
                                   TextColumn(
-                                    title: StringConst.thongTinData,
+                                    title:
+                                        StringConst.get(context)!.thongTinData,
                                     content: 'Gói 90KC',
                                   ),
                                   TextColumn(
-                                    title: StringConst.dataConLai,
+                                    title: StringConst.get(context)!.dataConLai,
                                     content: '815 MB',
                                   ),
                                   TextColumn(
-                                    title: StringConst.hanSuDung,
+                                    title: StringConst.get(context)!.hanSuDung,
                                     content: '23/07/2023',
                                   ),
                                 ],
@@ -223,9 +225,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 horizontal: 36,
                                 vertical: 4,
                               ),
-                              child: const Text(
-                                StringConst.tienIchChinh,
-                                style: TextStyle(
+                              child: Text(
+                                StringConst.get(context)!.tienIchChinh,
+                                style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -311,9 +313,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           top: 15,
                           bottom: 8,
                         ),
-                        child: const Text(
-                          StringConst.cacGoiCuocUuDai,
-                          style: TextStyle(
+                        child: Text(
+                          StringConst.get(context)!.cacGoiCuocUuDai,
+                          style: const TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w600,
                           ),
@@ -338,8 +340,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           ),
                           child: GradientButton(
                             onPressed: () {},
-                            child: const GradientButtonTitle(
-                              buttonTitle: StringConst.dieuChinhManHinhChinh,
+                            child: GradientButtonTitle(
+                              buttonTitle: StringConst.get(context)!
+                                  .dieuChinhManHinhChinh,
                             ),
                           ),
                         ),

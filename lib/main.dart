@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/router.dart';
 import 'package:next_app/theme/theme_colors.dart';
 
@@ -34,21 +32,21 @@ class MyApp extends StatefulWidget {
 
   @override
   State<MyApp> createState() => _MyAppState();
+
+  /// Update locale
+  static void setLocale(BuildContext context, Locale locale) {
+    _MyAppState? state =
+        context.findAncestorStateOfType<_MyAppState>();
+    state?.setLocale(locale);
+  }
 }
 
 class _MyAppState extends State<MyApp> {
-  Language currentLanguage = Language.vi;
+  Locale? _locale;
 
-  @override
-  void initState() {
-    _loadLanguage();
-    super.initState();
-  }
-
-  Future<void> _loadLanguage() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  void setLocale(Locale locale) {
     setState(() {
-      currentLanguage = Language.values[prefs.getInt('language') ?? 0];
+      _locale = locale;
     });
   }
 
@@ -65,6 +63,9 @@ class _MyAppState extends State<MyApp> {
       onGenerateRoute: AppRouter.generateRoute,
       navigatorKey: AppRouter.instance.navigatorKey,
       initialRoute: Routes.intro,
+      locale: _locale,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         fontFamily: 'Inter',
         colorScheme: const ColorScheme(

@@ -51,6 +51,8 @@ class RowContentButton extends StatelessWidget {
             ),
             child: Text(
               buttonTitle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 color: ThemeColors.onPrimary,
                 fontWeight: FontWeight.w400,
