@@ -23,6 +23,7 @@ class PolicyScreen extends StatelessWidget {
         title: StringConst.get(context)!.chinhSachQuyenRiengTu,
       ),
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.only(
             top: 20,

@@ -28,23 +28,25 @@ class NavigationBarIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Stack(
       children: [
-        AnimatedSize(
+        SizedBox(
+          width: double.infinity,
+          height: indicatorHeight,
+        ),
+        AnimatedPositioned(
           duration: duration,
           curve: curve,
+          left: itemWidth * currentIndex,
           child: SizedBox(
-            width: itemWidth * currentIndex,
-          ),
-        ),
-        SizedBox(
-          width: itemWidth,
-          child: Container(
-            height: indicatorHeight,
-            margin: EdgeInsets.symmetric(horizontal: indicatorPadding),
-            decoration: BoxDecoration(
-              color: activeColor,
-              borderRadius: BorderRadius.circular(10),
+            width: itemWidth,
+            child: Container(
+              height: indicatorHeight,
+              margin: EdgeInsets.symmetric(horizontal: indicatorPadding),
+              decoration: BoxDecoration(
+                color: activeColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
           ),
         ),
