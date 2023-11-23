@@ -87,17 +87,6 @@ class _AppSwitchState extends State<AppSwitch> {
     }
   }
 
-  LinearGradient? _colorUpdate() {
-    return LinearGradient(colors: [
-      ThemeColors.indicatorGradient1.withOpacity(1 -
-          (((dragPosition - switchPadding) / dragUpperLimit) * 1.5)
-              .clamp(0, 1)),
-      ThemeColors.indicatorGradient2.withOpacity(1 -
-          (((dragPosition - switchPadding) / dragUpperLimit) * 1.5)
-              .clamp(0, 1)),
-    ]);
-  }
-
   void _dragUpdate(DragUpdateDetails details) {
     setState(() {
       dragPosition = (dragPosition + details.delta.dx)
@@ -160,54 +149,63 @@ class _AppSwitchState extends State<AppSwitch> {
               color: ThemeColors.switchBackground,
             ),
           ),
-          Container(
-            height: switchHeight + switchPadding * 2,
-            width: switchWidth + switchPadding * 1,
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: widget.isColorUpdate
-                  ? _colorUpdate()
-                  : const LinearGradient(colors: [
-                      ThemeColors.indicatorGradient1,
-                      ThemeColors.indicatorGradient2,
-                    ]),
+          AnimatedOpacity(
+            duration:
+                isDragging ? const Duration(milliseconds: 1) : switchDuration,
+            opacity: widget.isColorUpdate
+                ? (1 -
+                    (((dragPosition - switchPadding) / dragUpperLimit) * 1.5)
+                        .clamp(0, 1))
+                : 1,
+            child: Container(
+              height: switchHeight + switchPadding * 2,
+              width: switchWidth + switchPadding * 1,
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: const LinearGradient(
+                  colors: [
+                    ThemeColors.indicatorGradient1,
+                    ThemeColors.indicatorGradient2,
+                  ],
+                ),
+              ),
+              child: widget.text != null
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.textOff != null
+                              ? widget.textOff.toString()
+                              : widget.text.toString(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: textColor,
+                            fontSize: 10.7,
+                          ),
+                        ),
+                        AnimatedSize(
+                          duration: switchDuration,
+                          curve: switchCurve,
+                          child: SizedBox(
+                            width: isOnToggle ? 12.9 : 9,
+                          ),
+                        ),
+                        Text(
+                          widget.text.toString(),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: textColor,
+                            fontSize: 10.7,
+                          ),
+                        ),
+                      ],
+                    )
+                  : null,
             ),
-            child: widget.text != null
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        widget.textOff != null
-                            ? widget.textOff.toString()
-                            : widget.text.toString(),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: textColor,
-                          fontSize: 10.7,
-                        ),
-                      ),
-                      AnimatedSize(
-                        duration: switchDuration,
-                        curve: switchCurve,
-                        child: SizedBox(
-                          width: isOnToggle ? 12.9 : 9,
-                        ),
-                      ),
-                      Text(
-                        widget.text.toString(),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: textColor,
-                          fontSize: 10.7,
-                        ),
-                      ),
-                    ],
-                  )
-                : null,
           ),
           AnimatedPositioned(
             duration:

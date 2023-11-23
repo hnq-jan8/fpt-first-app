@@ -53,12 +53,15 @@ class SettingCellSwitch extends StatelessWidget {
                 ],
               ),
             ),
-            AppSwitch(
-              value: value,
-              isColorUpdate: isColorUpdate,
-              text: switchText,
-              textOff: switchTextOff,
-              onChanged: onChanged,
+            Padding(
+              padding: const EdgeInsets.only(left: 7.5),
+              child: AppSwitch(
+                value: value,
+                isColorUpdate: isColorUpdate,
+                text: switchText,
+                textOff: switchTextOff,
+                onChanged: onChanged,
+              ),
             ),
           ],
         ),
