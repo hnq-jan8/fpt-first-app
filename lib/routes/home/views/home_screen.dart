@@ -46,20 +46,30 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   Brightness _iconBrightness = Brightness.light;
 
   double avatarRadius = 25;
+  double backgroundHeight = 5;
+  double backgroundOpacity = 1;
 
   final ScrollController _menuScrollController = ScrollController();
   final ScrollController _adsScrollController = ScrollController();
 
   bool _scrollListener(ScrollNotification info) {
     if (info.metrics.axis == Axis.vertical) {
-      _colorController.animateTo(info.metrics.pixels.abs() * 2.2 / 100);
-      _backDropController.animateTo(info.metrics.pixels * 2.5 / 100);
+      _colorController.animateTo(info.metrics.pixels * 2 / 100);
+      _backDropController.animateTo(info.metrics.pixels.abs() * 1.5 / 100);
 
-      _iconBrightness = info.metrics.pixels < 30 && info.metrics.pixels > -20
-          ? Brightness.light
-          : Brightness.dark;
+      _iconBrightness =
+          info.metrics.pixels < 30 ? Brightness.light : Brightness.dark;
 
-      avatarRadius = info.metrics.pixels > 10 ? 17 : 25;
+      avatarRadius = info.metrics.pixels > 5 ? 17 : 25;
+
+      setState(() {
+        backgroundHeight = info.metrics.pixels > 0
+            ? 5
+            : (-1 * info.metrics.pixels * 1.2).clamp(5, double.infinity);
+        backgroundOpacity = info.metrics.pixels > 0
+            ? 1
+            : (1 + info.metrics.pixels / 50).clamp(0, 1);
+      });
     }
     return true;
   }
@@ -94,11 +104,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _colorTween = ColorTween(
       begin: Colors.transparent,
       end: ThemeColors.homeHeader,
-    ).animate(_backDropController);
+    ).animate(_colorController);
 
     _colorTweenText = ColorTween(
       begin: ThemeColors.onPrimary,
-      end: ThemeColors.onBackground,
+      end: ThemeColors.homeSearchDark,
     ).animate(_colorController);
 
     _colorTweenBorder = ColorTween(
@@ -146,6 +156,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
+          Container(
+            height: backgroundHeight,
+            width: double.infinity,
+            color: ThemeColors.backgroundMedium,
+          ),
           NotificationListener<ScrollNotification>(
             onNotification: _scrollListener,
             child: SingleChildScrollView(
@@ -153,7 +168,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               child: Stack(
                 alignment: Alignment.topCenter,
                 children: [
-                  const HomeBackground(),
+                  HomeBackground(
+                    imageOpacity: backgroundOpacity,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

@@ -109,7 +109,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     filled: true,
                     fillColor: _searchFocusNode.hasFocus
                         ? ThemeColors.background
-                        : Colors.transparent,
+                        : const Color(0x12000000),
                     contentPadding: EdgeInsets.zero,
                     hintText: StringConst.get(context)!.timKiem,
                     hintStyle: TextStyle(
@@ -136,8 +136,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(100),
                       borderSide: const BorderSide(
-                        width: 1,
-                        color: ThemeColors.background,
+                        width: 0.4,
+                        color: ThemeColors.dimText,
                       ),
                     ),
                   ),

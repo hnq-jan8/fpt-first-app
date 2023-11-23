@@ -92,7 +92,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
             style: TextStyle(
               color: useGradient ? Colors.white : ThemeColors.onBackground,
               fontSize: 18,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w500,
             ),
           ),
       centerTitle: title != null ? true : centerTitle,
