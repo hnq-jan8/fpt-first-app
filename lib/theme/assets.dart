@@ -56,12 +56,19 @@ class Assets {
   static const String icon_otp = '${_ICONS_PATH}otp.svg';
   static const String icon_info = '${_ICONS_PATH}info.svg';
 
+  static const String icon_like = '${_ICONS_PATH}like.svg';
+  static const String icon_share = '${_ICONS_PATH}share.svg';
+  static const String icon_link = '${_ICONS_PATH}link.svg';
+
   // images
   static const String image_intro = '${_IMAGES_PATH}intro.png';
   static const String image_logo = '${_IMAGES_PATH}logo.png';
   static const String image_home_bg = '${_IMAGES_PATH}home_background.png';
   static const String image_avatar_default =
       '${_IMAGES_PATH}avatar_default.png';
+
   static const String image_ad_demo_1 = '${_IMAGES_PATH}ad1.png';
   static const String image_ad_demo_2 = '${_IMAGES_PATH}ad2.png';
+
+  static const String image_app_icon = '${_IMAGES_PATH}ic_launcher_ios.png';
 }

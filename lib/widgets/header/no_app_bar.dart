@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:next_app/theme/theme_colors.dart';
 
 class NoAppBar extends StatelessWidget implements PreferredSizeWidget {
-  ///
   /// Correct system_status_bar_icon color
   const NoAppBar({
     super.key,

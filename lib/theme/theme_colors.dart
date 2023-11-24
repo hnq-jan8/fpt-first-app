@@ -49,5 +49,5 @@ class ThemeColors {
   static const Color navigationBarDimText = Color(0xFF858585);
   static const Color homeSearchDark = Color(0x95000000);
   static const Color switchBackground = Color(0xFFB9B9B9);
-  static const Color backgroundMedium = Color(0xFFBA8DC0);
+  static const Color backgroundMedium = Color(0xFFCB9BD1);
 }

@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       setState(() {
         backgroundHeight = info.metrics.pixels > 0
             ? 5
-            : (-1 * info.metrics.pixels * 1.2).clamp(5, double.infinity);
+            : (-1.05 * info.metrics.pixels).clamp(5, double.infinity);
         backgroundOpacity = info.metrics.pixels > 0
             ? 1
             : (1 + info.metrics.pixels / 50).clamp(0, 1);
@@ -184,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           boxShadow: const [
                             BoxShadow(
                               color: Colors.black26,
-                              blurRadius: 10,
+                              blurRadius: 5,
                               offset: Offset(0, 5),
                             )
                           ],

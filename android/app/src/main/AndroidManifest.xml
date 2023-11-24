@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.next_app">
    <application
-        android:label="next_app"
+        android:label="FPT Retail"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

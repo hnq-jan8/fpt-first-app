@@ -111,7 +111,9 @@ class _SettingScreenState extends State<SettingScreen> {
               SettingCellOther(
                 svgIconPath: Assets.icon_info,
                 title: StringConst.get(context)!.thongTinUngDung,
-                onPressed: () {},
+                onPressed: () {
+                  AppRouter.instance.navigateTo(Routes.appInfo);
+                },
               ),
               SettingCellOther(
                 svgIconPath: Assets.icon_info,

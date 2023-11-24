@@ -30,10 +30,22 @@ dev_dependencies:
 
   flutter_lints: ^2.0.0
 
+#   flutter_launcher_icons: ^0.13.1
+
+# flutter_launcher_icons:
+#   android: true
+#   image_path: "assets/images/ic_launcher.png"
+#   adaptive_icon_background: "#FFFFFF"
+#   ios: true
+#   image_path_ios: "assets/images/ic_launcher_ios.png"
+#   remove_alpha_ios: true
+
 flutter_native_splash:
   image: assets/images/splash.png
   background_image: assets/images/splash_background.png
-  # windowDrawsSystemBarBackgrounds: true
+
+  # windowDrawsSystemBarBackgrounds: true (change manually in styles.xml
+  # every time run 'pub run flutter_native_splash:create')
 
   android_12:
     color: "#F5F5F5"

@@ -24,14 +24,15 @@ class RowContentButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
+          flex: 2,
           child: TextColumn(
             title: title,
             content: content,
             fontSize: 15.7,
           ),
         ),
-        SizedBox(
-          width: 94,
+        Expanded(
+          flex: 1,
           child: OutlinedButton(
             onPressed: onPressed,
             style: ButtonStyle(
