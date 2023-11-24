@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:next_app/constants/string_const.dart';
+import 'package:next_app/routes/account/account_screen.dart';
 import 'package:next_app/routes/home/views/home_screen.dart';
 import 'package:next_app/routes/settings/setting_screen.dart';
 import 'package:next_app/widgets/navigation_bar/navigation_bar.dart';
@@ -77,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                       Container(color: Colors.red),
                       Container(color: Colors.green),
                       const SettingScreen(),
-                      Container(color: Colors.yellow),
+                      const AccountScreen(),
                     ],
                   ),
                 ),

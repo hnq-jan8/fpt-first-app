@@ -9,13 +9,16 @@ class AppButton extends StatelessWidget {
     required this.child,
     this.borderRadius = 15,
     this.color,
+    this.height = 50,
   });
 
   final VoidCallback? onPressed;
   final Widget child;
 
   final Color? color;
+
   final double borderRadius;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class AppButton extends StatelessWidget {
         ),
         animationDuration: const Duration(milliseconds: 0),
         fixedSize: MaterialStateProperty.all<Size>(
-          const Size(double.infinity, 50),
+           Size(double.infinity, height),
         ),
         splashFactory: NoSplash.splashFactory,
         elevation: MaterialStateProperty.all<double>(0),

@@ -56,5 +56,8 @@
   "truyCapWebsite": "Website",
   "chinhSachQuyenRiengTu": "Privacy policy",
   "dieuKhoanSuDung": "Terms of use",
-  "thoatTaiKhoan": "Sign out"
+  "thoatTaiKhoan": "Sign out",
+  "xinChaoUser": "Greetings, {user_name}!",
+  "xacThucTaiKhoan": "Verify account",
+  "thongTinChung": "General info"
 }

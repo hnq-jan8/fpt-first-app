@@ -56,5 +56,8 @@
   "truyCapWebsite": "Truy cập website",
   "chinhSachQuyenRiengTu": "Chính sách quyền riêng tư",
   "dieuKhoanSuDung": "Điều khoản sử dụng",
-  "thoatTaiKhoan": "Thoát tài khoản"
+  "thoatTaiKhoan": "Thoát tài khoản",
+  "xinChaoUser": "Xin chào, {user_name}!",
+  "xacThucTaiKhoan": "Xác thực tài khoản",
+  "thongTinChung": "Thông tin chung"
 }

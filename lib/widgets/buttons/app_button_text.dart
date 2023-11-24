@@ -13,9 +13,12 @@ class AppButtonText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
+      maxLines: 1,
       style: const TextStyle(
+        overflow: TextOverflow.ellipsis,
         color: ThemeColors.onPrimary,
         fontSize: 13.5,
+        fontWeight: FontWeight.w500,
       ),
     );
   }

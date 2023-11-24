@@ -1,13 +1,11 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
 import 'package:next_app/widgets/avatar/gradient_circle_avatar.dart';
+import 'package:next_app/widgets/header/blur_header.dart';
 
 class HomeAppBar extends StatefulWidget {
   final Color backgroundColor;
@@ -61,29 +59,10 @@ class _HomeAppBarState extends State<HomeAppBar> {
     double topPadding = MediaQuery.of(context).padding.top;
     return SizedBox(
       height: 56 + topPadding,
-      child: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: widget.statusBarIconBrightness == Brightness.dark
-              ? Brightness.light
-              : Brightness.dark,
-          statusBarIconBrightness: widget.statusBarIconBrightness,
-          systemNavigationBarIconBrightness: Brightness.dark,
-          systemNavigationBarColor: const Color(0xFFFFFFFF),
-        ),
-        flexibleSpace: ClipRRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-              sigmaX: widget.sigmaValue,
-              sigmaY: widget.sigmaValue,
-            ), //
-            child: Container(
-              color: widget.backgroundColor,
-            ),
-          ),
-        ),
-        elevation: 0,
+      child: BlurHeader(
+        statusBarIconBrightness: widget.statusBarIconBrightness,
+        sigmaValue: widget.sigmaValue,
+        backgroundColor: widget.backgroundColor,
         title: Row(
           children: [
             GradientCircleAvatar(radius: widget.avatarRadius),
