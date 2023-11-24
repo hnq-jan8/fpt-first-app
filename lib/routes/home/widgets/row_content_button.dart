@@ -24,18 +24,20 @@ class RowContentButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          flex: 2,
           child: TextColumn(
             title: title,
             content: content,
             fontSize: 15.7,
           ),
         ),
-        Expanded(
-          flex: 1,
+        SizedBox(
+          width: 90,
           child: OutlinedButton(
             onPressed: onPressed,
             style: ButtonStyle(
+              padding: MaterialStateProperty.all(
+                const EdgeInsets.symmetric(horizontal: 10),
+              ),
               side: MaterialStateProperty.all(
                 const BorderSide(
                   color: ThemeColors.onPrimary,
