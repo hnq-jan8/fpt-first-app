@@ -25,7 +25,7 @@ class _AccountScreenState extends State<AccountScreen>
 
   double sigmaValue = 0;
 
-  Brightness statusBarIconBrightness = Brightness.dark;
+  Brightness statusBarIconBrightness = Brightness.light;
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +50,13 @@ class _AccountScreenState extends State<AccountScreen>
         return true;
       },
       child: Scaffold(
+        backgroundColor: ThemeColors.background,
+        extendBodyBehindAppBar: true,
         appBar: BlurHeader(
           backgroundColor: ThemeColors.homeHeader.withOpacity(statusBarOpacity),
           sigmaValue: sigmaValue,
           statusBarIconBrightness: statusBarIconBrightness,
         ),
-        extendBodyBehindAppBar: true,
         body: Stack(
           children: [
             Container(
@@ -64,6 +65,7 @@ class _AccountScreenState extends State<AccountScreen>
               color: ThemeColors.backgroundMedium,
             ),
             SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Stack(
                 children: [
                   HomeBackground(
