@@ -9,7 +9,7 @@ import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
 import 'package:next_app/widgets/buttons/app_button.dart';
 import 'package:next_app/widgets/buttons/app_button_text.dart';
-import 'package:next_app/widgets/header/no_app_bar.dart';
+import 'package:next_app/widgets/header/blur_header.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -19,7 +19,7 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  double topPadding = 15;
+  double startingPadding = 15;
   double elevation = 0;
 
   bool isUsingVi = true;
@@ -27,35 +27,26 @@ class _SettingScreenState extends State<SettingScreen> {
   bool isUsingFaceId = true;
   bool isUsingOtp = false;
 
-  ScrollController scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    scrollController.addListener(() {
-      scrollController.offset > topPadding + 15
-          ? setState(() => elevation = 1)
-          : setState(() => elevation = 0);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    double topPadding = MediaQuery.of(context).padding.top;
+
     isUsingVi = StringConst.get(context)!.localeName == 'vi';
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: NoAppBar(elevation: elevation),
+      appBar: const BlurHeader(
+        backgroundColor: ThemeColors.homeHeader,
+      ),
+      extendBodyBehindAppBar: true,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          controller: scrollController,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: topPadding),
+              SizedBox(height: topPadding + startingPadding),
               SettingCellSwitch(
                 svgAsset: Assets.icon_globe,
                 title: StringConst.get(context)!.ngonNguLanguage,
