@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -54,7 +56,11 @@ class _LoginScreenState extends State<LoginScreen> {
       StringConst.get(context)!.guiOtp,
       StringConst.get(context)!.guiLaiOtp,
     ];
+
     bool isKeyboardUp = MediaQuery.of(context).viewInsets.bottom != 0;
+
+    double topPadding = MediaQuery.of(context).padding.top;
+
     return WillPopScope(
       onWillPop: buttonSignInVisibility
           ? () {
@@ -67,6 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
           : null,
       child: Scaffold(
         backgroundColor: ThemeColors.background,
+        extendBodyBehindAppBar: true,
         appBar: Header(
           onBack: onBackCustom,
           showBack: buttonSignInVisibility,
@@ -86,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      SizedBox(height: topPadding + kToolbarHeight),
                       Image.asset(
                         Assets.image_logo,
                         height: 80,
@@ -255,31 +263,35 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Visibility(
                 visible: !buttonSignInVisibility && !isKeyboardUp,
                 child: SafeArea(
-                  child: Container(
-                    decoration:
-                        const BoxDecoration(color: ThemeColors.background),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          StringConst.get(context)!.banCoSimFTelMoi,
-                          style: const TextStyle(fontSize: 13.2),
-                        ),
-                        TextButton(
-                          style: const ButtonStyle(
-                            splashFactory: NoSplash.splashFactory,
+                  child: ClipRRect(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(
+                        sigmaX: 12,
+                        sigmaY: 12,
+                      ), //
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            StringConst.get(context)!.banCoSimFTelMoi,
+                            style: const TextStyle(fontSize: 13.2),
                           ),
-                          onPressed: () {},
-                          child: Text(
-                            StringConst.get(context)!.kichHoatSimTaiDay,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 13.2,
-                              decoration: TextDecoration.underline,
+                          TextButton(
+                            style: const ButtonStyle(
+                              splashFactory: NoSplash.splashFactory,
                             ),
-                          ),
-                        )
-                      ],
+                            onPressed: () {},
+                            child: Text(
+                              StringConst.get(context)!.kichHoatSimTaiDay,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 13.2,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -21,6 +21,9 @@ class BlurHeader extends StatelessWidget implements PreferredSizeWidget {
   });
 
   @override
+  Size get preferredSize => const Size.fromHeight(0);
+
+  @override
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
@@ -48,7 +51,4 @@ class BlurHeader extends StatelessWidget implements PreferredSizeWidget {
       title: title,
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(0);
 }

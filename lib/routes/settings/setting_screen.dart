@@ -35,9 +35,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: const BlurHeader(
-        backgroundColor: ThemeColors.homeHeader,
-      ),
+      appBar: const BlurHeader(backgroundColor: Colors.transparent),
       extendBodyBehindAppBar: true,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),

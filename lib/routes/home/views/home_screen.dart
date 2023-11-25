@@ -39,11 +39,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late AnimationController _backDropController;
 
   late Animation _colorTween;
-  late Animation _colorTweenText;
   late Animation _colorTweenBorder;
   late Animation _backDropFilter;
 
   Brightness _iconBrightness = Brightness.light;
+
+  Color searchTextColor = ThemeColors.onPrimary;
 
   double avatarRadius = 25;
   double backgroundHeight = 5;
@@ -57,8 +58,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       _colorController.animateTo(info.metrics.pixels * 2 / 100);
       _backDropController.animateTo(info.metrics.pixels.abs() * 1.5 / 100);
 
-      _iconBrightness =
-          info.metrics.pixels < 30 ? Brightness.light : Brightness.dark;
+      if (info.metrics.pixels < 30) {
+        _iconBrightness = Brightness.light;
+        searchTextColor = ThemeColors.onPrimary;
+      } else {
+        _iconBrightness = Brightness.dark;
+        searchTextColor = ThemeColors.homeSearchDark;
+      }
 
       avatarRadius = info.metrics.pixels > 5 ? 17 : 25;
 
@@ -106,11 +112,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       end: ThemeColors.homeHeader,
     ).animate(_colorController);
 
-    _colorTweenText = ColorTween(
-      begin: ThemeColors.onPrimary,
-      end: ThemeColors.homeSearchDark,
-    ).animate(_colorController);
-
     _colorTweenBorder = ColorTween(
       begin: ThemeColors.fieldBorderLight,
       end: ThemeColors.fieldBorderDark,
@@ -151,9 +152,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     };
 
     var topPadding = MediaQuery.of(context).padding.top + 60;
-    return Material(
-      color: ThemeColors.background,
-      child: Stack(
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      backgroundColor: ThemeColors.background,
+      appBar: HomeAppBar(
+        searchTextColor: searchTextColor,
+        backgroundColor: _colorTween.value,
+        searchBorderColor: _colorTweenBorder.value,
+        sigmaValue: _backDropFilter.value,
+        statusBarIconBrightness: _iconBrightness,
+        avatarRadius: avatarRadius,
+        notifUnreadCount: 7,
+        animationController: _colorController,
+      ),
+      body: Stack(
         alignment: Alignment.topCenter,
         children: [
           Container(
@@ -369,20 +381,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ],
               ),
             ),
-          ),
-          AnimatedBuilder(
-            animation: _colorController,
-            builder: (context, child) {
-              return HomeAppBar(
-                searchTextColor: _colorTweenText.value,
-                backgroundColor: _colorTween.value,
-                searchBorderColor: _colorTweenBorder.value,
-                sigmaValue: _backDropFilter.value,
-                statusBarIconBrightness: _iconBrightness,
-                avatarRadius: avatarRadius,
-                notifUnreadCount: 7,
-              );
-            },
           ),
         ],
       ),

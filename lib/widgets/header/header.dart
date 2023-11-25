@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -82,7 +84,15 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             )
-          : null,
+          : ClipRRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: 12,
+                  sigmaY: 12,
+                ), //
+                child: Container(),
+              ),
+            ),
       title: widgets ??
           Text(
             title ?? "",
