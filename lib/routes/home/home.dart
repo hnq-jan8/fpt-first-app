@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/routes/account/account_screen.dart';
+import 'package:next_app/routes/help/help_screen.dart';
 import 'package:next_app/routes/home/views/home_screen.dart';
 import 'package:next_app/routes/settings/setting_screen.dart';
 import 'package:next_app/widgets/navigation_bar/navigation_bar.dart';
@@ -75,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                     index: _currentIndex,
                     children: [
                       const HomeScreen(),
-                      Container(color: Colors.red),
+                      const HelpScreen(),
                       Container(color: Colors.green),
                       const SettingScreen(),
                       const AccountScreen(),

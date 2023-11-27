@@ -2,9 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:next_app/theme/theme_colors.dart';
 
 class BlurHeader extends StatelessWidget implements PreferredSizeWidget {
-  final Brightness? statusBarIconBrightness;
+  final Brightness statusBarIconBrightness;
 
   final double? sigmaValue;
 
@@ -14,9 +15,9 @@ class BlurHeader extends StatelessWidget implements PreferredSizeWidget {
 
   const BlurHeader({
     super.key,
-    this.statusBarIconBrightness,
+    this.statusBarIconBrightness = Brightness.dark,
     this.sigmaValue,
-    required this.backgroundColor,
+    this.backgroundColor = ThemeColors.homeHeader,
     this.title,
   });
 
@@ -32,15 +33,15 @@ class BlurHeader extends StatelessWidget implements PreferredSizeWidget {
         statusBarBrightness: statusBarIconBrightness == Brightness.dark
             ? Brightness.light
             : Brightness.dark,
-        statusBarIconBrightness: statusBarIconBrightness ?? Brightness.dark,
+        statusBarIconBrightness: statusBarIconBrightness,
         systemNavigationBarIconBrightness: Brightness.dark,
         systemNavigationBarColor: const Color(0xFFFFFFFF),
       ),
       flexibleSpace: ClipRRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(
-            sigmaX: sigmaValue ?? 10,
-            sigmaY: sigmaValue ?? 10,
+            sigmaX: sigmaValue ?? 15,
+            sigmaY: sigmaValue ?? 15,
           ), //
           child: Container(
             color: backgroundColor,

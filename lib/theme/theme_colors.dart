@@ -21,7 +21,7 @@ class ThemeColors {
   // - header
   static const Color headerGradient1 = Color(0xFF302690);
   static const Color headerGradient2 = Color(0xFFB9272F);
-  static const Color homeHeader = Color(0x92F5F5F5);
+  static const Color homeHeader = Color(0xAAE9E9E9);
   // - button
   static const Color buttonGradient1 = Color(0xFF162B93);
   static const Color buttonGradient2 = Color(0xFFB82531);

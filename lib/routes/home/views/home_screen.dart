@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   List<DataPackage> offers = [
     DataPackage("HD70", "6GB - HSD 30 ngày", "70.000 VNĐ/tháng"),
     DataPackage("HD50", "3GB - HSD 30 ngày", "50.000 VNĐ/tháng"),
-    DataPackage("D10", "4GB - HSD 1 ngày", "10.000 VNĐ/ngày"),
+    // DataPackage("D10", "4GB - HSD 1 ngày", "10.000 VNĐ/ngày"),
   ];
 
   late AnimationController _colorController;

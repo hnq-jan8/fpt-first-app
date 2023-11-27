@@ -60,6 +60,19 @@ class Assets {
   static const String icon_share = '${_ICONS_PATH}share.svg';
   static const String icon_link = '${_ICONS_PATH}link.svg';
 
+  static const String icon_history = '${_ICONS_PATH}history.svg';
+  static const String icon_cart = '${_ICONS_PATH}cart.svg';
+  static const String icon_block_call = '${_ICONS_PATH}block_call.svg';
+  static const String icon_wallet = '${_ICONS_PATH}wallet.svg';
+  static const String icon_lock = '${_ICONS_PATH}lock.svg';
+  static const String icon_scan_qr = '${_ICONS_PATH}scan_qr.svg';
+  static const String icon_members = '${_ICONS_PATH}members.svg';
+
+  static const String icon_security = '${_ICONS_PATH}security.svg';
+  static const String icon_gift = '${_ICONS_PATH}gift.svg';
+
+  static const String question = '${_ICONS_PATH}question.svg';
+
   // images
   static const String image_intro = '${_IMAGES_PATH}intro.png';
   static const String image_logo = '${_IMAGES_PATH}logo.png';

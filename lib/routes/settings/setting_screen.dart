@@ -4,7 +4,7 @@ import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/main.dart';
 import 'package:next_app/router.dart';
 import 'package:next_app/routes/settings/widgets/setting_cell_switch.dart';
-import 'package:next_app/routes/settings/widgets/setting_cell_other.dart';
+import 'package:next_app/widgets/buttons/cell_button.dart';
 import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
 import 'package:next_app/widgets/buttons/app_button.dart';
@@ -19,13 +19,33 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  double startingPadding = 15;
-  double elevation = 0;
+  double startingPadding = 5;
+
+  Color headerColor = ThemeColors.background;
 
   bool isUsingVi = true;
   bool isUsingNotification = true;
   bool isUsingFaceId = true;
   bool isUsingOtp = false;
+
+  ScrollController? _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController()
+      ..addListener(() => setState(() {
+            headerColor = _scrollController!.offset > 15
+                ? ThemeColors.homeHeader
+                : ThemeColors.background;
+          }));
+  }
+
+  @override
+  void dispose() {
+    _scrollController!.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +55,14 @@ class _SettingScreenState extends State<SettingScreen> {
 
     return Scaffold(
       backgroundColor: Colors.transparent,
-      appBar: const BlurHeader(backgroundColor: Colors.transparent),
+      appBar: BlurHeader(
+        backgroundColor: headerColor,
+      ),
       extendBodyBehindAppBar: true,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
+          controller: _scrollController,
           physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,21 +120,21 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                 ),
               ),
-              SettingCellOther(
+              CellButton(
                 svgIconPath: Assets.icon_info,
                 title: StringConst.get(context)!.thongTinUngDung,
                 onPressed: () {
                   AppRouter.instance.navigateTo(Routes.appInfo);
                 },
               ),
-              SettingCellOther(
+              CellButton(
                 svgIconPath: Assets.icon_info,
                 title: StringConst.get(context)!.chinhSachQuyenRiengTu,
                 onPressed: () {
                   AppRouter.instance.navigateTo(Routes.policy);
                 },
               ),
-              SettingCellOther(
+              CellButton(
                 svgIconPath: Assets.icon_info,
                 title: StringConst.get(context)!.dieuKhoanSuDung,
                 onPressed: () {},

@@ -59,5 +59,17 @@
   "thoatTaiKhoan": "Sign out",
   "xinChaoUser": "Greetings, {user_name}!",
   "xacThucTaiKhoan": "Verify account",
-  "thongTinChung": "General info"
+  "thongTinChung": "General info",
+  "quanLyThueBao": "Manage subscription",
+  "lichSuThanhToan": "Payment history",
+  "theoDoiDonHang": "Track order",
+  "chanCuocGoi": "Block calls",
+  "quanLyThongTinThanhToan": "Manage payment info",
+  "doiMatKhau": "Change password",
+  "quetMaQr": "Scan QR code",
+  "dangKyHoiVien": "Register member",
+  "trungTamBaoMat": "Security center",
+  "khuyenMaiVaQuaTang": "Promotion and gift",
+  "lienHeVoiChungToi": "Contact us",
+  "cacCauHoiThuongGap": "FAQs"
 }

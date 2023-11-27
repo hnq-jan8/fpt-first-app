@@ -14,6 +14,7 @@ class SettingCellSwitch extends StatelessWidget {
     this.switchText,
     this.switchTextOff,
     this.isColorUpdate = true,
+    this.minHeight = 55,
   });
 
   final String svgAsset;
@@ -25,32 +26,26 @@ class SettingCellSwitch extends StatelessWidget {
   final bool value;
   final bool isColorUpdate;
 
+  final double minHeight;
+
   final void Function(bool) onChanged;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 55,
+      constraints: BoxConstraints(minHeight: minHeight),
       margin: const EdgeInsets.only(top: 15),
       child: OutlinedCell(
         horizontalPadding: 20,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            SvgPicture.asset(svgAsset, width: 20),
+            const SizedBox(width: 20),
             Expanded(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(svgAsset, width: 20),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: Text(
-                      title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
+              child: Text(
+                title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             Padding(

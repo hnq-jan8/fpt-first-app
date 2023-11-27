@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/routes/settings/widgets/app_icon.dart';
-import 'package:next_app/routes/settings/widgets/setting_cell_other.dart';
+import 'package:next_app/widgets/buttons/cell_button.dart';
 import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
 import 'package:next_app/widgets/header/header.dart';
@@ -63,17 +63,17 @@ class AppInfoScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              SettingCellOther(
+              CellButton(
                 svgIconPath: Assets.icon_like,
                 title: StringConst.get(context)!.danhGiaUngDung,
                 onPressed: () {},
               ),
-              SettingCellOther(
+              CellButton(
                 svgIconPath: Assets.icon_share,
                 title: StringConst.get(context)!.chiaSeChoBanBe,
                 onPressed: () {},
               ),
-              SettingCellOther(
+              CellButton(
                 svgIconPath: Assets.icon_link,
                 title: StringConst.get(context)!.truyCapWebsite,
                 onPressed: () {},

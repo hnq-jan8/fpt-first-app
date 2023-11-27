@@ -25,64 +25,60 @@ class DataPackageCell extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 7.5),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(right: 15),
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: ThemeColors.primary,
-                    borderRadius: BorderRadius.circular(10),
+            Container(
+              margin: const EdgeInsets.only(right: 15),
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                color: ThemeColors.primary,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    Assets.icon_data_package,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset(
-                        Assets.icon_data_package,
-                      ),
-                      Text(
-                        dataPackage.title,
-                        style: const TextStyle(
-                          fontSize: 11.7,
-                          height: 1.6,
-                          color: ThemeColors.onPrimary,
-                        ),
-                      ),
-                    ],
+                  Text(
+                    dataPackage.title,
+                    style: const TextStyle(
+                      fontSize: 11.7,
+                      height: 1.6,
+                      color: ThemeColors.onPrimary,
+                    ),
                   ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      // "Gói Data ${dataPackage.title}",
-                      StringConst.get(context)!.goiData_name(dataPackage.title),
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    StringConst.get(context)!.goiData_name(dataPackage.title),
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
                     ),
-                    Text(
-                      dataPackage.description,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        height: 1.4,
-                      ),
+                  ),
+                  Text(
+                    dataPackage.description,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      height: 1.4,
                     ),
-                    Text(
-                      dataPackage.highlight,
-                      style: const TextStyle(
-                        fontSize: 13.6,
-                        height: 1.5,
-                        color: ThemeColors.primary,
-                      ),
+                  ),
+                  Text(
+                    dataPackage.highlight,
+                    style: const TextStyle(
+                      fontSize: 13.6,
+                      height: 1.5,
+                      color: ThemeColors.primary,
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 10),

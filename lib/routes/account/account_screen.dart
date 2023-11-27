@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/routes/home/widgets/home_background.dart';
+import 'package:next_app/widgets/buttons/cell_button.dart';
+import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
 import 'package:next_app/widgets/avatar/gradient_circle_avatar.dart';
 import 'package:next_app/widgets/buttons/app_button.dart';
@@ -36,7 +38,7 @@ class _AccountScreenState extends State<AccountScreen>
             statusBarOpacity = info.metrics.pixels > 65
                 ? ((info.metrics.pixels - 65) / 25).clamp(0, 0.64)
                 : 0;
-            sigmaValue = 0.4 * info.metrics.pixels.abs().clamp(0, 40);
+            sigmaValue = 0.4 * info.metrics.pixels.abs().clamp(0, 32);
 
             statusBarIconBrightness =
                 info.metrics.pixels > 65 ? Brightness.dark : Brightness.light;
@@ -76,8 +78,10 @@ class _AccountScreenState extends State<AccountScreen>
                       top: MediaQuery.of(context).padding.top + 20,
                       left: 20,
                       right: 20,
+                      bottom: 70,
                     ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Stack(
                           alignment: Alignment.topCenter,
@@ -86,8 +90,8 @@ class _AccountScreenState extends State<AccountScreen>
                               width: double.infinity,
                               margin: const EdgeInsets.only(top: 45),
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 25,
-                                vertical: 15,
+                                horizontal: 17.5,
+                                vertical: 12,
                               ),
                               decoration: BoxDecoration(
                                 color: const Color(0xFFFFFFFF),
@@ -117,7 +121,7 @@ class _AccountScreenState extends State<AccountScreen>
                                       height: 1.5,
                                     ),
                                   ),
-                                  const SizedBox(height: 13.2),
+                                  const SizedBox(height: 11.5),
                                   Row(
                                     children: [
                                       Expanded(
@@ -129,7 +133,7 @@ class _AccountScreenState extends State<AccountScreen>
                                                   .xacThucTaiKhoan),
                                         ),
                                       ),
-                                      const SizedBox(width: 15),
+                                      const SizedBox(width: 13.7),
                                       Expanded(
                                         child: AppButton(
                                           onPressed: () {},
@@ -149,8 +153,78 @@ class _AccountScreenState extends State<AccountScreen>
                             const GradientCircleAvatar(radius: 45),
                           ],
                         ),
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height - 45),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 1,
+                            top: 30,
+                          ),
+                          child: Text(
+                            StringConst.get(context)!.quanLyThueBao,
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        CellButton(
+                          svgIconPath: Assets.icon_history,
+                          title: StringConst.get(context)!.lichSuThanhToan,
+                          onPressed: () {},
+                        ),
+                        CellButton(
+                          svgIconPath: Assets.icon_cart,
+                          title: StringConst.get(context)!.theoDoiDonHang,
+                          onPressed: () {},
+                        ),
+                        CellButton(
+                          svgIconPath: Assets.icon_block_call,
+                          title: StringConst.get(context)!.chanCuocGoi,
+                          onPressed: () {},
+                        ),
+                        CellButton(
+                          svgIconPath: Assets.icon_wallet,
+                          title:
+                              StringConst.get(context)!.quanLyThongTinThanhToan,
+                          onPressed: () {},
+                        ),
+                        CellButton(
+                          svgIconPath: Assets.icon_lock,
+                          title: StringConst.get(context)!.doiMatKhau,
+                          onPressed: () {},
+                        ),
+                        CellButton(
+                          svgIconPath: Assets.icon_scan_qr,
+                          title: StringConst.get(context)!.quetMaQr,
+                          onPressed: () {},
+                        ),
+                        CellButton(
+                          svgIconPath: Assets.icon_members,
+                          title: StringConst.get(context)!.hoiVien,
+                          onPressed: () {},
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 1,
+                            top: 30,
+                          ),
+                          child: Text(
+                            StringConst.get(context)!.khac,
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        CellButton(
+                          svgIconPath: Assets.icon_security,
+                          title: StringConst.get(context)!.trungTamBaoMat,
+                          onPressed: () {},
+                        ),
+                        CellButton(
+                          svgIconPath: Assets.icon_gift,
+                          title: StringConst.get(context)!.khuyenMaiVaQuaTang,
+                          onPressed: () {},
+                        ),
                       ],
                     ),
                   ),

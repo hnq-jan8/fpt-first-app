@@ -59,5 +59,17 @@
   "thoatTaiKhoan": "Thoát tài khoản",
   "xinChaoUser": "Xin chào, {user_name}!",
   "xacThucTaiKhoan": "Xác thực tài khoản",
-  "thongTinChung": "Thông tin chung"
+  "thongTinChung": "Thông tin chung",
+  "quanLyThueBao": "Quản lý thuê bao",
+  "lichSuThanhToan": "Lịch sử thanh toán",
+  "theoDoiDonHang": "Theo dõi đơn hàng",
+  "chanCuocGoi": "Chặn cuộc gọi",
+  "quanLyThongTinThanhToan": "Quản lý thông tin thanh toán",
+  "doiMatKhau": "Đổi mật khẩu",
+  "quetMaQr": "Quét mã QR",
+  "dangKyHoiVien": "Đăng ký hội viên",
+  "trungTamBaoMat": "Trung tâm bảo mật",
+  "khuyenMaiVaQuaTang": "Khuyến mãi và quà tặng",
+  "lienHeVoiChungToi": "Liên hệ với chúng tôi",
+  "cacCauHoiThuongGap": "Các câu hỏi thường gặp"
 }
