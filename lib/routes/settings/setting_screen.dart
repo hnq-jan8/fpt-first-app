@@ -59,11 +59,11 @@ class _SettingScreenState extends State<SettingScreen> {
         backgroundColor: headerColor,
       ),
       extendBodyBehindAppBar: true,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: SingleChildScrollView(
-          controller: _scrollController,
-          physics: const BouncingScrollPhysics(),
+      body: SingleChildScrollView(
+        controller: _scrollController,
+        physics: const BouncingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

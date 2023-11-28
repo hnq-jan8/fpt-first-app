@@ -16,7 +16,9 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
 
   final double? height;
+
   final double elevation;
+  final double? sigmaValue;
 
   final bool? showBack;
   final bool useGradient;
@@ -37,6 +39,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
     this.elevation = 0,
     this.useGradient = true,
     this.centerTitle = false,
+    this.sigmaValue,
   }) : super(key: key);
 
   @override
@@ -87,8 +90,8 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           : ClipRRect(
               child: BackdropFilter(
                 filter: ImageFilter.blur(
-                  sigmaX: 12,
-                  sigmaY: 12,
+                  sigmaX: sigmaValue ?? 12,
+                  sigmaY: sigmaValue ?? 12,
                 ), //
                 child: Container(),
               ),

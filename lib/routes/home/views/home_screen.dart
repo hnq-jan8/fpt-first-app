@@ -53,6 +53,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final ScrollController _menuScrollController = ScrollController();
   final ScrollController _adsScrollController = ScrollController();
 
+  final TextEditingController _searchController = TextEditingController();
+
   bool _scrollListener(ScrollNotification info) {
     if (info.metrics.axis == Axis.vertical) {
       _colorController.animateTo(info.metrics.pixels * 2 / 100);
@@ -133,6 +135,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _menuScrollController.dispose();
     _adsScrollController.dispose();
 
+    _searchController.dispose();
+
     super.dispose();
   }
 
@@ -156,6 +160,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       extendBodyBehindAppBar: true,
       backgroundColor: ThemeColors.background,
       appBar: HomeAppBar(
+        searchController: _searchController,
         searchTextColor: searchTextColor,
         backgroundColor: _colorTween.value,
         searchBorderColor: _colorTweenBorder.value,

@@ -29,6 +29,9 @@ class _AccountScreenState extends State<AccountScreen>
 
   Brightness statusBarIconBrightness = Brightness.light;
 
+  final String username = 'Nguyễn Văn A';
+  final String phoneNumber = '0987654321';
+
   @override
   Widget build(BuildContext context) {
     return NotificationListener<ScrollNotification>(
@@ -88,7 +91,7 @@ class _AccountScreenState extends State<AccountScreen>
                           children: [
                             Container(
                               width: double.infinity,
-                              margin: const EdgeInsets.only(top: 45),
+                              margin: const EdgeInsets.only(top: 47),
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 17.5,
                                 vertical: 12,
@@ -109,15 +112,15 @@ class _AccountScreenState extends State<AccountScreen>
                                   const SizedBox(height: 49),
                                   Text(
                                     StringConst.get(context)!
-                                        .xinChaoUser('Nguyễn Văn A'),
+                                        .xinChaoUser(username),
                                     style: const TextStyle(
                                       fontSize: 14.5,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                  const Text(
-                                    '0987654321',
-                                    style: TextStyle(
+                                  Text(
+                                    phoneNumber,
+                                    style: const TextStyle(
                                       height: 1.5,
                                     ),
                                   ),

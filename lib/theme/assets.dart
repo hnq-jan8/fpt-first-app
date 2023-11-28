@@ -71,7 +71,12 @@ class Assets {
   static const String icon_security = '${_ICONS_PATH}security.svg';
   static const String icon_gift = '${_ICONS_PATH}gift.svg';
 
-  static const String question = '${_ICONS_PATH}question.svg';
+  static const String icon_question = '${_ICONS_PATH}question.svg';
+
+  static const String icon_phone_gradient = '${_ICONS_PATH}phone_gradient.svg';
+  static const String icon_email_gradient = '${_ICONS_PATH}email_gradient.svg';
+  static const String icon_position_gradient =
+      '${_ICONS_PATH}position_gradient.svg';
 
   // images
   static const String image_intro = '${_IMAGES_PATH}intro.png';

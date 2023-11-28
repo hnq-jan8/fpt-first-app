@@ -43,14 +43,10 @@ class _GradientButtonState extends State<GradientButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTapDown: (details) {
-        setState(() => isButtonPressed = true);
-      },
+      onTap: widget.onPressed,
+      onTapDown: (details) => setState(() => isButtonPressed = true),
       onTapCancel: () => setState(() => isButtonPressed = false),
-      onTapUp: (details) {
-        setState(() => isButtonPressed = false);
-        widget.onPressed!();
-      },
+      onTapUp: (details) => setState(() => isButtonPressed = false),
       child: IntrinsicWidth(
         child: Container(
           padding: const EdgeInsets.all(1),
@@ -66,7 +62,9 @@ class _GradientButtonState extends State<GradientButton> {
             ),
           ),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: widget.borderRadius),
+            padding: EdgeInsets.symmetric(
+              horizontal: widget.borderRadius > 5 ? widget.borderRadius - 5 : 0,
+            ),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(widget.borderRadius),
@@ -75,19 +73,17 @@ class _GradientButtonState extends State<GradientButton> {
                   : widget.backgroundColor,
             ),
             child: ShaderMask(
-              shaderCallback: (Rect bounds) {
-                return LinearGradient(
-                  colors: isButtonPressed != widget.reversedBehavior
-                      ? <Color>[
-                          const Color(0xFFFFFFFF),
-                          const Color(0xFFFFFFFF),
-                        ]
-                      : <Color>[
-                          widget.textGradientColor1,
-                          widget.textGradientColor2,
-                        ],
-                ).createShader(bounds);
-              },
+              shaderCallback: (Rect bounds) => LinearGradient(
+                colors: isButtonPressed != widget.reversedBehavior
+                    ? <Color>[
+                        const Color(0xFFFFFFFF),
+                        const Color(0xFFFFFFFF),
+                      ]
+                    : <Color>[
+                        widget.textGradientColor1,
+                        widget.textGradientColor2,
+                      ],
+              ).createShader(bounds),
               child: widget.child,
             ),
           ),

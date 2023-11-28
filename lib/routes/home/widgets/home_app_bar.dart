@@ -22,6 +22,8 @@ class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   final Listenable animationController;
 
+  final TextEditingController searchController;
+
   const HomeAppBar({
     super.key,
     this.backgroundColor = Colors.transparent,
@@ -32,6 +34,7 @@ class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.notifUnreadCount = 0,
     this.avatarRadius,
     required this.animationController,
+    required this.searchController,
   });
 
   @override
@@ -43,7 +46,6 @@ class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _HomeAppBarState extends State<HomeAppBar> {
   final FocusNode _searchFocusNode = FocusNode();
-  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -56,7 +58,6 @@ class _HomeAppBarState extends State<HomeAppBar> {
   @override
   void dispose() {
     _searchFocusNode.dispose();
-    _searchController.dispose();
     super.dispose();
   }
 
@@ -78,14 +79,13 @@ class _HomeAppBarState extends State<HomeAppBar> {
                     height: 36,
                     child: TextField(
                       focusNode: _searchFocusNode,
-                      controller: _searchController,
+                      controller: widget.searchController,
                       onTap: () =>
-                          _searchController.selection = TextSelection(
+                          widget.searchController.selection = TextSelection(
                         baseOffset: 0,
-                        extentOffset: _searchController.text.length,
+                        extentOffset: widget.searchController.text.length,
                       ),
-                      onTapOutside: (event) =>
-                          FocusScope.of(context).unfocus(),
+                      onTapOutside: (event) => FocusScope.of(context).unfocus(),
                       style: TextStyle(
                         fontSize: 13.6,
                         color: _searchFocusNode.hasFocus
@@ -157,8 +157,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                         alignment: Alignment.topRight,
                         child: widget.notifUnreadCount != 0
                             ? Container(
-                                constraints:
-                                    const BoxConstraints(minWidth: 20),
+                                constraints: const BoxConstraints(minWidth: 20),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: ThemeColors.primary,

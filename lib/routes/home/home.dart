@@ -55,6 +55,8 @@ class _HomePageState extends State<HomePage> {
 
     double bottomPadding = MediaQuery.of(context).padding.bottom;
 
+    bool isBottomInset = MediaQuery.of(context).viewInsets.bottom > 0;
+
     return WillPopScope(
       onWillPop: _currentIndex != 0
           ? () {
@@ -64,44 +66,40 @@ class _HomePageState extends State<HomePage> {
               return Future.value(false);
             }
           : null,
-      child: Material(
-        color: ThemeColors.background,
-        child: Stack(
-          alignment: Alignment.bottomCenter,
+      child: Scaffold(
+        backgroundColor: ThemeColors.background,
+        extendBody: true,
+        body: Column(
           children: [
-            Column(
-              children: [
-                Expanded(
-                  child: IndexedStack(
-                    index: _currentIndex,
-                    children: [
-                      const HomeScreen(),
-                      const HelpScreen(),
-                      Container(color: Colors.green),
-                      const SettingScreen(),
-                      const AccountScreen(),
-                    ],
-                  ),
-                ),
-                Container(
-                  color: const Color(0xFFFFFFFF),
-                  height: 45 + bottomPadding,
-                ),
-              ],
-            ),
-            SafeArea(
-              minimum: const EdgeInsets.only(bottom: 5),
-              child: CustomBottomNavigationBar(
-                onPressed: (index) {
-                  setState(() {
-                    _currentIndex = index;
-                  });
-                },
-                items: navigationItems,
-                currentIndex: _currentIndex,
+            Expanded(
+              child: IndexedStack(
+                index: _currentIndex,
+                children: [
+                  const HomeScreen(),
+                  const HelpScreen(),
+                  Container(color: Colors.green),
+                  const SettingScreen(),
+                  const AccountScreen(),
+                ],
               ),
             ),
+            Container(
+              color: const Color(0xFFFFFFFF),
+              height: isBottomInset ? 0 : 45 + bottomPadding,
+            ),
           ],
+        ),
+        bottomNavigationBar: SafeArea(
+          minimum: const EdgeInsets.only(bottom: 5),
+          child: CustomBottomNavigationBar(
+            onPressed: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            items: navigationItems,
+            currentIndex: _currentIndex,
+          ),
         ),
       ),
     );
