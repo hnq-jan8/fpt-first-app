@@ -6,6 +6,7 @@ import 'package:next_app/routes/account/account_screen.dart';
 import 'package:next_app/routes/help/help_screen.dart';
 import 'package:next_app/routes/home/views/home_screen.dart';
 import 'package:next_app/routes/settings/setting_screen.dart';
+import 'package:next_app/routes/utility/utility_screen.dart';
 import 'package:next_app/widgets/navigation_bar/navigation_bar.dart';
 import 'package:next_app/widgets/navigation_bar/navigation_bar_item.dart';
 import 'package:next_app/theme/assets.dart';
@@ -53,10 +54,6 @@ class _HomePageState extends State<HomePage> {
       )
     ];
 
-    double bottomPadding = MediaQuery.of(context).padding.bottom;
-
-    bool isBottomInset = MediaQuery.of(context).viewInsets.bottom > 0;
-
     return WillPopScope(
       onWillPop: _currentIndex != 0
           ? () {
@@ -72,12 +69,12 @@ class _HomePageState extends State<HomePage> {
         resizeToAvoidBottomInset: false,
         body: IndexedStack(
           index: _currentIndex,
-          children: [
-            const HomeScreen(),
-            const HelpScreen(),
-            Container(color: Colors.green),
-            const SettingScreen(),
-            const AccountScreen(),
+          children: const [
+            HomeScreen(),
+            HelpScreen(),
+            UtilityScreen(),
+            SettingScreen(),
+            AccountScreen(),
           ],
         ),
         bottomNavigationBar: Stack(

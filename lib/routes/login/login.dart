@@ -83,177 +83,180 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Stack(
           alignment: Alignment.bottomCenter,
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: SingleChildScrollView(
-                keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.manual,
-                physics: const BouncingScrollPhysics(),
-                child: Padding(
-                  padding: const EdgeInsets.all(19),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(height: topPadding + kToolbarHeight),
-                      Image.asset(
-                        Assets.image_logo,
-                        height: 80,
-                        fit: BoxFit.cover,
-                      ),
-                      const SizedBox(height: 50),
-                      TextField(
-                        controller: fieldController,
-                        keyboardType: TextInputType.phone,
-                        onTapOutside: (event) =>
-                            FocusScope.of(context).unfocus(),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: ThemeColors.inputBackground,
-                          prefixIcon: Container(
-                            width: 64,
-                            padding: const EdgeInsets.only(
-                              top: 1,
-                              left: 20,
-                              right: 18,
+            SafeArea(
+              top: false,
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: SingleChildScrollView(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.manual,
+                  physics: const BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(19),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(height: topPadding + kToolbarHeight),
+                        Image.asset(
+                          Assets.image_logo,
+                          height: 80,
+                          fit: BoxFit.cover,
+                        ),
+                        const SizedBox(height: 50),
+                        TextField(
+                          controller: fieldController,
+                          keyboardType: TextInputType.phone,
+                          onTapOutside: (event) =>
+                              FocusScope.of(context).unfocus(),
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: ThemeColors.inputBackground,
+                            prefixIcon: Container(
+                              width: 64,
+                              padding: const EdgeInsets.only(
+                                top: 1,
+                                left: 20,
+                                right: 18,
+                              ),
+                              child: SvgPicture.asset(
+                                iconField[!buttonSignInVisibility ? 0 : 1],
+                              ),
                             ),
-                            child: SvgPicture.asset(
-                              iconField[!buttonSignInVisibility ? 0 : 1],
+                            hintText: hintText[!buttonSignInVisibility ? 0 : 1],
+                            hintStyle: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: ThemeColors.hintText,
                             ),
-                          ),
-                          hintText: hintText[!buttonSignInVisibility ? 0 : 1],
-                          hintStyle: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            color: ThemeColors.hintText,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(
-                              color: ThemeColors.fieldBorder,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                color: ThemeColors.fieldBorder,
+                              ),
                             ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(
-                              width: 2,
-                              color: ThemeColors.fieldBorder,
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide: const BorderSide(
+                                width: 2,
+                                color: ThemeColors.fieldBorder,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      AnimatedSize(
-                        duration: const Duration(milliseconds: 200),
-                        curve: Curves.easeInOut,
-                        child: Visibility(
-                          visible: buttonSignInVisibility,
-                          child: Column(
-                            children: [
-                              GradientButton(
-                                onPressed: onTapSignIn,
-                                child: GradientButtonTitle(
-                                  buttonTitle:
-                                      StringConst.get(context)!.dangNhap,
+                        const SizedBox(height: 20),
+                        AnimatedSize(
+                          duration: const Duration(milliseconds: 200),
+                          curve: Curves.easeInOut,
+                          child: Visibility(
+                            visible: buttonSignInVisibility,
+                            child: Column(
+                              children: [
+                                GradientButton(
+                                  onPressed: onTapSignIn,
+                                  child: GradientButtonTitle(
+                                    buttonTitle:
+                                        StringConst.get(context)!.dangNhap,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 15),
-                            ],
+                                const SizedBox(height: 15),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      GradientButton(
-                        gradientColor1: buttonSignInVisibility
-                            ? ThemeColors.dimText
-                            : ThemeColors.buttonGradient1,
-                        gradientColor2: buttonSignInVisibility
-                            ? ThemeColors.dimText
-                            : ThemeColors.buttonGradient2,
-                        textGradientColor1: buttonSignInVisibility
-                            ? ThemeColors.dimText
-                            : ThemeColors.textGradient1,
-                        textGradientColor2: buttonSignInVisibility
-                            ? ThemeColors.dimText
-                            : ThemeColors.textGradient2,
-                        onPressed: onTapSendOtp,
-                        child: AnimatedSwitcher(
-                          duration: const Duration(milliseconds: 300),
-                          transitionBuilder:
-                              (Widget child, Animation<double> animation) =>
-                                  FadeTransition(
-                            opacity: animation,
-                            child: child,
-                          ),
-                          child: GradientButtonTitle(
-                            buttonTitle:
-                                otpButtonTitle[!buttonSignInVisibility ? 0 : 1],
-                          ),
-                        ),
-                      ),
-                      AnimatedSize(
-                        duration: const Duration(milliseconds: 100),
-                        curve: Curves.easeOut,
-                        child: Visibility(
-                          visible: !buttonSignInVisibility,
-                          maintainAnimation: true,
-                          maintainState: true,
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 70),
-                              SizedBox(
-                                width: double.infinity,
-                                child: AppButton(
-                                  onPressed: () {},
-                                  child: AppButtonText(
-                                      title: StringConst.get(context)!
-                                          .dangNhapFaceId),
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              SizedBox(
-                                width: double.infinity,
-                                child: AppButton(
-                                  onPressed: () {},
-                                  color: ThemeColors.primaryBlue,
-                                  child: AppButtonText(
-                                      title: StringConst.get(context)!
-                                          .dangNhapMatKhau),
-                                ),
-                              ),
-                              const SizedBox(height: 25),
-                              Text(
-                                StringConst.get(context)!.hoacDangNhapVs,
-                                style:
-                                    const TextStyle(color: ThemeColors.dimText),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 15,
-                                  horizontal: 25,
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    IconCell(
-                                      Assets.icon_facebook,
-                                      onPressed: () {},
-                                    ),
-                                    IconCell(
-                                      Assets.icon_google,
-                                      onPressed: () {},
-                                    ),
-                                    IconCell(
-                                      Assets.icon_apple,
-                                      onPressed: () {},
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
+                        GradientButton(
+                          gradientColor1: buttonSignInVisibility
+                              ? ThemeColors.dimText
+                              : ThemeColors.buttonGradient1,
+                          gradientColor2: buttonSignInVisibility
+                              ? ThemeColors.dimText
+                              : ThemeColors.buttonGradient2,
+                          textGradientColor1: buttonSignInVisibility
+                              ? ThemeColors.dimText
+                              : ThemeColors.textGradient1,
+                          textGradientColor2: buttonSignInVisibility
+                              ? ThemeColors.dimText
+                              : ThemeColors.textGradient2,
+                          onPressed: onTapSendOtp,
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            transitionBuilder:
+                                (Widget child, Animation<double> animation) =>
+                                    FadeTransition(
+                              opacity: animation,
+                              child: child,
+                            ),
+                            child: GradientButtonTitle(
+                              buttonTitle: otpButtonTitle[
+                                  !buttonSignInVisibility ? 0 : 1],
+                            ),
                           ),
                         ),
-                      )
-                    ],
+                        AnimatedSize(
+                          duration: const Duration(milliseconds: 100),
+                          curve: Curves.easeOut,
+                          child: Visibility(
+                            visible: !buttonSignInVisibility,
+                            maintainAnimation: true,
+                            maintainState: true,
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 70),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: AppButton(
+                                    onPressed: () {},
+                                    child: AppButtonText(
+                                        title: StringConst.get(context)!
+                                            .dangNhapFaceId),
+                                  ),
+                                ),
+                                const SizedBox(height: 10),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: AppButton(
+                                    onPressed: () {},
+                                    color: ThemeColors.primaryBlue,
+                                    child: AppButtonText(
+                                        title: StringConst.get(context)!
+                                            .dangNhapMatKhau),
+                                  ),
+                                ),
+                                const SizedBox(height: 25),
+                                Text(
+                                  StringConst.get(context)!.hoacDangNhapVs,
+                                  style: const TextStyle(
+                                      color: ThemeColors.dimText),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 15,
+                                    horizontal: 25,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      IconCell(
+                                        Assets.icon_facebook,
+                                        onPressed: () {},
+                                      ),
+                                      IconCell(
+                                        Assets.icon_google,
+                                        onPressed: () {},
+                                      ),
+                                      IconCell(
+                                        Assets.icon_apple,
+                                        onPressed: () {},
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

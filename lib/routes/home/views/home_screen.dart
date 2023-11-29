@@ -269,29 +269,27 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                 ),
                               ),
                             ),
-                            Center(
-                              child: SizedBox(
-                                height: 200,
-                                child: GridView.count(
-                                  scrollDirection: Axis.horizontal,
-                                  controller: _menuScrollController,
-                                  physics: const BouncingScrollPhysics(),
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 1.2,
-                                  shrinkWrap: true,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 5,
-                                  ),
-                                  children: [
-                                    for (final feature in mainFeatures.entries)
-                                      MenuItem(
-                                        svgIcon: feature.key,
-                                        title: feature.value,
-                                        onPressed: () {},
-                                      ),
-                                  ],
+                            SizedBox(
+                              height: 200,
+                              child: GridView.count(
+                                scrollDirection: Axis.horizontal,
+                                controller: _menuScrollController,
+                                physics: const BouncingScrollPhysics(),
+                                crossAxisCount: 2,
+                                childAspectRatio: 1.2,
+                                shrinkWrap: true,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 5,
                                 ),
+                                children: [
+                                  for (final feature in mainFeatures.entries)
+                                    MenuItem(
+                                      svgIcon: feature.key,
+                                      title: feature.value,
+                                      onPressed: () {},
+                                    ),
+                                ],
                               ),
                             ),
                             Visibility(
@@ -309,28 +307,26 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Center(
-                        child: SizedBox(
-                          height: 150,
-                          child: GridView.count(
-                            physics: const BouncingScrollPhysics(),
-                            controller: _adsScrollController,
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 15,
-                            ),
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            crossAxisCount: 1,
-                            childAspectRatio: 0.55,
-                            children: [
-                              for (final ad in ads)
-                                AdImage(
-                                  image: ad,
-                                  onPressed: () {},
-                                ),
-                            ],
+                      SizedBox(
+                        height: 150,
+                        child: GridView.count(
+                          physics: const BouncingScrollPhysics(),
+                          controller: _adsScrollController,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 15,
                           ),
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          crossAxisCount: 1,
+                          childAspectRatio: 0.55,
+                          children: [
+                            for (final ad in ads)
+                              AdImage(
+                                image: ad,
+                                onPressed: () {},
+                              ),
+                          ],
                         ),
                       ),
                       Visibility(

@@ -89,4 +89,6 @@ class Assets {
   static const String image_ad_demo_2 = '${_IMAGES_PATH}ad2.png';
 
   static const String image_app_icon = '${_IMAGES_PATH}ic_launcher_ios.png';
+
+  static const String image_flash_deals = '${_IMAGES_PATH}flash_deals.png';
 }

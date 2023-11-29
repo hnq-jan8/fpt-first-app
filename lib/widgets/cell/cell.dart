@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Cell extends StatelessWidget {
+class Cell extends StatefulWidget {
   const Cell({
     super.key,
     this.width = 64,
@@ -9,6 +9,7 @@ class Cell extends StatelessWidget {
     this.fillColor = const Color(0xFFFFFFFF),
     required this.child,
     this.borderColor,
+    this.onPressed,
   });
 
   final double borderRadius;
@@ -20,22 +21,51 @@ class Cell extends StatelessWidget {
 
   final Widget? child;
 
+  final VoidCallback? onPressed;
+
+  @override
+  State<Cell> createState() => _CellState();
+}
+
+class _CellState extends State<Cell> {
+  bool isPressed = false;
+
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: fillColor,
-        borderRadius: BorderRadius.circular(borderRadius),
-        border: borderColor != null
-            ? Border.all(
-                color: borderColor!,
-                width: 1,
-              )
-            : null,
+    return GestureDetector(
+      onTap: widget.onPressed,
+      onTapDown: (details) {
+        if (widget.onPressed != null) {
+          setState(() {
+            isPressed = true;
+          });
+        }
+      },
+      onTapUp: (details) {
+        setState(() {
+          isPressed = false;
+        });
+      },
+      onTapCancel: () {
+        setState(() {
+          isPressed = false;
+        });
+      },
+      child: Container(
+        width: widget.width,
+        height: widget.height,
+        decoration: BoxDecoration(
+          color: isPressed ? const Color(0xFFE7E7E7) : widget.fillColor,
+          borderRadius: BorderRadius.circular(widget.borderRadius),
+          border: widget.borderColor != null
+              ? Border.all(
+                  color: widget.borderColor!,
+                  width: 1,
+                )
+              : null,
+        ),
+        child: widget.child,
       ),
-      child: child,
     );
   }
 }
