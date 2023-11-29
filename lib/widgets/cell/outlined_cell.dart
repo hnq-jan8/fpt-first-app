@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:next_app/theme/theme_colors.dart';
 
-class OutlinedCell extends StatelessWidget {
+class OutlinedCell extends StatefulWidget {
   const OutlinedCell({
     super.key,
     this.child,
-    this.onPressed,
     this.horizontalPadding = 15,
+    this.onPressed,
     this.onTapDown,
     this.onTapUp,
   });
@@ -22,27 +22,54 @@ class OutlinedCell extends StatelessWidget {
   final Function(TapUpDetails)? onTapUp;
 
   @override
+  State<OutlinedCell> createState() => _OutlinedCellState();
+}
+
+class _OutlinedCellState extends State<OutlinedCell> {
+  bool isPressed = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Ink(
-      decoration: BoxDecoration(
-        color: const Color(0xFFFFFFFF),
-        border: Border.all(
-          color: ThemeColors.fieldBorderDark,
-          width: 1,
+    return GestureDetector(
+      onTap: widget.onPressed,
+      onTapDown: (details) {
+        if (widget.onPressed != null) {
+          setState(() {
+            isPressed = true;
+          });
+        }
+
+        if (widget.onTapDown != null) {
+          widget.onTapDown!(details);
+        }
+      },
+      onTapUp: (details) {
+        setState(() {
+          isPressed = false;
+        });
+        if (widget.onTapUp != null) {
+          widget.onTapUp!(details);
+        }
+      },
+      onTapCancel: () {
+        setState(() {
+          isPressed = false;
+        });
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: isPressed ? const Color(0xFFE7E7E7) : const Color(0xFFFFFFFF),
+          border: Border.all(
+            color: ThemeColors.fieldBorderDark,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(15),
         ),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: InkWell(
-        splashFactory: NoSplash.splashFactory,
-        onTap: onPressed,
-        onTapDown: onTapDown,
-        onTapUp: onTapUp,
-        borderRadius: BorderRadius.circular(14),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: horizontalPadding,
+            horizontal: widget.horizontalPadding,
           ),
-          child: child,
+          child: widget.child,
         ),
       ),
     );

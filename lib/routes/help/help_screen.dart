@@ -85,110 +85,113 @@ class _HelpScreenState extends State<HelpScreen> {
     isUsingVi = StringConst.get(context)!.localeName == 'vi';
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: ThemeColors.background,
       appBar: BlurHeader(
         backgroundColor: headerColor,
       ),
       extendBodyBehindAppBar: true,
-      body: SingleChildScrollView(
-        controller: _scrollController,
-        physics: const BouncingScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              Container(
-                color: ThemeColors.background,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: topPadding + startingPadding),
-                    Container(
-                      margin: const EdgeInsets.only(
-                        top: 15,
-                        left: 1,
-                      ),
-                      child: Text(
-                        StringConst.get(context)!.lienHeVoiChungToi,
-                        style: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: GradientColumnButton(
-                            onPressed: () {
-                              debugPrint('Pressed 1');
-                            },
-                            title: StringConst.get(context)!.hotline,
-                            svgAsset: Assets.icon_phone_gradient,
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: GradientColumnButton(
-                            onPressed: () {
-                              debugPrint('Pressed 2');
-                            },
-                            title: StringConst.get(context)!.email,
-                            svgAsset: Assets.icon_email_gradient,
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: GradientColumnButton(
-                            onPressed: () {
-                              debugPrint('Pressed 3');
-                            },
-                            title: StringConst.get(context)!.daiLy,
-                            svgAsset: Assets.icon_position_gradient,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                        top: 30,
-                        left: 1,
-                      ),
-                      child: Text(
-                        StringConst.get(context)!.cacCauHoiThuongGap,
-                        style: const TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    FAQSearchBox(
-                      onChanged: (String query) => updateSearchResult(query),
-                      searchController: _searchController,
-                    ),
-                  ],
-                ),
-              ),
-              AnimatedSize(
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.easeInOut,
-                child: SizedBox(
-                  width: double.infinity,
+      body: SizedBox(
+        height: double.infinity,
+        child: SingleChildScrollView(
+          controller: _scrollController,
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                Container(
+                  color: ThemeColors.background,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      for (String question in _searchResult)
-                        CellButton(
-                          svgIconPath: Assets.icon_question,
-                          title: question,
-                          onPressed: () {},
+                      SizedBox(height: topPadding + startingPadding),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: 15,
+                          left: 1,
                         ),
+                        child: Text(
+                          StringConst.get(context)!.lienHeVoiChungToi,
+                          style: const TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: GradientColumnButton(
+                              onPressed: () {
+                                debugPrint('Pressed 1');
+                              },
+                              title: StringConst.get(context)!.hotline,
+                              svgAsset: Assets.icon_phone_gradient,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: GradientColumnButton(
+                              onPressed: () {
+                                debugPrint('Pressed 2');
+                              },
+                              title: StringConst.get(context)!.email,
+                              svgAsset: Assets.icon_email_gradient,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: GradientColumnButton(
+                              onPressed: () {
+                                debugPrint('Pressed 3');
+                              },
+                              title: StringConst.get(context)!.daiLy,
+                              svgAsset: Assets.icon_position_gradient,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(
+                          top: 30,
+                          left: 1,
+                        ),
+                        child: Text(
+                          StringConst.get(context)!.cacCauHoiThuongGap,
+                          style: const TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      FAQSearchBox(
+                        onChanged: (String query) => updateSearchResult(query),
+                        searchController: _searchController,
+                      ),
                     ],
                   ),
                 ),
-              ),
-              const SizedBox(height: 70),
-            ],
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeInOut,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        for (String question in _searchResult)
+                          CellButton(
+                            svgIconPath: Assets.icon_question,
+                            title: question,
+                            onPressed: () {},
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 160),
+              ],
+            ),
           ),
         ),
       ),

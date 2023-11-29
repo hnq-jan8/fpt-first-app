@@ -43,10 +43,10 @@ class _FAQSearchBoxState extends State<FAQSearchBox> {
         bottom: 5,
       ),
       padding: const EdgeInsets.only(
-        left: 20,
-        right: 20,
+        left: 23,
+        right: 23.5,
         top: 20,
-        bottom: 15,
+        bottom: 17,
       ),
       width: double.infinity,
       decoration: BoxDecoration(
@@ -95,16 +95,34 @@ class _FAQSearchBoxState extends State<FAQSearchBox> {
                 fontSize: 14.5,
               ),
               decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                 filled: true,
                 fillColor: searchFocusNode.hasFocus
                     ? ThemeColors.background
-                    : Colors.white30,
+                    : Colors.white24,
                 border: const OutlineInputBorder(
                   borderRadius: BorderRadius.all(
                     Radius.circular(15),
                   ),
                   borderSide: BorderSide.none,
+                ),
+                enabledBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15),
+                  ),
+                  borderSide: BorderSide(
+                    color: ThemeColors.onPrimary,
+                    width: 0.75,
+                  ),
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(15),
+                  ),
+                  borderSide: BorderSide(
+                    color: ThemeColors.onPrimary,
+                    width: 2,
+                  ),
                 ),
               ),
             ),

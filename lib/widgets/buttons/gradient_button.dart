@@ -16,6 +16,7 @@ class GradientButton extends StatefulWidget {
   final VoidCallback? onPressed;
 
   final double borderRadius;
+  final double? horizontalPadding;
 
   /// Reverse the way this button updates its color
   final bool reversedBehavior;
@@ -31,6 +32,7 @@ class GradientButton extends StatefulWidget {
     required this.child,
     required this.onPressed,
     this.reversedBehavior = false,
+    this.horizontalPadding,
   }) : super(key: key);
 
   @override
@@ -63,7 +65,7 @@ class _GradientButtonState extends State<GradientButton> {
           ),
           child: Container(
             padding: EdgeInsets.symmetric(
-              horizontal: widget.borderRadius > 5 ? widget.borderRadius - 5 : 0,
+              horizontal: widget.horizontalPadding ?? widget.borderRadius,
             ),
             alignment: Alignment.center,
             decoration: BoxDecoration(

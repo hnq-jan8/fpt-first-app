@@ -56,8 +56,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
 
   bool _scrollListener(ScrollNotification info) {
-    if (info.metrics.axis == Axis.vertical) {
-      _colorController.animateTo(info.metrics.pixels * 2 / 100);
+    if (info.metrics.axis == Axis.vertical &&
+        info.metrics.pixels < info.metrics.maxScrollExtent) {
+      setState(() {});
+
+      _colorController.animateTo((info.metrics.pixels * 2 / 100));
       _backDropController.animateTo(info.metrics.pixels.abs() * 1.5 / 100);
 
       if (info.metrics.pixels < 30) {
@@ -70,14 +73,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
       avatarRadius = info.metrics.pixels > 5 ? 17 : 25;
 
-      setState(() {
-        backgroundHeight = info.metrics.pixels > 0
-            ? 5
-            : (-1.05 * info.metrics.pixels).clamp(5, double.infinity);
-        backgroundOpacity = info.metrics.pixels > 0
-            ? 1
-            : (1 + info.metrics.pixels / 50).clamp(0, 1);
-      });
+      backgroundHeight = info.metrics.pixels > 0
+          ? 5
+          : (-1.05 * info.metrics.pixels).clamp(5, double.infinity);
+      backgroundOpacity = info.metrics.pixels > 0
+          ? 1
+          : (1 + info.metrics.pixels / 50).clamp(0, 1);
     }
     return true;
   }
@@ -155,7 +156,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       Assets.icon_vas_service: StringConst.get(context)!.dichVuVas,
     };
 
-    var topPadding = MediaQuery.of(context).padding.top + 60;
+    double topPadding = MediaQuery.of(context).padding.top + 60;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: ThemeColors.background,
@@ -370,7 +372,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         child: Padding(
                           padding: const EdgeInsets.only(
                             top: 40,
-                            bottom: 64,
+                            bottom: 170,
                           ),
                           child: GradientButton(
                             onPressed: () {},

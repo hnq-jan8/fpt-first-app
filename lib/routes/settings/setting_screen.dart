@@ -54,7 +54,7 @@ class _SettingScreenState extends State<SettingScreen> {
     isUsingVi = StringConst.get(context)!.localeName == 'vi';
 
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: ThemeColors.background,
       appBar: BlurHeader(
         backgroundColor: headerColor,
       ),
@@ -157,7 +157,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 125),
+              const SizedBox(height: 170),
             ],
           ),
         ),

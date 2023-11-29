@@ -69,37 +69,37 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: ThemeColors.background,
         extendBody: true,
-        body: Column(
+        resizeToAvoidBottomInset: false,
+        body: IndexedStack(
+          index: _currentIndex,
           children: [
-            Expanded(
-              child: IndexedStack(
-                index: _currentIndex,
-                children: [
-                  const HomeScreen(),
-                  const HelpScreen(),
-                  Container(color: Colors.green),
-                  const SettingScreen(),
-                  const AccountScreen(),
-                ],
-              ),
-            ),
-            Container(
-              color: const Color(0xFFFFFFFF),
-              height: isBottomInset ? 0 : 45 + bottomPadding,
-            ),
+            const HomeScreen(),
+            const HelpScreen(),
+            Container(color: Colors.green),
+            const SettingScreen(),
+            const AccountScreen(),
           ],
         ),
-        bottomNavigationBar: SafeArea(
-          minimum: const EdgeInsets.only(bottom: 5),
-          child: CustomBottomNavigationBar(
-            onPressed: (index) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
-            items: navigationItems,
-            currentIndex: _currentIndex,
-          ),
+        bottomNavigationBar: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Container(
+              height: 45,
+              color: const Color(0xFFFFFFFF),
+            ),
+            SafeArea(
+              minimum: const EdgeInsets.only(bottom: 5),
+              child: CustomBottomNavigationBar(
+                onPressed: (index) {
+                  setState(() {
+                    _currentIndex = index;
+                  });
+                },
+                items: navigationItems,
+                currentIndex: _currentIndex,
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -81,7 +81,7 @@ class _AccountScreenState extends State<AccountScreen>
                       top: MediaQuery.of(context).padding.top + 20,
                       left: 20,
                       right: 20,
-                      bottom: 70,
+                      bottom: 160,
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,6 +131,7 @@ class _AccountScreenState extends State<AccountScreen>
                                         child: GradientButton(
                                           onPressed: () {},
                                           reversedBehavior: true,
+                                          horizontalPadding: 8.5,
                                           child: AppButtonText(
                                               title: StringConst.get(context)!
                                                   .xacThucTaiKhoan),
