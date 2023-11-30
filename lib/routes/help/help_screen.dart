@@ -90,8 +90,9 @@ class _HelpScreenState extends State<HelpScreen> {
         backgroundColor: headerColor,
       ),
       extendBodyBehindAppBar: true,
-      body: SizedBox(
+      body: Container(
         height: double.infinity,
+        padding: const EdgeInsets.only(top: 0.5),
         child: SingleChildScrollView(
           controller: _scrollController,
           physics: const BouncingScrollPhysics(),

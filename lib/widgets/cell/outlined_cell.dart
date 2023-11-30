@@ -10,9 +10,14 @@ class OutlinedCell extends StatefulWidget {
     this.onPressed,
     this.onTapDown,
     this.onTapUp,
+    this.width,
+    this.height,
   });
 
   final double horizontalPadding;
+
+  final double? width;
+  final double? height;
 
   final Widget? child;
 
@@ -57,6 +62,8 @@ class _OutlinedCellState extends State<OutlinedCell> {
         });
       },
       child: Container(
+        width: widget.width,
+        height: widget.height,
         decoration: BoxDecoration(
           color: isPressed ? const Color(0xFFE7E7E7) : const Color(0xFFFFFFFF),
           border: Border.all(

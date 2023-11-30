@@ -40,8 +40,8 @@ class BlurHeader extends StatelessWidget implements PreferredSizeWidget {
       flexibleSpace: ClipRRect(
         child: BackdropFilter(
           filter: ImageFilter.blur(
-            sigmaX: sigmaValue ?? 15,
-            sigmaY: sigmaValue ?? 15,
+            sigmaX: sigmaValue ?? 12,
+            sigmaY: sigmaValue ?? 12,
           ), //
           child: Container(
             color: backgroundColor,

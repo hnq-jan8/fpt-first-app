@@ -182,206 +182,211 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           ),
           NotificationListener<ScrollNotification>(
             onNotification: _scrollListener,
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  HomeBackground(
-                    imageOpacity: backgroundOpacity,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: topPadding + 15),
-                      Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 20),
-                        padding: const EdgeInsets.symmetric(vertical: 20),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFFFFFFF),
-                          borderRadius: BorderRadius.circular(24),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 5,
-                              offset: Offset(0, 5),
-                            )
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            HomeGradientContentBox(
-                              title1: StringConst.get(context)!.taiKhoanGoc,
-                              content1: '90.000 VNĐ',
-                              buttonTitle1: StringConst.get(context)!.napTien,
-                              onPressed1: () {},
-                              title2:
-                                  StringConst.get(context)!.taiKhoanKhuyenMai,
-                              content2: '0 VNĐ',
-                              buttonTitle2: StringConst.get(context)!.traCuoc,
-                              onPressed2: () {},
-                            ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                horizontal: 20,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 0.5),
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    HomeBackground(
+                      imageOpacity: backgroundOpacity,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: topPadding + 15),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFFFFFFF),
+                            borderRadius: BorderRadius.circular(24),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 5,
+                                offset: Offset(0, 5),
+                              )
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              HomeGradientContentBox(
+                                title1: StringConst.get(context)!.taiKhoanGoc,
+                                content1: '90.000 VNĐ',
+                                buttonTitle1: StringConst.get(context)!.napTien,
+                                onPressed1: () {},
+                                title2:
+                                    StringConst.get(context)!.taiKhoanKhuyenMai,
+                                content2: '0 VNĐ',
+                                buttonTitle2: StringConst.get(context)!.traCuoc,
+                                onPressed2: () {},
                               ),
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 17,
-                                horizontal: 20,
-                              ),
-                              decoration: const BoxDecoration(
-                                // borderRadius: BorderRadius.vertical(
-                                //     bottom: Radius.circular(15)),
-                                color: ThemeColors.primaryBlue,
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  TextColumn(
-                                    title:
-                                        StringConst.get(context)!.thongTinData,
-                                    content: 'Gói 90KC',
-                                  ),
-                                  TextColumn(
-                                    title: StringConst.get(context)!.dataConLai,
-                                    content: '815 MB',
-                                  ),
-                                  TextColumn(
-                                    title: StringConst.get(context)!.hanSuDung,
-                                    content: '23/07/2023',
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 15),
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 36,
-                                vertical: 4,
-                              ),
-                              child: Text(
-                                StringConst.get(context)!.tienIchChinh,
-                                style: const TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w600,
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 20,
                                 ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 200,
-                              child: GridView.count(
-                                scrollDirection: Axis.horizontal,
-                                controller: _menuScrollController,
-                                physics: const BouncingScrollPhysics(),
-                                crossAxisCount: 2,
-                                childAspectRatio: 1.2,
-                                shrinkWrap: true,
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
+                                  vertical: 17,
+                                  horizontal: 20,
                                 ),
-                                children: [
-                                  for (final feature in mainFeatures.entries)
-                                    MenuItem(
-                                      svgIcon: feature.key,
-                                      title: feature.value,
-                                      onPressed: () {},
+                                decoration: const BoxDecoration(
+                                  // borderRadius: BorderRadius.vertical(
+                                  //     bottom: Radius.circular(15)),
+                                  color: ThemeColors.primaryBlue,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    TextColumn(
+                                      title: StringConst.get(context)!
+                                          .thongTinData,
+                                      content: 'Gói 90KC',
                                     ),
-                                ],
-                              ),
-                            ),
-                            Visibility(
-                              visible: _menuScrollController.hasClients &&
-                                  _menuScrollController
-                                          .position.maxScrollExtent >
-                                      0,
-                              child: Center(
-                                child: ScrollIndicator(
-                                  scrollController: _menuScrollController,
+                                    TextColumn(
+                                      title:
+                                          StringConst.get(context)!.dataConLai,
+                                      content: '815 MB',
+                                    ),
+                                    TextColumn(
+                                      title:
+                                          StringConst.get(context)!.hanSuDung,
+                                      content: '23/07/2023',
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      SizedBox(
-                        height: 150,
-                        child: GridView.count(
-                          physics: const BouncingScrollPhysics(),
-                          controller: _adsScrollController,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 15,
-                          ),
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          crossAxisCount: 1,
-                          childAspectRatio: 0.55,
-                          children: [
-                            for (final ad in ads)
-                              AdImage(
-                                image: ad,
-                                onPressed: () {},
+                              const SizedBox(height: 15),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 36,
+                                  vertical: 4,
+                                ),
+                                child: Text(
+                                  StringConst.get(context)!.tienIchChinh,
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ),
-                          ],
-                        ),
-                      ),
-                      Visibility(
-                        visible: _adsScrollController.hasClients &&
-                            _adsScrollController.position.maxScrollExtent > 0,
-                        child: Center(
-                          child: ScrollIndicator(
-                            scrollController: _adsScrollController,
-                            width: 25,
+                              SizedBox(
+                                height: 200,
+                                child: GridView.count(
+                                  scrollDirection: Axis.horizontal,
+                                  controller: _menuScrollController,
+                                  physics: const BouncingScrollPhysics(),
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 1.2,
+                                  shrinkWrap: true,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 5,
+                                  ),
+                                  children: [
+                                    for (final feature in mainFeatures.entries)
+                                      MenuItem(
+                                        svgIcon: feature.key,
+                                        title: feature.value,
+                                        onPressed: () {},
+                                      ),
+                                  ],
+                                ),
+                              ),
+                              Visibility(
+                                visible: _menuScrollController.hasClients &&
+                                    _menuScrollController
+                                            .position.maxScrollExtent >
+                                        0,
+                                child: Center(
+                                  child: ScrollIndicator(
+                                    scrollController: _menuScrollController,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ),
-                      Container(
-                        margin: const EdgeInsets.only(
-                          left: 21,
-                          top: 15,
-                          bottom: 8,
-                        ),
-                        child: Text(
-                          StringConst.get(context)!.cacGoiCuocUuDai,
-                          style: const TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600,
+                        const SizedBox(height: 10),
+                        SizedBox(
+                          height: 150,
+                          child: GridView.count(
+                            physics: const BouncingScrollPhysics(),
+                            controller: _adsScrollController,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 15,
+                            ),
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            crossAxisCount: 1,
+                            childAspectRatio: 0.55,
+                            children: [
+                              for (final ad in ads)
+                                AdImage(
+                                  image: ad,
+                                  onPressed: () {},
+                                ),
+                            ],
                           ),
                         ),
-                      ),
-                      for (final offer in offers)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 7,
-                          ),
-                          child: DataPackageCell(
-                            onPressed: () {},
-                            dataPackage: offer,
-                          ),
-                        ),
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: 40,
-                            bottom: 170,
-                          ),
-                          child: GradientButton(
-                            onPressed: () {},
-                            child: GradientButtonTitle(
-                              buttonTitle: StringConst.get(context)!
-                                  .dieuChinhManHinhChinh,
+                        Visibility(
+                          visible: _adsScrollController.hasClients &&
+                              _adsScrollController.position.maxScrollExtent > 0,
+                          child: Center(
+                            child: ScrollIndicator(
+                              scrollController: _adsScrollController,
+                              width: 25,
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
+                        Container(
+                          margin: const EdgeInsets.only(
+                            left: 21,
+                            top: 25,
+                            bottom: 8,
+                          ),
+                          child: Text(
+                            StringConst.get(context)!.cacGoiCuocUuDai,
+                            style: const TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        for (final offer in offers)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 7,
+                            ),
+                            child: DataPackageCell(
+                              onPressed: () {},
+                              dataPackage: offer,
+                            ),
+                          ),
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              top: 40,
+                              bottom: 170,
+                            ),
+                            child: GradientButton(
+                              onPressed: () {},
+                              child: GradientButtonTitle(
+                                buttonTitle: StringConst.get(context)!
+                                    .dieuChinhManHinhChinh,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
