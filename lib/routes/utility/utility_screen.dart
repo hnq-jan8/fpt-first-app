@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/data/product/product_entity.dart';
+import 'package:next_app/data/voucher/voucher_entity.dart';
 import 'package:next_app/routes/home/widgets/ad_image.dart';
 import 'package:next_app/routes/home/widgets/menu_item.dart';
 import 'package:next_app/routes/utility/widgets/heading_row.dart';
+import 'package:next_app/routes/utility/widgets/product_cell.dart';
+import 'package:next_app/routes/utility/widgets/voucher_cell.dart';
 import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
 import 'package:next_app/widgets/buttons/gradient_button.dart';
 import 'package:next_app/widgets/buttons/gradient_button_title.dart';
-import 'package:next_app/widgets/cell/outlined_cell.dart';
 import 'package:next_app/widgets/header/blur_header.dart';
 import 'package:next_app/widgets/indicators/indicator_scroll.dart';
 
@@ -37,18 +39,6 @@ class _UtilityScreenState extends State<UtilityScreen> {
     Assets.image_ad_demo_2,
     Assets.image_ad_demo_1,
     Assets.image_ad_demo_2,
-  ];
-
-  List saleProducts = [
-    Phone(
-      name: "iPhone 14 Pro Max 256GB",
-      image: "assets/images/phone_iphone14_promax.png",
-      availableStorage: ["128GB", "256GB", "512GB", "1TB"],
-      storage: "256GB",
-      discount: 0.45,
-      specs: PhoneSpecs("Apple A16 Bionic", "6.7 inch", "256GB"),
-      price: "29.790.000",
-    ),
   ];
 
   @override
@@ -92,6 +82,70 @@ class _UtilityScreenState extends State<UtilityScreen> {
       Assets.icon_purchase_sim: StringConst.get(context)!.muaSim,
       Assets.icon_transfer: StringConst.get(context)!.chuyenTien,
     };
+
+    List flashDeals = [
+      Voucher(
+        brand: "Gà rán KFC",
+        discount: 40,
+        image: "assets/images/voucher_kfc.png",
+        description: "Tối đa 50.000đ cho đơn từ 200.000đ",
+        expiredDate: "29/07/2023",
+      ),
+      Voucher(
+        brand: "Gong Cha",
+        discount: 20,
+        image: "assets/images/voucher_gongcha.png",
+        description: "Tối đa 20.000đ cho đơn từ 100.000đ",
+        expiredDate: "20/07/2023",
+      ),
+      Voucher(
+        brand: "Gà rán KFC",
+        discount: 40,
+        image: "assets/images/voucher_kfc.png",
+        description: "Tối đa 50.000đ cho đơn từ 200.000đ",
+        expiredDate: "29/07/2023",
+      ),
+      Voucher(
+        brand: "Gong Cha",
+        discount: 20,
+        image: "assets/images/voucher_gongcha.png",
+        description: "Tối đa 20.000đ cho đơn từ 100.000đ",
+        expiredDate: "20/07/2023",
+      ),
+    ];
+
+    List saleProducts = [
+      Phone(
+        name: "iPhone 14 Pro Max 256GB",
+        image: "assets/images/phone_iphone14_promax.png",
+        availableStorage: ["128GB", "256GB", "512GB", "1TB"],
+        storage: "256GB",
+        discount: 45,
+        installment: 0,
+        price: "29.790.000",
+        specs: PhoneSpecs("Apple A16 Bionic", "6.7 inch", "256GB"),
+      ),
+      Phone(
+        name: "Samsung Galaxy Z Flip 4 128GB",
+        image: "assets/images/phone_zflip_4.png",
+        availableStorage: ["128GB", "256GB"],
+        storage: "128GB",
+        discount: 55,
+        installment: 0,
+        price: "15.900.000",
+        specs: PhoneSpecs("Snapdragon 8+ Gen 1", "6.7 inch", "128GB"),
+      ),
+      Phone(
+        name: "Samsung Galaxy A54 5G 128GB",
+        image: "assets/images/phone_a54.png",
+        availableStorage: ["128GB", "256GB"],
+        storage: "256GB",
+        discount: 20,
+        installment: 0,
+        price: "9.190.000",
+        specs: PhoneSpecs("Exynos 1380", "6.4 inch", "128 GB"),
+      )
+    ];
 
     double topPadding = MediaQuery.of(context).padding.top;
 
@@ -221,7 +275,7 @@ class _UtilityScreenState extends State<UtilityScreen> {
                 title: StringConst.get(context)!.flashDeal,
               ),
               Container(
-                height: 200,
+                height: 275,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -232,10 +286,34 @@ class _UtilityScreenState extends State<UtilityScreen> {
                 ),
                 child: Row(
                   children: [
-                    Image.asset(
-                      Assets.image_flash_deals,
-                      height: 172,
-                      width: 160,
+                    Container(
+                      padding: const EdgeInsets.only(
+                        left: 12,
+                        right: 10,
+                        top: 32,
+                        bottom: 32,
+                      ),
+                      child: Image.asset(
+                        Assets.image_flash_deals,
+                        cacheHeight: 500,
+                        cacheWidth: 350,
+                      ),
+                    ),
+                    Expanded(
+                      child: GridView.count(
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(),
+                        crossAxisCount: 1,
+                        childAspectRatio: 1.6,
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        children: [
+                          for (final voucher in flashDeals)
+                            VoucherCell(
+                              voucher: voucher,
+                              onPressed: () {},
+                            ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -246,90 +324,11 @@ class _UtilityScreenState extends State<UtilityScreen> {
                 title: StringConst.get(context)!.cacSanPhamUuDaiTaiFptShop,
               ),
               const SizedBox(height: 7),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 7,
+              for (final product in saleProducts)
+                ProductCell(
+                  product: product,
+                  onPressedCell: () {},
                 ),
-                child: OutlinedCell(
-                  onPressed: () {},
-                  height: 164,
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        saleProducts[0].image,
-                        height: 160,
-                        width: 100,
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              saleProducts[0].name,
-                              style: const TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  saleProducts[0].specs.cpu,
-                                  style: const TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                Text(
-                                  saleProducts[0].specs.screenSize,
-                                  style: const TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                Text(
-                                  saleProducts[0].specs.storage,
-                                  style: const TextStyle(
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Text(
-                              "${saleProducts[0].price}đ",
-                              style: const TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(
-              //     horizontal: 20,
-              //     vertical: 7,
-              //   ),
-              //   child: OutlinedCell(
-              //     onPressed: () {},
-              //     child: Row(
-              //       children: [
-              //         Image.asset(
-              //           saleProducts[0].image,
-              //           height: 160,
-              //           width: 100,
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(

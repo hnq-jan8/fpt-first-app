@@ -57,7 +57,7 @@
   "chinhSachQuyenRiengTu": "Chính sách quyền riêng tư",
   "dieuKhoanSuDung": "Điều khoản sử dụng",
   "thoatTaiKhoan": "Thoát tài khoản",
-  "xinChaoUser": "Xin chào, {user_name}!",
+  "xinChao_user": "Xin chào, {user_name}!",
   "xacThucTaiKhoan": "Xác thực tài khoản",
   "thongTinChung": "Thông tin chung",
   "quanLyThueBao": "Quản lý thuê bao",
@@ -78,7 +78,13 @@
   "daiLy": "Đại lý",
   "nhungTienIchNoiBat": "Những tiện ích nổi bật",
   "flashDeal": "Flash Deal",
+  "hetHieuLucVao_date": "Hết hiệu lực vào {date}",
+  "thuNhap": "Thu nhập",
   "cacSanPhamUuDaiTaiFptShop": "Các sản phẩm ưu đãi tại FPT Shop",
   "xemThem": "Xem thêm",
+  "discount_rate": "Giảm {discount_rate}%",
+  "installment_rate": "Trả góp {installment_rate}%",
+  "muaNgay": "Mua ngay",
+  "soSanh": "So sánh",
   "xemThemTaiWebsite": "Xem thêm tại website"
 }

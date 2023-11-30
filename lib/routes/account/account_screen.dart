@@ -114,7 +114,7 @@ class _AccountScreenState extends State<AccountScreen>
                                     const SizedBox(height: 49),
                                     Text(
                                       StringConst.get(context)!
-                                          .xinChaoUser(username),
+                                          .xinChao_user(username),
                                       style: const TextStyle(
                                         fontSize: 14.5,
                                         fontWeight: FontWeight.w500,

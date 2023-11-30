@@ -32,7 +32,7 @@ class PolicyScreen extends StatelessWidget {
             bottom: 120 + bottomPadding,
           ),
           child: OutlinedCell(
-            horizontalPadding: 20,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(

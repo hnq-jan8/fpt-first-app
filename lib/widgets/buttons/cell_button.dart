@@ -30,7 +30,7 @@ class CellButton extends StatelessWidget {
       margin: const EdgeInsets.only(top: 15),
       child: OutlinedCell(
         onPressed: onPressed,
-        horizontalPadding: 20,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           children: [
             SvgPicture.asset(svgIconPath, width: 20),

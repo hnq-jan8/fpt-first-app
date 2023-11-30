@@ -57,7 +57,7 @@
   "chinhSachQuyenRiengTu": "Privacy policy",
   "dieuKhoanSuDung": "Terms of use",
   "thoatTaiKhoan": "Sign out",
-  "xinChaoUser": "Greetings, {user_name}!",
+  "xinChao_user": "Greetings, {user_name}!",
   "xacThucTaiKhoan": "Verify account",
   "thongTinChung": "General info",
   "quanLyThueBao": "Manage subscription",
@@ -78,7 +78,13 @@
   "daiLy": "Agent",
   "nhungTienIchNoiBat": "Featured utilities",
   "flashDeal": "Flash Deal",
+  "hetHieuLucVao_date": "Expired on {date}",
+  "thuNhap": "Redeem",
   "cacSanPhamUuDaiTaiFptShop": "Promotional products at FPT Shop",
   "xemThem": "View more",
+  "discount_rate": "{discount_rate}% off",
+  "installment_rate": "{installment_rate}% installment",
+  "muaNgay": "Buy now",
+  "soSanh": "Compare",
   "xemThemTaiWebsite": "View more on website"
 }

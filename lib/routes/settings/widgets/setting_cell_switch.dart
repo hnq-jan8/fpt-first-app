@@ -36,7 +36,7 @@ class SettingCellSwitch extends StatelessWidget {
       constraints: BoxConstraints(minHeight: minHeight),
       margin: const EdgeInsets.only(top: 15),
       child: OutlinedCell(
-        horizontalPadding: 20,
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Row(
           children: [
             SvgPicture.asset(svgAsset, width: 20),

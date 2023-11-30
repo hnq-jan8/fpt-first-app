@@ -22,7 +22,7 @@ void main() {
 
   runApp(const MyApp());
 
-  Future.delayed(const Duration(milliseconds: 750), () {
+  Future.delayed(const Duration(milliseconds: 500), () {
     FlutterNativeSplash.remove();
   });
 }
@@ -35,8 +35,7 @@ class MyApp extends StatefulWidget {
 
   /// Update locale
   static void setLocale(BuildContext context, Locale locale) {
-    _MyAppState? state =
-        context.findAncestorStateOfType<_MyAppState>();
+    _MyAppState? state = context.findAncestorStateOfType<_MyAppState>();
     state?.setLocale(locale);
   }
 }

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:next_app/theme/theme_colors.dart';
 
-class AppButton extends StatelessWidget {
-  const AppButton({
+class AppOutlinedButton extends StatelessWidget {
+  const AppOutlinedButton({
     super.key,
     required this.onPressed,
     required this.child,
-    this.borderRadius = 15,
+    this.borderRadius = 10,
     this.color,
-    this.height = 50,
+    this.height,
     this.width,
     this.horizontalPadding = 10,
     this.verticalPadding = 0,
@@ -21,23 +21,20 @@ class AppButton extends StatelessWidget {
   final Color? color;
 
   final double borderRadius;
-  final double height;
   final double horizontalPadding;
   final double verticalPadding;
 
+  final double? height;
   final double? width;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return OutlinedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(
-          color ?? ThemeColors.primary,
-        ),
         animationDuration: const Duration(milliseconds: 0),
         fixedSize: MaterialStateProperty.all<Size>(
-          Size(width ?? double.infinity, height),
+          Size(width ?? double.infinity, height ?? 10),
         ),
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
           EdgeInsets.symmetric(
@@ -50,6 +47,11 @@ class AppButton extends StatelessWidget {
         shape: MaterialStateProperty.all<OutlinedBorder?>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
+          ),
+        ),
+        side: MaterialStateProperty.all<BorderSide>(
+          BorderSide(
+            color: color ?? ThemeColors.primary,
           ),
         ),
       ),

@@ -6,6 +6,8 @@ class ThemeColors {
 
   static const Color primary = Color(0xFFAB0059);
   static const Color primaryBlue = Color(0xFF072D94);
+  static const Color primaryOrange = Color(0xFFBC3026);
+
   static const Color onPrimary = Color(0xFFFFFFFF);
 
   static const Color secondary = Color(0xFFF5F5F5);
@@ -50,4 +52,6 @@ class ThemeColors {
   static const Color homeSearchDark = Color(0x95000000);
   static const Color switchBackground = Color(0xFFB9B9B9);
   static const Color backgroundMedium = Color(0xFFCB9BD1);
+  static const Color transparentPriceTag = Color(0x90BC3026);
+  static const Color greyButton = Color(0xFF929CA3);
 }

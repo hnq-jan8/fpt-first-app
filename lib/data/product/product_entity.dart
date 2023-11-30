@@ -3,11 +3,23 @@ class Product {
   final String image;
   final String price;
 
+  final int discount;
+  final int installment;
+
   Product({
+    this.discount = 0,
+    this.installment = 0,
     required this.name,
     required this.image,
     required this.price,
-  });
+  })  : assert(
+          discount >= 0 && discount <= 100,
+          'Discount must be in range of 0 - 100 (0% - 100%)',
+        ),
+        assert(
+          installment >= 0 && installment <= 100,
+          'Installment must be in range of 0 - 100 (0% - 100%)',
+        );
 }
 
 class PhoneSpecs {
@@ -23,23 +35,18 @@ class Phone extends Product {
 
   final String storage;
 
-  final double discount;
-
   final PhoneSpecs specs;
 
   Phone({
-    required this.specs,
-    required this.availableStorage,
-    required this.storage,
-    this.discount = 0,
     required String name,
     required String image,
+    required this.availableStorage,
+    required this.storage,
+    int discount = 0,
+    int installment = 0,
     required String price,
+    required this.specs,
   })  : assert(
-          discount >= 0 && discount <= 1,
-          'Discount must be in range of 0 - 1 (0% - 100%)',
-        ),
-        assert(
           availableStorage.contains(storage),
           'Storage must be in available_storage list',
         ),
@@ -47,5 +54,7 @@ class Phone extends Product {
           name: name,
           image: image,
           price: price,
+          discount: discount,
+          installment: installment,
         );
 }
