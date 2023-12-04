@@ -143,7 +143,10 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 32),
+                    padding: const EdgeInsets.only(
+                      top: 32,
+                      bottom: 170,
+                    ),
                     child: Container(
                       constraints: const BoxConstraints(minWidth: 160),
                       child: AppButton(
@@ -159,7 +162,6 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 170),
               ],
             ),
           ),
