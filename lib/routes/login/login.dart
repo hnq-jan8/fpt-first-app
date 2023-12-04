@@ -61,16 +61,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
     double topPadding = MediaQuery.of(context).padding.top;
 
-    return WillPopScope(
-      onWillPop: buttonSignInVisibility
-          ? () {
-              // override device back button
-              setState(() => buttonSignInVisibility = false);
-              FocusScope.of(context).unfocus();
-              fieldController.clear();
-              return Future(() => false);
-            }
-          : null,
+    return PopScope(
+      canPop: !buttonSignInVisibility,
+      onPopInvoked: (didPop) {
+        if (!didPop) {
+          setState(() => buttonSignInVisibility = false);
+          FocusScope.of(context).unfocus();
+          fieldController.clear();
+        }
+      },
       child: Scaffold(
         backgroundColor: ThemeColors.background,
         extendBodyBehindAppBar: true,
@@ -290,7 +289,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: const TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 13.2,
+                                color: ThemeColors.primary,
                                 decoration: TextDecoration.underline,
+                                decorationColor: ThemeColors.primary,
                               ),
                             ),
                           )

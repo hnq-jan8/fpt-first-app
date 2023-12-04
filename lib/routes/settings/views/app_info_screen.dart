@@ -44,9 +44,9 @@ class AppInfoScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
+                  children: [
                     AppIcon(),
                     SizedBox(height: 12),
                     Text('Phiên bản 1.0.23 build ABCDE'),

@@ -31,13 +31,13 @@ class PolicyScreen extends StatelessWidget {
             right: 20,
             bottom: 120 + bottomPadding,
           ),
-          child: OutlinedCell(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: const OutlinedCell(
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     updatedAt,
                     style: TextStyle(

@@ -42,6 +42,9 @@ class AppOutlinedButton extends StatelessWidget {
             vertical: verticalPadding,
           ),
         ),
+        overlayColor: MaterialStateProperty.all<Color>(
+          ThemeColors.primaryBlue.withOpacity(0.25),
+        ),
         splashFactory: NoSplash.splashFactory,
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<OutlinedBorder?>(

@@ -35,6 +35,9 @@ class AppButton extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all<Color>(
           color ?? ThemeColors.primary,
         ),
+        overlayColor: MaterialStateProperty.all<Color>(
+          const Color(0x50E5E5E5),
+        ),
         animationDuration: const Duration(milliseconds: 0),
         fixedSize: MaterialStateProperty.all<Size>(
           Size(width ?? double.infinity, height),

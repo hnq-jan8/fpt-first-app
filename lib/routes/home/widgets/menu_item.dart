@@ -52,6 +52,7 @@ class MenuItem extends StatelessWidget {
               color: ThemeColors.onBackground,
               fontSize: 12,
               fontWeight: FontWeight.w500,
+              height: 1.25,
             ),
           ),
         ],

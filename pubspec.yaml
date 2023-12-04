@@ -1,12 +1,12 @@
 name: next_app
-description: A new Flutter project.
+description: FPT Retail mobile app
 
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.19.6 <3.0.0"
+  sdk: ">=2.19.6 <4.0.0"
 
 dependencies:
   flutter:
@@ -22,7 +22,7 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

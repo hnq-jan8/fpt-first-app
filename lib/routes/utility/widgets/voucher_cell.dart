@@ -40,6 +40,7 @@ class VoucherCell extends StatelessWidget {
           )
         ],
       ),
+      width: 164,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

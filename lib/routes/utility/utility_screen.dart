@@ -275,7 +275,7 @@ class _UtilityScreenState extends State<UtilityScreen> {
                 title: StringConst.get(context)!.flashDeal,
               ),
               Container(
-                height: 275,
+                height: 300,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -289,9 +289,9 @@ class _UtilityScreenState extends State<UtilityScreen> {
                     Container(
                       padding: const EdgeInsets.only(
                         left: 12,
-                        right: 10,
-                        top: 32,
-                        bottom: 32,
+                        right: 7,
+                        top: 40,
+                        bottom: 40,
                       ),
                       child: Image.asset(
                         Assets.image_flash_deals,
@@ -300,25 +300,22 @@ class _UtilityScreenState extends State<UtilityScreen> {
                       ),
                     ),
                     Expanded(
-                      child: GridView.count(
+                      child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         physics: const BouncingScrollPhysics(),
-                        crossAxisCount: 1,
-                        childAspectRatio: 1.6,
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        children: [
-                          for (final voucher in flashDeals)
-                            VoucherCell(
-                              voucher: voucher,
-                              onPressed: () {},
-                            ),
-                        ],
+                        itemCount: flashDeals.length,
+                        itemBuilder: (context, index) {
+                          return VoucherCell(
+                            voucher: flashDeals[index],
+                            onPressed: () {},
+                          );
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 20),
               HeadingRow(
                 onPressed: () {},
                 title: StringConst.get(context)!.cacSanPhamUuDaiTaiFptShop,

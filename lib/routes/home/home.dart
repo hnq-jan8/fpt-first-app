@@ -54,15 +54,15 @@ class _HomePageState extends State<HomePage> {
       )
     ];
 
-    return WillPopScope(
-      onWillPop: _currentIndex != 0
-          ? () {
-              setState(() {
-                _currentIndex = 0;
-              });
-              return Future.value(false);
-            }
-          : null,
+    return PopScope(
+      canPop: _currentIndex == 0,
+      onPopInvoked: (didPop) {
+        if (!didPop) {
+          setState(() {
+            _currentIndex = 0;
+          });
+        }
+      },
       child: Scaffold(
         backgroundColor: ThemeColors.background,
         extendBody: true,
