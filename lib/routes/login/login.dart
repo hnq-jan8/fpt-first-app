@@ -96,8 +96,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(height: topPadding + kToolbarHeight),
-                        Image.asset(
-                          Assets.image_logo,
+                        SvgPicture.asset(
+                          Assets.icon_logo,
                           height: 80,
                           fit: BoxFit.cover,
                         ),

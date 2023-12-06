@@ -15,8 +15,9 @@ class GradientCircleAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(2),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: LinearGradient(
           colors: <Color>[
             ThemeColors.indicatorGradient1,
             ThemeColors.indicatorGradient2,
@@ -24,7 +25,6 @@ class GradientCircleAvatar extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(100),
       ),
       child: CircleAvatar(
         radius: radius ?? 21,

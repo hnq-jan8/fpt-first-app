@@ -81,13 +81,13 @@ class _IntroScreenState extends State<IntroScreen>
     ];
     double bottomPadding = MediaQuery.of(context).padding.bottom;
 
-    return WillPopScope(
-      onWillPop: currentPage == 1
-          ? () {
-              changePage(toPage: 0);
-              return Future.value(false);
-            }
-          : null,
+    return PopScope(
+      canPop: currentPage != 1,
+      onPopInvoked: (didPop) {
+        if (!didPop) {
+          changePage(toPage: 0);
+        }
+      },
       child: Scaffold(
         backgroundColor: ThemeColors.background,
         resizeToAvoidBottomInset: false,

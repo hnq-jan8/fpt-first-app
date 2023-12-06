@@ -18,10 +18,9 @@ class MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return FilledButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        elevation: MaterialStateProperty.all(0),
         splashFactory: NoSplash.splashFactory,
         backgroundColor: MaterialStateProperty.all(
           Colors.transparent,

@@ -22,7 +22,7 @@ void main() {
 
   runApp(const MyApp());
 
-  Future.delayed(const Duration(milliseconds: 500), () {
+  Future.delayed(const Duration(milliseconds: 400), () {
     FlutterNativeSplash.remove();
   });
 }

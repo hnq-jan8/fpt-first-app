@@ -12,7 +12,7 @@ class PolicyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double bottomPadding = MediaQuery.of(context).padding.bottom;
 
-    const String updatedAt = 'Cập nhật ngày 27/07/2023' + '\n';
+    const String updatedAt = 'Cập nhật ngày 27/07/2023\n';
     const String exampleTextShort = '\nLorem ipsum dolor sit amet';
     const String exampleText =
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies ultrices, nunc nisl ultricies nunc, quis ultricies nisl nisl eget nisl. Donec euismod, nisl eget ultricies ultrices, nunc nisl ultricies nunc, quis ultricies nisl nisl eget nisl. Donec euismod, nisl eget ultricies ultrices, nunc nisl ultricies nunc, quis ultricies nisl nisl eget nisl.';
@@ -26,10 +26,10 @@ class PolicyScreen extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.only(
-            top: 20,
+            top: 30,
             left: 20,
             right: 20,
-            bottom: 120 + bottomPadding,
+            bottom: 70 + bottomPadding,
           ),
           child: const OutlinedCell(
             padding: EdgeInsets.symmetric(horizontal: 20),

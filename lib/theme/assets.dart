@@ -78,6 +78,8 @@ class Assets {
   static const String icon_position_gradient =
       '${_ICONS_PATH}position_gradient.svg';
 
+  static const String icon_logo = '${_ICONS_PATH}logo.svg';
+
   // images
   static const String image_intro = '${_IMAGES_PATH}intro.png';
   static const String image_logo = '${_IMAGES_PATH}logo.png';

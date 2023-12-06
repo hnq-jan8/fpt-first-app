@@ -19,11 +19,10 @@ class AdImage extends StatelessWidget {
       margin: const EdgeInsets.symmetric(
         horizontal: 10,
       ),
-      child: ElevatedButton(
+      child: FilledButton(
         onPressed: onPressed,
         style: ButtonStyle(
           splashFactory: NoSplash.splashFactory,
-          elevation: MaterialStateProperty.all(0),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
@@ -44,6 +43,8 @@ class AdImage extends StatelessWidget {
           child: Image.asset(
             image,
             fit: BoxFit.fitWidth,
+            cacheHeight: 240,
+            cacheWidth: 400,
           ),
         ),
       ),

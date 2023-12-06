@@ -29,7 +29,7 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return FilledButton(
       onPressed: onPressed,
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(
@@ -49,7 +49,6 @@ class AppButton extends StatelessWidget {
           ),
         ),
         splashFactory: NoSplash.splashFactory,
-        elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<OutlinedBorder?>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(borderRadius),
