@@ -13,8 +13,8 @@ class HomeBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int cacheHeight = MediaQuery.of(context).size.height ~/ 2;
-    int cacheWidth = MediaQuery.of(context).size.width ~/ 2;
+    int cacheHeight = MediaQuery.of(context).size.height ~/ 1.4;
+    int cacheWidth = MediaQuery.of(context).size.width ~/ 1.4;
 
     return Container(
       clipBehavior: Clip.hardEdge,

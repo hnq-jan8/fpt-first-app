@@ -72,7 +72,9 @@ class _AccountScreenState extends State<AccountScreen>
             Padding(
               padding: const EdgeInsets.only(top: 0.5),
               child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
                 child: Stack(
                   children: [
                     HomeBackground(

@@ -37,16 +37,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   late AnimationController _colorController;
   late AnimationController _backDropController;
+  late AnimationController _avatarController;
 
   late Animation _colorTween;
   late Animation _colorTweenBorder;
   late Animation _backDropFilter;
+  late Animation _avatarRadius;
 
   Brightness _iconBrightness = Brightness.light;
 
   Color searchTextColor = ThemeColors.onPrimary;
 
-  double avatarRadius = 25;
   double backgroundHeight = 5;
   double backgroundOpacity = 1;
 
@@ -62,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
       _colorController.animateTo((info.metrics.pixels * 2 / 100));
       _backDropController.animateTo(info.metrics.pixels.abs() * 1.5 / 100);
+      _avatarController.animateTo(info.metrics.pixels > 5 ? 1 : 0);
 
       if (info.metrics.pixels < 30) {
         _iconBrightness = Brightness.light;
@@ -70,8 +72,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         _iconBrightness = Brightness.dark;
         searchTextColor = ThemeColors.homeSearchDark;
       }
-
-      avatarRadius = info.metrics.pixels > 5 ? 17 : 25;
 
       backgroundHeight = info.metrics.pixels > 0
           ? 5
@@ -110,6 +110,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       duration: const Duration(seconds: 0),
     );
 
+    _avatarController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 0),
+    );
+
     _colorTween = ColorTween(
       begin: Colors.transparent,
       end: ThemeColors.homeHeader,
@@ -125,6 +130,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       end: 36,
     ).animate(_backDropController);
 
+    _avatarRadius = Tween<double>(
+      begin: 25,
+      end: 17,
+    ).animate(_avatarController);
+
     super.initState();
   }
 
@@ -132,6 +142,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   void dispose() {
     _colorController.dispose();
     _backDropController.dispose();
+    _avatarController.dispose();
 
     _menuScrollController.dispose();
     _adsScrollController.dispose();
@@ -168,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         searchBorderColor: _colorTweenBorder.value,
         sigmaValue: _backDropFilter.value,
         statusBarIconBrightness: _iconBrightness,
-        avatarRadius: avatarRadius,
+        avatarRadius: _avatarRadius.value,
         notifUnreadCount: 7,
         animationController: _colorController,
       ),
@@ -185,7 +196,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: Padding(
               padding: const EdgeInsets.only(top: 0.5),
               child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
                 child: Stack(
                   alignment: Alignment.topCenter,
                   children: [

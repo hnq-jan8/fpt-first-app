@@ -31,8 +31,7 @@ class GradientCircleAvatar extends StatelessWidget {
         backgroundColor: ThemeColors.background,
         backgroundImage: Image.asset(
           Assets.image_avatar_default,
-          cacheHeight: 147,
-          cacheWidth: 147,
+          fit: BoxFit.cover,
         ).image,
       ),
     );

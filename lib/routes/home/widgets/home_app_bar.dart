@@ -123,8 +123,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(100),
                         borderSide: const BorderSide(
-                          width: 0.4,
-                          color: ThemeColors.dimText,
+                          color: Color(0x30000000),
                         ),
                       ),
                     ),

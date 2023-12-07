@@ -19,10 +19,12 @@ class AppInfoScreen extends StatelessWidget {
         title: StringConst.get(context)!.thongTinUngDung,
       ),
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics(),
+        ),
         child: Padding(
           padding: EdgeInsets.only(
-            top: 20,
+            top: 30,
             left: 20,
             right: 20,
             bottom: 120 + bottomPadding,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:next_app/theme/theme_colors.dart';
 
@@ -111,12 +112,16 @@ class _AppSwitchState extends State<AppSwitch> {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => widget.onChanged?.call(!widget.value),
+      onTap: () {
+        HapticFeedback.lightImpact();
+        widget.onChanged?.call(!widget.value);
+      },
       onHorizontalDragDown: (details) {
         setState(() {
           isOnToggle = true;
         });
       },
+      onHorizontalDragStart: (details) => HapticFeedback.lightImpact(),
       onHorizontalDragUpdate: (details) {
         setState(() {
           isDragging = true;

@@ -27,7 +27,6 @@ class _UtilityScreenState extends State<UtilityScreen> {
 
   Color headerColor = ThemeColors.background;
 
-  final ScrollController _scrollController = ScrollController();
   final ScrollController _adsScrollController = ScrollController();
   final ScrollController _menuScrollController = ScrollController();
 
@@ -44,11 +43,6 @@ class _UtilityScreenState extends State<UtilityScreen> {
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(() => setState(() {
-          headerColor = _scrollController.offset > 15
-              ? ThemeColors.homeHeader
-              : ThemeColors.background;
-        }));
 
     _adsScrollController.addListener(() => setState(() {}));
     _menuScrollController.addListener(() => setState(() {}));
@@ -63,7 +57,6 @@ class _UtilityScreenState extends State<UtilityScreen> {
 
   @override
   void dispose() {
-    _scrollController.dispose();
     _adsScrollController.dispose();
 
     super.dispose();
@@ -149,198 +142,210 @@ class _UtilityScreenState extends State<UtilityScreen> {
 
     double topPadding = MediaQuery.of(context).padding.top;
 
-    return Scaffold(
-      backgroundColor: ThemeColors.background,
-      appBar: BlurHeader(
-        backgroundColor: headerColor,
-      ),
-      extendBodyBehindAppBar: true,
-      body: Padding(
-        padding: const EdgeInsets.only(top: 0.5),
-        child: SingleChildScrollView(
-          controller: _scrollController,
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: topPadding + startingPadding),
-              SizedBox(
-                height: 150,
-                child: GridView.count(
-                  physics: const BouncingScrollPhysics(),
-                  controller: _adsScrollController,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 15,
-                  ),
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  crossAxisCount: 1,
-                  childAspectRatio: 0.55,
-                  children: [
-                    for (final ad in ads)
-                      AdImage(
-                        image: ad,
-                        onPressed: () {},
-                      ),
-                  ],
-                ),
-              ),
-              Visibility(
-                visible: _adsScrollController.hasClients &&
-                    _adsScrollController.position.maxScrollExtent > 0,
-                child: Center(
-                  child: ScrollIndicator(
-                    scrollController: _adsScrollController,
-                    width: 25,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 15),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 21,
-                  vertical: 4,
-                ),
-                child: Text(
-                  StringConst.get(context)!.nhungTienIchNoiBat,
-                  style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 10,
-                ),
-                padding: const EdgeInsets.only(
-                  top: 10,
-                  bottom: 12.5,
-                ),
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFFFFF),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 5,
-                      offset: Offset(0, 5),
-                    )
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 100,
-                      child: GridView.count(
-                        scrollDirection: Axis.horizontal,
-                        controller: _menuScrollController,
-                        physics: const BouncingScrollPhysics(),
-                        crossAxisCount: 1,
-                        childAspectRatio: 1.18,
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 5,
-                          vertical: 5,
-                        ),
-                        children: [
-                          for (final feature in mainFeatures.entries)
-                            MenuItem(
-                              svgIcon: feature.key,
-                              title: feature.value,
-                              onPressed: () {},
-                            ),
-                        ],
-                      ),
+    return NotificationListener<ScrollUpdateNotification>(
+      onNotification: (notification) {
+        setState(() {
+          headerColor = notification.metrics.pixels > 15
+              ? ThemeColors.homeHeader
+              : ThemeColors.background;
+        });
+        return true;
+      },
+      child: Scaffold(
+        backgroundColor: ThemeColors.background,
+        appBar: BlurHeader(
+          backgroundColor: headerColor,
+        ),
+        extendBodyBehindAppBar: true,
+        body: Padding(
+          padding: const EdgeInsets.only(top: 0.5),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics(),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: topPadding + startingPadding),
+                SizedBox(
+                  height: 150,
+                  child: GridView.count(
+                    physics: const BouncingScrollPhysics(),
+                    controller: _adsScrollController,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 15,
                     ),
-                    Visibility(
-                      visible: _menuScrollController.hasClients &&
-                          _menuScrollController.position.maxScrollExtent > 0,
-                      child: Center(
-                        child: ScrollIndicator(
-                          scrollController: _menuScrollController,
-                          width: 25,
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    crossAxisCount: 1,
+                    childAspectRatio: 0.55,
+                    children: [
+                      for (final ad in ads)
+                        AdImage(
+                          image: ad,
+                          onPressed: () {},
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 15),
-              HeadingRow(
-                onPressed: () {},
-                title: StringConst.get(context)!.flashDeal,
-              ),
-              Container(
-                height: 300,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      ThemeColors.headerGradient1,
-                      ThemeColors.primary,
                     ],
                   ),
                 ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(
-                        left: 12,
-                        right: 7,
-                        top: 40,
-                        bottom: 40,
-                      ),
-                      child: Image.asset(
-                        Assets.image_flash_deals,
-                        cacheHeight: 500,
-                        cacheWidth: 350,
-                      ),
+                Visibility(
+                  visible: _adsScrollController.hasClients &&
+                      _adsScrollController.position.maxScrollExtent > 0,
+                  child: Center(
+                    child: ScrollIndicator(
+                      scrollController: _adsScrollController,
+                      width: 25,
                     ),
-                    Expanded(
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: flashDeals.length,
-                        itemBuilder: (context, index) {
-                          return VoucherCell(
-                            voucher: flashDeals[index],
-                            onPressed: () {},
-                          );
-                        },
-                      ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 21,
+                    vertical: 4,
+                  ),
+                  child: Text(
+                    StringConst.get(context)!.nhungTienIchNoiBat,
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
                     ),
-                  ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              HeadingRow(
-                onPressed: () {},
-                title: StringConst.get(context)!.cacSanPhamUuDaiTaiFptShop,
-              ),
-              const SizedBox(height: 7),
-              for (final product in saleProducts)
-                ProductCell(
-                  product: product,
-                  onPressedCell: () {},
-                ),
-              Center(
-                child: Padding(
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
                   padding: const EdgeInsets.only(
-                    top: 40,
-                    bottom: 170,
+                    top: 10,
+                    bottom: 12.5,
                   ),
-                  child: GradientButton(
-                    onPressed: () {},
-                    child: GradientButtonTitle(
-                      buttonTitle: StringConst.get(context)!.xemThemTaiWebsite,
+                  clipBehavior: Clip.hardEdge,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFFFFF),
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 5,
+                        offset: Offset(0, 5),
+                      )
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 100,
+                        child: GridView.count(
+                          scrollDirection: Axis.horizontal,
+                          controller: _menuScrollController,
+                          physics: const BouncingScrollPhysics(),
+                          crossAxisCount: 1,
+                          childAspectRatio: 1.18,
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 5,
+                            vertical: 5,
+                          ),
+                          children: [
+                            for (final feature in mainFeatures.entries)
+                              MenuItem(
+                                svgIcon: feature.key,
+                                title: feature.value,
+                                onPressed: () {},
+                              ),
+                          ],
+                        ),
+                      ),
+                      Visibility(
+                        visible: _menuScrollController.hasClients &&
+                            _menuScrollController.position.maxScrollExtent > 0,
+                        child: Center(
+                          child: ScrollIndicator(
+                            scrollController: _menuScrollController,
+                            width: 25,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 15),
+                HeadingRow(
+                  onPressed: () {},
+                  title: StringConst.get(context)!.flashDeal,
+                ),
+                Container(
+                  height: 300,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        ThemeColors.headerGradient1,
+                        ThemeColors.primary,
+                      ],
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(
+                          left: 12,
+                          right: 7,
+                          top: 40,
+                          bottom: 40,
+                        ),
+                        child: Image.asset(
+                          Assets.image_flash_deals,
+                          cacheHeight: 500,
+                          cacheWidth: 350,
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: flashDeals.length,
+                          itemBuilder: (context, index) {
+                            return VoucherCell(
+                              voucher: flashDeals[index],
+                              onPressed: () {},
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                HeadingRow(
+                  onPressed: () {},
+                  title: StringConst.get(context)!.cacSanPhamUuDaiTaiFptShop,
+                ),
+                const SizedBox(height: 7),
+                for (final product in saleProducts)
+                  ProductCell(
+                    product: product,
+                    onPressedCell: () {},
+                  ),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 40,
+                      bottom: 170,
+                    ),
+                    child: GradientButton(
+                      onPressed: () {},
+                      child: GradientButtonTitle(
+                        buttonTitle:
+                            StringConst.get(context)!.xemThemTaiWebsite,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -145,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(height: 20),
                         AnimatedSize(
                           duration: const Duration(milliseconds: 200),
-                          curve: Curves.easeInOut,
+                          curve: Curves.easeOut,
                           child: Visibility(
                             visible: buttonSignInVisibility,
                             child: Column(
