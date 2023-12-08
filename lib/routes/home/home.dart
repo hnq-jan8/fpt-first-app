@@ -8,7 +8,7 @@ import 'package:next_app/routes/home/views/home_screen.dart';
 import 'package:next_app/routes/settings/setting_screen.dart';
 import 'package:next_app/routes/utility/utility_screen.dart';
 import 'package:next_app/widgets/navigation_bar/navigation_bar.dart';
-import 'package:next_app/widgets/navigation_bar/navigation_bar_item.dart';
+import 'package:next_app/widgets/navigation_bar/components/navigation_bar_item.dart';
 import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
 
@@ -69,12 +69,14 @@ class _HomePageState extends State<HomePage> {
         resizeToAvoidBottomInset: false,
         body: IndexedStack(
           index: _currentIndex,
-          children: const [
-            HomeScreen(),
-            HelpScreen(),
-            UtilityScreen(),
-            SettingScreen(),
-            AccountScreen(),
+          children: [
+            HomeScreen(
+              onAvatarPressed: () => setState(() => _currentIndex = 4),
+            ),
+            const HelpScreen(),
+            const UtilityScreen(),
+            const SettingScreen(),
+            const AccountScreen(),
           ],
         ),
         bottomNavigationBar: Stack(

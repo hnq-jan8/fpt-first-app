@@ -28,7 +28,7 @@ class SettingCellSwitch extends StatelessWidget {
 
   final double minHeight;
 
-  final void Function(bool) onChanged;
+  final void Function(bool)? onChanged;
 
   @override
   Widget build(BuildContext context) {

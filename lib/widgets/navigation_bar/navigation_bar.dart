@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:next_app/theme/theme_colors.dart';
-import 'package:next_app/widgets/navigation_bar/navigation_bar_indicator.dart';
-import 'package:next_app/widgets/navigation_bar/navigation_bar_item.dart';
+import 'package:next_app/widgets/navigation_bar/components/navigation_bar_indicator.dart';
+import 'package:next_app/widgets/navigation_bar/components/navigation_bar_item.dart';
 
 // ignore_for_file: constant_identifier_names
 const double DEFAULT_BAR_HEIGHT = 60;

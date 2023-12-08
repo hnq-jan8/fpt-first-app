@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/data/ads/ad_entity.dart';
@@ -8,15 +10,23 @@ import 'package:next_app/routes/home/widgets/home_app_bar.dart';
 import 'package:next_app/routes/home/widgets/home_background.dart';
 import 'package:next_app/routes/home/widgets/home_gradient_content.dart';
 import 'package:next_app/routes/home/widgets/menu_item.dart';
+import 'package:next_app/routes/home/widgets/row_icon_text.dart';
 import 'package:next_app/routes/home/widgets/text_column.dart';
 import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
+import 'package:next_app/widgets/buttons/app_outlined_button.dart';
 import 'package:next_app/widgets/buttons/gradient_button.dart';
 import 'package:next_app/widgets/buttons/gradient_button_title.dart';
 import 'package:next_app/widgets/indicators/indicator_scroll.dart';
+import 'package:next_app/widgets/sheets/modal_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+    this.onAvatarPressed,
+  });
+
+  final VoidCallback? onAvatarPressed;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -30,9 +40,18 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   ];
 
   List<DataPackage> offers = [
-    DataPackage("HD70", "6GB - HSD 30 ngày", "70.000 VNĐ/tháng"),
-    DataPackage("HD50", "3GB - HSD 30 ngày", "50.000 VNĐ/tháng"),
-    // DataPackage("D10", "4GB - HSD 1 ngày", "10.000 VNĐ/ngày"),
+    DataPackage(
+      title: "HD70",
+      amount: "6GB",
+      duration: "HSD 30 ngày",
+      price: "70.000 VNĐ/tháng",
+    ),
+    DataPackage(
+      title: "HD50",
+      amount: "3GB",
+      duration: "HSD 30 ngày",
+      price: "50.000 VNĐ/tháng",
+    ),
   ];
 
   late AnimationController _colorController;
@@ -173,6 +192,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       extendBodyBehindAppBar: true,
       backgroundColor: ThemeColors.background,
       appBar: HomeAppBar(
+        onAvatarPressed: widget.onAvatarPressed,
+        onNotifPressed: () {},
         searchController: _searchController,
         searchTextColor: searchTextColor,
         backgroundColor: _colorTween.value,
@@ -377,7 +398,123 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                               vertical: 7,
                             ),
                             child: DataPackageCell(
-                              onPressed: () {},
+                              onPressed: () => showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                backgroundColor: ThemeColors.primary,
+                                builder: (context) => AnnotatedRegion(
+                                  value: const SystemUiOverlayStyle(
+                                    systemNavigationBarColor:
+                                        ThemeColors.primary,
+                                    systemNavigationBarIconBrightness:
+                                        Brightness.light,
+                                  ),
+                                  child: AppModalBottomSheet(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            SvgPicture.asset(
+                                              Assets.icon_data_package_large,
+                                            ),
+                                            const SizedBox(height: 7),
+                                            Text(
+                                              offer.title,
+                                              style: const TextStyle(
+                                                color: ThemeColors.onPrimary,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 15),
+                                            Text(
+                                              "${StringConst.get(context)!.thongTinChiTietVeGoiCuoc}:",
+                                              style: const TextStyle(
+                                                color: ThemeColors.onPrimary,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 15),
+                                            Container(
+                                              width: double.infinity,
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 20,
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  RowIconText(
+                                                    svgIcon:
+                                                        Assets.icon_data_amount,
+                                                    text:
+                                                        'Data: ${offer.amount}',
+                                                  ),
+                                                  const SizedBox(height: 12.5),
+                                                  RowIconText(
+                                                    svgIcon: Assets.icon_price,
+                                                    text:
+                                                        '${StringConst.get(context)!.gia}: ${offer.price}',
+                                                  ),
+                                                  const SizedBox(height: 40),
+                                                  const RowIconText(
+                                                    svgIcon:
+                                                        Assets.icon_warning,
+                                                    text:
+                                                        'Gói cước sẽ tự động gia hạn',
+                                                  ),
+                                                  const SizedBox(height: 12.5),
+                                                  const RowIconText(
+                                                    svgIcon:
+                                                        Assets.icon_warning,
+                                                    text:
+                                                        'Đối tượng đăng kí: Áp dụng cho tất cả thuê bao',
+                                                  ),
+                                                  const SizedBox(height: 12.5),
+                                                  const RowIconText(
+                                                    svgIcon:
+                                                        Assets.icon_warning,
+                                                    text:
+                                                        'Dịch vụ được cung cấp cho tất cả các thuê bao di dộng trả trước và trả sau đang hoạt động hai chiều',
+                                                  ),
+                                                  const SizedBox(height: 10),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SafeArea(
+                                          minimum:
+                                              const EdgeInsets.only(bottom: 5),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              vertical: 25,
+                                            ),
+                                            child: AppOutlinedButton(
+                                              onPressed: () {},
+                                              borderRadius: 15,
+                                              height: 45,
+                                              width: 160,
+                                              color: ThemeColors.onPrimary,
+                                              child: Text(
+                                                StringConst.get(context)!
+                                                    .dangKyGoi,
+                                                style: const TextStyle(
+                                                  color: ThemeColors.onPrimary,
+                                                  fontSize: 16,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                               dataPackage: offer,
                             ),
                           ),

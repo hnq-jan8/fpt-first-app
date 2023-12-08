@@ -91,23 +91,22 @@ class _IntroScreenState extends State<IntroScreen>
       child: Scaffold(
         backgroundColor: ThemeColors.background,
         resizeToAvoidBottomInset: false,
-        body: Column(
-          children: [
-            Expanded(
-              flex: 10,
-              child: NotificationListener(
-                onNotification: (notif) {
-                  if (notif is ScrollUpdateNotification) {
-                    if (notif.scrollDelta! > 0.1) {
-                      changePage(toPage: 1);
-                    } else if (notif.scrollDelta! < -0.1) {
-                      changePage(toPage: 0);
-                    }
-                  }
-                  return true;
-                },
+        body: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onHorizontalDragEnd: (details) {
+            if (details.primaryVelocity! > 0) {
+              changePage(toPage: 0);
+            } else if (details.primaryVelocity! < 0) {
+              changePage(toPage: 1);
+            }
+          },
+          child: Column(
+            children: [
+              Expanded(
+                flex: 10,
                 child: SingleChildScrollView(
                   controller: _scrollController,
+                  physics: const NeverScrollableScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
@@ -125,90 +124,90 @@ class _IntroScreenState extends State<IntroScreen>
                   ),
                 ),
               ),
-            ),
-            // ),
-            const SizedBox(height: 40),
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: AnimatedSwitcher(
-                  duration: textDuration,
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) =>
-                          FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  ),
-                  child: Text(
-                    introTitles[currentPage],
-                    key: ValueKey<String>(introTitles[currentPage]),
-                    style: const TextStyle(
-                      color: Color(0xFFAB0059),
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
+              // ),
+              const SizedBox(height: 40),
+              Expanded(
+                flex: 1,
+                child: Center(
+                  child: AnimatedSwitcher(
+                    duration: textDuration,
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) =>
+                            FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    ),
+                    child: Text(
+                      introTitles[currentPage],
+                      key: ValueKey<String>(introTitles[currentPage]),
+                      style: const TextStyle(
+                        color: Color(0xFFAB0059),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 5),
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: AnimatedSwitcher(
-                  duration: textDuration,
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) =>
-                          FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  ),
-                  child: Text(
-                    introContent[currentPage],
-                    key: ValueKey<String>(introContent[currentPage]),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: ThemeColors.onBackground,
-                      fontSize: 12,
+              const SizedBox(height: 5),
+              Expanded(
+                flex: 1,
+                child: Center(
+                  child: AnimatedSwitcher(
+                    duration: textDuration,
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) =>
+                            FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    ),
+                    child: Text(
+                      introContent[currentPage],
+                      key: ValueKey<String>(introContent[currentPage]),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: ThemeColors.onBackground,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IndicatorDot(
-                  relativePage: 0,
-                  currentPage: currentPage,
-                  key: const ValueKey<int>(0),
-                ),
-                const SizedBox(width: 10),
-                IndicatorDot(
-                  relativePage: 1,
-                  currentPage: currentPage,
-                  key: ValueKey<bool>(1 == currentPage),
-                ),
-              ],
-            ),
-            Expanded(
-              flex: 2,
-              child: Center(
-                child: GradientButton(
-                  onPressed: currentPage == 0
-                      ? () => changePage(toPage: 1)
-                      : () =>
-                          AppRouter.instance.navigateAndRemove(Routes.login),
-                  child: GradientButtonTitle(
-                    buttonTitle: buttonTitle[currentPage],
-                    key: ValueKey<String>(buttonTitle[currentPage]),
+              const SizedBox(height: 30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IndicatorDot(
+                    relativePage: 0,
+                    currentPage: currentPage,
+                    key: const ValueKey<int>(0),
+                  ),
+                  const SizedBox(width: 10),
+                  IndicatorDot(
+                    relativePage: 1,
+                    currentPage: currentPage,
+                    key: ValueKey<bool>(1 == currentPage),
+                  ),
+                ],
+              ),
+              Expanded(
+                flex: 2,
+                child: Center(
+                  child: GradientButton(
+                    onPressed: currentPage == 0
+                        ? () => changePage(toPage: 1)
+                        : () =>
+                            AppRouter.instance.navigateAndRemove(Routes.login),
+                    child: GradientButtonTitle(
+                      buttonTitle: buttonTitle[currentPage],
+                      key: ValueKey<String>(buttonTitle[currentPage]),
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 30 + bottomPadding),
-          ],
+              SizedBox(height: 30 + bottomPadding),
+            ],
+          ),
         ),
       ),
     );

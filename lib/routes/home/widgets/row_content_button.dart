@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:next_app/routes/home/widgets/text_column.dart';
 import 'package:next_app/theme/theme_colors.dart';
+import 'package:next_app/widgets/buttons/app_outlined_button.dart';
 
 class RowContentButton extends StatelessWidget {
   const RowContentButton({
@@ -32,26 +33,10 @@ class RowContentButton extends StatelessWidget {
         ),
         SizedBox(
           width: 90,
-          child: OutlinedButton(
+          child: AppOutlinedButton(
             onPressed: onPressed,
-            style: ButtonStyle(
-              padding: MaterialStateProperty.all(
-                const EdgeInsets.symmetric(horizontal: 10),
-              ),
-              side: MaterialStateProperty.all(
-                const BorderSide(
-                  color: ThemeColors.onPrimary,
-                  width: 1,
-                ),
-              ),
-              shape: MaterialStateProperty.all<OutlinedBorder>(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-              ),
-              splashFactory: NoSplash.splashFactory,
-              overlayColor: MaterialStateProperty.all(Colors.white24),
-            ),
+            color: ThemeColors.onPrimary,
+            borderRadius: 15,
             child: Text(
               buttonTitle,
               maxLines: 1,

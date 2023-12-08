@@ -144,11 +144,13 @@ class _UtilityScreenState extends State<UtilityScreen> {
 
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (notification) {
-        setState(() {
-          headerColor = notification.metrics.pixels > 15
-              ? ThemeColors.homeHeader
-              : ThemeColors.background;
-        });
+        if (notification.metrics.axis == Axis.vertical) {
+          setState(() {
+            headerColor = notification.metrics.pixels > 15
+                ? ThemeColors.homeHeader
+                : ThemeColors.background;
+          });
+        }
         return true;
       },
       child: Scaffold(

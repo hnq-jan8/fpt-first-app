@@ -110,126 +110,135 @@ class _AppSwitchState extends State<AppSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () {
-        HapticFeedback.lightImpact();
-        widget.onChanged?.call(!widget.value);
-      },
-      onHorizontalDragDown: (details) {
-        setState(() {
-          isOnToggle = true;
-        });
-      },
-      onHorizontalDragStart: (details) => HapticFeedback.lightImpact(),
-      onHorizontalDragUpdate: (details) {
-        setState(() {
-          isDragging = true;
-        });
-        _dragUpdate(details);
-      },
-      onHorizontalDragCancel: () {
-        setState(() {
-          isOnToggle = false;
-          isDragging = false;
-        });
-        _dragTo(widget.value);
-      },
-      onHorizontalDragEnd: (details) {
-        setState(() {
-          isOnToggle = false;
-          isDragging = false;
-        });
-        widget.onChanged?.call(_setValueWithDragPosition());
-      },
-      child: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.center,
-        children: [
-          Container(
+    return widget.onChanged != null
+        ? GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              HapticFeedback.lightImpact();
+              widget.onChanged?.call(!widget.value);
+            },
+            onHorizontalDragDown: (details) {
+              setState(() {
+                isOnToggle = true;
+              });
+            },
+            onHorizontalDragStart: (details) => HapticFeedback.lightImpact(),
+            onHorizontalDragUpdate: (details) {
+              setState(() {
+                isDragging = true;
+              });
+              _dragUpdate(details);
+            },
+            onHorizontalDragCancel: () {
+              setState(() {
+                isOnToggle = false;
+                isDragging = false;
+              });
+              _dragTo(widget.value);
+            },
+            onHorizontalDragEnd: (details) {
+              setState(() {
+                isOnToggle = false;
+                isDragging = false;
+              });
+              widget.onChanged?.call(_setValueWithDragPosition());
+            },
+            child: switchUI(),
+          )
+        : Opacity(
+            opacity: 0.32,
+            child: switchUI(),
+          );
+  }
+
+  switchUI() {
+    return Stack(
+      clipBehavior: Clip.none,
+      alignment: Alignment.center,
+      children: [
+        Container(
+          height: switchHeight + switchPadding * 2,
+          width: switchWidth + switchPadding * 1,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: ThemeColors.switchBackground,
+          ),
+        ),
+        AnimatedOpacity(
+          duration:
+              isDragging ? const Duration(milliseconds: 1) : switchDuration,
+          opacity: widget.isColorUpdate
+              ? (1 -
+                  (((dragPosition - switchPadding) / dragUpperLimit) * 1.5)
+                      .clamp(0, 1))
+              : 1,
+          child: Container(
             height: switchHeight + switchPadding * 2,
             width: switchWidth + switchPadding * 1,
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: ThemeColors.switchBackground,
-            ),
-          ),
-          AnimatedOpacity(
-            duration:
-                isDragging ? const Duration(milliseconds: 1) : switchDuration,
-            opacity: widget.isColorUpdate
-                ? (1 -
-                    (((dragPosition - switchPadding) / dragUpperLimit) * 1.5)
-                        .clamp(0, 1))
-                : 1,
-            child: Container(
-              height: switchHeight + switchPadding * 2,
-              width: switchWidth + switchPadding * 1,
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                gradient: const LinearGradient(
-                  colors: [
-                    ThemeColors.indicatorGradient1,
-                    ThemeColors.indicatorGradient2,
-                  ],
-                ),
-              ),
-              child: widget.text != null
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          widget.textOff != null
-                              ? widget.textOff.toString()
-                              : widget.text.toString(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: textColor,
-                            fontSize: 10.7,
-                          ),
-                        ),
-                        AnimatedSize(
-                          duration: switchDuration,
-                          curve: switchCurve,
-                          child: SizedBox(
-                            width: isOnToggle ? 12.9 : 9,
-                          ),
-                        ),
-                        Text(
-                          widget.text.toString(),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: textColor,
-                            fontSize: 10.7,
-                          ),
-                        ),
-                      ],
-                    )
-                  : null,
-            ),
-          ),
-          AnimatedPositioned(
-            duration:
-                isDragging ? const Duration(milliseconds: 1) : switchDuration,
-            curve: switchCurve,
-            left: isOnToggle && dragPosition == dragUpperLimit
-                ? dragPosition - 5
-                : dragPosition,
-            width: isOnToggle ? switchButtonWidth + 5 : switchButtonWidth,
-            child: Container(
-              height: switchHeight,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: ThemeColors.onPrimary,
+              gradient: const LinearGradient(
+                colors: [
+                  ThemeColors.indicatorGradient1,
+                  ThemeColors.indicatorGradient2,
+                ],
               ),
             ),
+            child: widget.text != null
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        widget.textOff != null
+                            ? widget.textOff.toString()
+                            : widget.text.toString(),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: 10.7,
+                        ),
+                      ),
+                      AnimatedSize(
+                        duration: switchDuration,
+                        curve: switchCurve,
+                        child: SizedBox(
+                          width: isOnToggle ? 12.9 : 9,
+                        ),
+                      ),
+                      Text(
+                        widget.text.toString(),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: 10.7,
+                        ),
+                      ),
+                    ],
+                  )
+                : null,
           ),
-        ],
-      ),
+        ),
+        AnimatedPositioned(
+          duration:
+              isDragging ? const Duration(milliseconds: 1) : switchDuration,
+          curve: switchCurve,
+          left: isOnToggle && dragPosition == dragUpperLimit
+              ? dragPosition - 5
+              : dragPosition,
+          width: isOnToggle ? switchButtonWidth + 5 : switchButtonWidth,
+          child: Container(
+            height: switchHeight,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: ThemeColors.onPrimary,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

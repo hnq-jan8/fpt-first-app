@@ -100,6 +100,7 @@ class VoucherCell extends StatelessWidget {
             child: AppOutlinedButton(
               onPressed: onPressed,
               color: ThemeColors.primaryBlue,
+              overlayColor: ThemeColors.primaryBlue.withOpacity(0.25),
               horizontalPadding: 15,
               child: Text(
                 StringConst.get(context)!.thuNhap,

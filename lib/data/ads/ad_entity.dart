@@ -1,11 +1,13 @@
 class DataPackage {
-  final String _title;
-  final String _description;
-  final String _highlight;
+  final String title;
+  final String amount;
+  final String duration;
+  final String price;
 
-  DataPackage(this._title, this._description, this._highlight);
-
-  String get title => _title;
-  String get description => _description;
-  String get highlight => _highlight;
+  DataPackage({
+    required this.title,
+    required this.amount,
+    required this.duration,
+    required this.price,
+  });
 }

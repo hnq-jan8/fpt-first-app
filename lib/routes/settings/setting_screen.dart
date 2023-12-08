@@ -25,7 +25,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   bool isUsingVi = true;
   bool isUsingNotification = true;
-  bool isUsingFaceId = true;
+  bool isUsingFaceId = false;
   bool isUsingOtp = false;
 
   @override
@@ -89,9 +89,10 @@ class _SettingScreenState extends State<SettingScreen> {
                     title:
                         StringConst.get(context)!.dangNhapXacThucBangKhuonMat,
                     value: isUsingFaceId,
-                    onChanged: (value) {
-                      setState(() => isUsingFaceId = value);
-                    },
+                    // onChanged: (value) {
+                    //   setState(() => isUsingFaceId = value);
+                    // },
+                    onChanged: null,
                   ),
                   SettingCellSwitch(
                     svgAsset: Assets.icon_otp,

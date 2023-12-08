@@ -18,69 +18,72 @@ class AppInfoScreen extends StatelessWidget {
       appBar: Header(
         title: StringConst.get(context)!.thongTinUngDung,
       ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(
-          parent: AlwaysScrollableScrollPhysics(),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: 30,
-            left: 20,
-            right: 20,
-            bottom: 120 + bottomPadding,
+      body: SizedBox(
+        height: double.infinity,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFFFFF),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 5,
-                      offset: Offset(0, 2.5),
-                    )
-                  ],
-                ),
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AppIcon(),
-                    SizedBox(height: 12),
-                    Text('Phiên bản 1.0.23 build ABCDE'),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 1, top: 25),
-                child: Text(
-                  StringConst.get(context)!.them,
-                  style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w600,
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: 30,
+              left: 20,
+              right: 20,
+              bottom: 120 + bottomPadding,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFFFFF),
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 5,
+                        offset: Offset(0, 2.5),
+                      )
+                    ],
+                  ),
+                  child: const Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      AppIcon(),
+                      SizedBox(height: 12),
+                      Text('Phiên bản 1.0.23 build ABCDE'),
+                    ],
                   ),
                 ),
-              ),
-              CellButton(
-                svgIconPath: Assets.icon_like,
-                title: StringConst.get(context)!.danhGiaUngDung,
-                onPressed: () {},
-              ),
-              CellButton(
-                svgIconPath: Assets.icon_share,
-                title: StringConst.get(context)!.chiaSeChoBanBe,
-                onPressed: () {},
-              ),
-              CellButton(
-                svgIconPath: Assets.icon_link,
-                title: StringConst.get(context)!.truyCapWebsite,
-                onPressed: () {},
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(left: 1, top: 25),
+                  child: Text(
+                    StringConst.get(context)!.them,
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                CellButton(
+                  svgIconPath: Assets.icon_like,
+                  title: StringConst.get(context)!.danhGiaUngDung,
+                  onPressed: () {},
+                ),
+                CellButton(
+                  svgIconPath: Assets.icon_share,
+                  title: StringConst.get(context)!.chiaSeChoBanBe,
+                  onPressed: () {},
+                ),
+                CellButton(
+                  svgIconPath: Assets.icon_link,
+                  title: StringConst.get(context)!.truyCapWebsite,
+                  onPressed: () {},
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -31,6 +31,13 @@ class Assets {
   static const String icon_vas_service = '${_ICONS_PATH}vas_service.svg';
 
   static const String icon_data_package = '${_ICONS_PATH}data_package.svg';
+  static const String icon_data_package_large =
+      '${_ICONS_PATH}data_package_large.svg';
+  static const String icon_data_amount = '${_ICONS_PATH}data_amount.svg';
+
+  static const String icon_price = '${_ICONS_PATH}price.svg';
+
+  static const String icon_warning = '${_ICONS_PATH}warning.svg';
 
   static const String icon_home_active = '${_ICONS_PATH}home.svg';
   static const String icon_home_inactive = '${_ICONS_PATH}home_inactive.svg';

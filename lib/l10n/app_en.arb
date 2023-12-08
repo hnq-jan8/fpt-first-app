@@ -86,5 +86,8 @@
   "installment_rate": "{installment_rate}% installment",
   "muaNgay": "Buy now",
   "soSanh": "Compare",
-  "xemThemTaiWebsite": "View more on website"
+  "xemThemTaiWebsite": "View more on website",
+  "thongTinChiTietVeGoiCuoc": "Package details",
+  "gia": "Price",
+  "dangKyGoi": "Register package"
 }

@@ -50,8 +50,9 @@ class ThemeColors {
   static const Color bottomContainer = Color(0xFFF5F5F5);
   static const Color navigationBarDimText = Color(0xFF858585);
   static const Color homeSearchDark = Color(0x95000000);
-  static const Color switchBackground = Color(0xFFB9B9B9);
+  static const Color switchBackground = Color(0xFFA9A9A9);
   static const Color backgroundMedium = Color(0xFFCB9BD1);
   static const Color transparentPriceTag = Color(0x90BC3026);
   static const Color greyButton = Color(0xFF929CA3);
+  static const Color exitSheet = Color(0x40FFFFFF);
 }

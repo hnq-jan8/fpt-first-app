@@ -86,5 +86,8 @@
   "installment_rate": "Trả góp {installment_rate}%",
   "muaNgay": "Mua ngay",
   "soSanh": "So sánh",
-  "xemThemTaiWebsite": "Xem thêm tại website"
+  "xemThemTaiWebsite": "Xem thêm tại website",
+  "thongTinChiTietVeGoiCuoc": "Thông tin chi tiết về gói cước",
+  "gia": "Giá",
+  "dangKyGoi": "Đăng ký gói"
 }

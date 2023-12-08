@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:next_app/constants/string_const.dart';
 
+import 'package:next_app/constants/string_const.dart';
 import 'package:next_app/data/ads/ad_entity.dart';
 import 'package:next_app/theme/assets.dart';
 import 'package:next_app/theme/theme_colors.dart';
@@ -37,9 +37,7 @@ class DataPackageCell extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SvgPicture.asset(
-                    Assets.icon_data_package,
-                  ),
+                  SvgPicture.asset(Assets.icon_data_package),
                   Text(
                     dataPackage.title,
                     style: const TextStyle(
@@ -63,14 +61,14 @@ class DataPackageCell extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    dataPackage.description,
+                    '${dataPackage.amount} - ${dataPackage.duration}',
                     style: const TextStyle(
                       fontSize: 14,
                       height: 1.4,
                     ),
                   ),
                   Text(
-                    dataPackage.highlight,
+                    dataPackage.price,
                     style: const TextStyle(
                       fontSize: 13.6,
                       height: 1.5,

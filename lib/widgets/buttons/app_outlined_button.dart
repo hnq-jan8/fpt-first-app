@@ -13,12 +13,14 @@ class AppOutlinedButton extends StatelessWidget {
     this.width,
     this.horizontalPadding = 10,
     this.verticalPadding = 0,
+    this.overlayColor,
   });
 
   final VoidCallback? onPressed;
   final Widget child;
 
   final Color? color;
+  final Color? overlayColor;
 
   final double borderRadius;
   final double horizontalPadding;
@@ -42,9 +44,7 @@ class AppOutlinedButton extends StatelessWidget {
             vertical: verticalPadding,
           ),
         ),
-        overlayColor: MaterialStateProperty.all<Color>(
-          ThemeColors.primaryBlue.withOpacity(0.25),
-        ),
+        overlayColor: MaterialStateProperty.all(overlayColor ?? Colors.white24),
         splashFactory: NoSplash.splashFactory,
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<OutlinedBorder?>(

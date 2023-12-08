@@ -24,6 +24,9 @@ class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   final TextEditingController searchController;
 
+  final VoidCallback? onAvatarPressed;
+  final VoidCallback? onNotifPressed;
+
   const HomeAppBar({
     super.key,
     this.backgroundColor = Colors.transparent,
@@ -35,6 +38,8 @@ class HomeAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.avatarRadius,
     required this.animationController,
     required this.searchController,
+    this.onAvatarPressed,
+    this.onNotifPressed,
   });
 
   @override
@@ -72,7 +77,10 @@ class _HomeAppBarState extends State<HomeAppBar> {
           backgroundColor: widget.backgroundColor,
           title: Row(
             children: [
-              GradientCircleAvatar(radius: widget.avatarRadius),
+              GradientCircleAvatar(
+                radius: widget.avatarRadius,
+                onPressed: widget.onAvatarPressed,
+              ),
               const SizedBox(width: 15),
               Expanded(
                 child: SizedBox(
@@ -132,10 +140,9 @@ class _HomeAppBarState extends State<HomeAppBar> {
               ),
               const SizedBox(width: 5),
               IconButton(
-                onPressed: () {},
+                onPressed: widget.onNotifPressed,
                 padding: EdgeInsets.zero,
-                splashColor: Colors.transparent,
-                splashRadius: 0.1,
+                style: const ButtonStyle(splashFactory: NoSplash.splashFactory),
                 icon: Stack(
                   alignment: Alignment.topRight,
                   children: [

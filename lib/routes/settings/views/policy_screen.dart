@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:next_app/constants/string_const.dart';
@@ -22,41 +23,43 @@ class PolicyScreen extends StatelessWidget {
       appBar: Header(
         title: StringConst.get(context)!.chinhSachQuyenRiengTu,
       ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(
-          parent: AlwaysScrollableScrollPhysics(),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(
-            top: 30,
-            left: 20,
-            right: 20,
-            bottom: 70 + bottomPadding,
+      body: CupertinoScrollbar(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
           ),
-          child: const OutlinedCell(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    updatedAt,
-                    style: TextStyle(
-                      fontStyle: FontStyle.italic,
-                      height: 1.5,
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: 30,
+              left: 20,
+              right: 20,
+              bottom: 70 + bottomPadding,
+            ),
+            child: const OutlinedCell(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      updatedAt,
+                      style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        height: 1.5,
+                      ),
                     ),
-                  ),
-                  Text(exampleText),
-                  Text(exampleText),
-                  Text(exampleTextShort,
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(exampleText),
-                  Text(exampleTextShort,
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(exampleText),
-                  Text(exampleText),
-                ],
+                    Text(exampleText),
+                    Text(exampleText),
+                    Text(exampleTextShort,
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text(exampleText),
+                    Text(exampleTextShort,
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text(exampleText),
+                    Text(exampleText),
+                  ],
+                ),
               ),
             ),
           ),
