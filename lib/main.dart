@@ -57,7 +57,6 @@ class _MyAppState extends State<MyApp> {
     ]);
 
     return MaterialApp(
-      title: 'FPT Test',
       debugShowCheckedModeBanner: false,
       onGenerateRoute: AppRouter.generateRoute,
       navigatorKey: AppRouter.instance.navigatorKey,

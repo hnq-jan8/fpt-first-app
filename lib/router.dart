@@ -12,7 +12,6 @@ class Routes {
   static const String splash = '/';
   static const String intro = '/intro';
   static const String login = '/login';
-  static const String login_otp = '/login-otp';
   static const String home = '/home';
   static const String policy = '/setting/policy';
   static const String appInfo = '/setting/app-info';

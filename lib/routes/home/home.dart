@@ -15,8 +15,6 @@ import 'package:next_app/theme/theme_colors.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  static const String routeName = '/home';
-
   @override
   State<HomePage> createState() => _HomePageState();
 }

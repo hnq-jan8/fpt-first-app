@@ -12,11 +12,6 @@ class AppModalBottomSheet extends StatelessWidget {
     return Wrap(
       children: [
         Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(25),
-            ),
-          ),
           padding: const EdgeInsets.only(
             top: 5,
             left: 5,
@@ -51,6 +46,7 @@ class AppModalBottomSheet extends StatelessWidget {
                     child: const Icon(
                       Icons.close,
                       color: ThemeColors.onPrimary,
+                      size: 20,
                     ),
                   ),
                 ),

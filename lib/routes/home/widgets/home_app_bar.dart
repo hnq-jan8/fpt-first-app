@@ -147,7 +147,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
                   alignment: Alignment.topRight,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8.5),
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: SvgPicture.asset(
@@ -170,8 +170,8 @@ class _HomeAppBarState extends State<HomeAppBar> {
                               ),
                               padding: const EdgeInsets.only(
                                 top: 1,
-                                // left: 3,
-                                // right: 4,
+                                left: 2,
+                                right: 2.1,
                               ),
                               child: Text(
                                 widget.notifUnreadCount.toString(),
